@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--全局主题颜色值-->
+    <color name="theme_color">#ffF3F5F6</color>
+    <color name="colorPrimary">#3D7DFB</color>
+    <color name="colorPrimaryDark">#3D7DFB</color>
+    <color name="colorAccent">#3D7DFB</color>
+    <color name="transparent">#00ffffff</color>
+
+</resources>

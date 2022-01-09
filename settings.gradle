@@ -1,0 +1,3 @@
+rootProject.name = "bee-rider"
+include ':app'
+include ':base'

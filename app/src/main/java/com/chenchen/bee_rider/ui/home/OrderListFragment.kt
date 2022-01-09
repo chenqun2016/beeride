@@ -1,0 +1,97 @@
+package com.chenchen.bee_rider.ui.home
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.chad.library.adapter.base.listener.OnItemChildLongClickListener
+import com.chenchen.base.base.BaseFragment
+import com.chenchen.base.utils.LoadmoreUtils
+import com.chenchen.bee_rider.R
+import com.chenchen.bee_rider.bean.OrderBean
+import com.chenchen.bee_rider.databinding.ModelRecyclerviewBinding
+import com.chenchen.bee_rider.ui.adapter.HomeOrderAdapter
+import com.chenchen.bee_rider.utils.options
+
+/**
+ * 创建时间：2022/1/3
+ * @Author： 陈陈陈
+ * 功能描述：
+ */
+class OrderListFragment() : BaseFragment() {
+    companion object{
+        //历史订单
+        const val TYPE_HISTORY  = 999
+        const val TYPE_NOMAL  = 0
+
+        fun newInstance(type: Int): OrderListFragment {
+            val args = Bundle()
+            args.putInt("type",type)
+            val fragment = OrderListFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+    private var _binding:ModelRecyclerviewBinding? = null
+    private val binding get() = _binding!!
+
+    val adapter = HomeOrderAdapter()
+    var loadmoreUtils: LoadmoreUtils? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = ModelRecyclerviewBinding.inflate(inflater, container, false)
+        return _binding?.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val type = arguments?.getInt("type")
+
+        adapter.setType(type)
+        adapter.setOnItemClickListener { adapter, _, position ->
+            val args = Bundle()
+            args.putInt("orderId", position)
+            findNavController().navigate(R.id.history_detail,args,options)
+        }
+        adapter.addChildLongClickViewIds(R.id.tv_accept)
+        adapter.setOnItemChildLongClickListener (OnItemChildLongClickListener { _, view, _ ->
+            if(view.id == R.id.tv_accept){
+                Toast.makeText(context, "接单", Toast.LENGTH_SHORT).show()
+                return@OnItemChildLongClickListener true
+            }
+            false
+        })
+        binding.recyclerview.layoutManager = LinearLayoutManager(context)
+        binding.recyclerview.adapter = adapter
+        loadmoreUtils = object :LoadmoreUtils(){
+            override fun getDatas(page: Int) {
+                val list = mutableListOf<OrderBean>()
+                list.add(OrderBean())
+                list.add(OrderBean())
+                list.add(OrderBean())
+                list.add(OrderBean())
+
+                loadmoreUtils?.onSuccess(adapter,list)
+            }
+        }
+        loadmoreUtils?.initLoadmore(adapter,binding.srl)
+        loadmoreUtils?.refresh(adapter)
+    }
+
+    fun reflushDatas() {
+        loadmoreUtils?.refresh(adapter)
+    }
+}
