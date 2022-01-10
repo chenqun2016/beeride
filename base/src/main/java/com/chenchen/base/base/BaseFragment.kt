@@ -14,17 +14,17 @@ import com.chenchen.base.utils.d
  * @Author： 陈陈陈
  * 功能描述：
  */
-abstract class BaseFragment <T:ViewBinding> :Fragment(){
+abstract class BaseFragment <VB:ViewBinding> :Fragment(){
     protected val TAG: String = this.javaClass.simpleName
 
-    private var _binding: T? = null
+    private var _binding: VB? = null
     protected val binding get() = _binding!!
 
     abstract fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): T?
+    ): VB?
 
     override fun onCreateView(
         inflater: LayoutInflater,
