@@ -1,7 +1,11 @@
 package com.chenchen.base.base
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
 import com.chenchen.base.utils.d
 
 
@@ -10,8 +14,33 @@ import com.chenchen.base.utils.d
  * @Author： 陈陈陈
  * 功能描述：
  */
-open class BaseFragment :Fragment(){
+abstract class BaseFragment <T:ViewBinding> :Fragment(){
     protected val TAG: String = this.javaClass.simpleName
+
+    private var _binding: T? = null
+    protected val binding get() = _binding!!
+
+    abstract fun getBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): T?
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        d(TAG,"onCreateView")
+        _binding = getBinding(inflater,container,savedInstanceState)
+        return _binding?.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+        d(TAG,"onDestroyView")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,14 +66,9 @@ open class BaseFragment :Fragment(){
         super.onStop()
         d(TAG,"onStop")
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        d(TAG,"onDestroyView")
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         d(TAG,"onDestroy")
     }
+
 }

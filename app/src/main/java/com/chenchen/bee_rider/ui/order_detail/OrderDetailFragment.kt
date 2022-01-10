@@ -27,27 +27,23 @@ import kotlin.math.abs
  * @Author： 陈陈陈
  * 功能描述：
  */
-class OrderDetailFragment : BaseFragment(), AMap.OnMapLoadedListener,
+class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>(), AMap.OnMapLoadedListener,
     AMap.OnInfoWindowClickListener {
-    private var _binding: FragmentOrderDetailBinding? = null
-    private val binding get() = _binding!!
 
     private var aMap: AMap? = null
     var backIconWhite = true
 
-    override fun onCreateView(
+    override fun onDestroyView() {
+        binding.map.onDestroy()
+        super.onDestroyView()
+    }
+
+    override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentOrderDetailBinding.inflate(inflater, container, false)
-        return _binding?.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding.map.onDestroy()
-        _binding = null
+    ): FragmentOrderDetailBinding? {
+        return FragmentOrderDetailBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -212,4 +208,5 @@ class OrderDetailFragment : BaseFragment(), AMap.OnMapLoadedListener,
         super.onSaveInstanceState(outState)
         binding.map.onSaveInstanceState(outState)
     }
+
 }

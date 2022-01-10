@@ -33,10 +33,7 @@ import java.util.*
  * @Author： 陈陈陈
  * 功能描述：
  */
-class OrderHistoryFragment : BaseFragment() {
-    private var _binding: FragmentOrderHistoryBinding? = null
-    private val binding get() = _binding!!
-
+class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
     var popupWindow: PopupWindow? = null
     var endDate: String? = null
     var beginDate: String? = null
@@ -44,18 +41,12 @@ class OrderHistoryFragment : BaseFragment() {
 
     private var fragment: OrderListFragment? = null
 
-    override fun onCreateView(
+    override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentOrderHistoryBinding.inflate(inflater, container, false)
-        return _binding?.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    ): FragmentOrderHistoryBinding? {
+        return FragmentOrderHistoryBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -285,4 +276,5 @@ class OrderHistoryFragment : BaseFragment() {
         }
         alphaAnimation2!!.start()
     }
+
 }

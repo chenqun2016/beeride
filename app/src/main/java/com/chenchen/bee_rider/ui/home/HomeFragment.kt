@@ -24,22 +24,14 @@ import com.gyf.immersionbar.ImmersionBar
  * @Author： 陈陈陈
  * 功能描述：
  */
-class HomeFragment : BaseFragment() {
-    private var _binding:FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
-    override fun onCreateView(
+    override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return _binding?.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    ): FragmentHomeBinding? {
+        return FragmentHomeBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -98,5 +90,6 @@ class HomeFragment : BaseFragment() {
             binding.tabLayout.getTabAt(0)?.select()
         }
     }
+
 
 }

@@ -21,7 +21,7 @@ import com.chenchen.bee_rider.utils.options
  * @Author： 陈陈陈
  * 功能描述：
  */
-class OrderListFragment() : BaseFragment() {
+class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
     companion object{
         //历史订单
         const val TYPE_HISTORY  = 999
@@ -35,27 +35,16 @@ class OrderListFragment() : BaseFragment() {
             return fragment
         }
     }
-
-    private var _binding:ModelRecyclerviewBinding? = null
-    private val binding get() = _binding!!
-
     val adapter = HomeOrderAdapter()
     var loadmoreUtils: LoadmoreUtils? = null
 
-    override fun onCreateView(
+    override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = ModelRecyclerviewBinding.inflate(inflater, container, false)
-        return _binding?.root
+    ): ModelRecyclerviewBinding? {
+        return ModelRecyclerviewBinding.inflate(inflater, container, false)
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val type = arguments?.getInt("type")
@@ -94,4 +83,5 @@ class OrderListFragment() : BaseFragment() {
     fun reflushDatas() {
         loadmoreUtils?.refresh(adapter)
     }
+
 }

@@ -14,24 +14,14 @@ import com.chenchen.bee_rider.ui.adapter.ProductsAdapter
  * @Author： 陈陈陈
  * 功能描述：
  */
-class OrderDetailTab1Fragment : BaseFragment() {
-    private var _binding: FragmentOrderDetailTab1Binding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
+class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() {
+    override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentOrderDetailTab1Binding.inflate(inflater, container, false)
-        return _binding?.root
+    ): FragmentOrderDetailTab1Binding? {
+        return FragmentOrderDetailTab1Binding.inflate(inflater, container, false)
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.includeProducts.products.layoutManager = LinearLayoutManager(context)
@@ -40,4 +30,5 @@ class OrderDetailTab1Fragment : BaseFragment() {
         val products = mutableListOf<String>("1","2","3")
         productsAdapter.setNewInstance(products)
     }
+
 }
