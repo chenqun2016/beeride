@@ -1,4 +1,4 @@
-package com.chenchen.bee_rider.ui
+package com.chenchen.bee_rider.ui.order
 
 import android.animation.Animator
 import android.animation.ValueAnimator
@@ -45,40 +45,29 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): FragmentOrderHistoryBinding? {
+    ): FragmentOrderHistoryBinding {
         return FragmentOrderHistoryBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initViews(savedInstanceState: Bundle?) {
         initImmersionBar()
-        initViews(savedInstanceState)
-    }
-
-
-    private fun initImmersionBar() {
-        val mImmersionBar = ImmersionBar.with(this)
-        mImmersionBar.statusBarDarkFont(true, 0.2f)
-        mImmersionBar.init()
-    }
-
-
-    private fun initViews(savedInstanceState: Bundle?) {
-        UIUtils.setGradientDrawable(this, binding.statusBar, binding.ivBg, R.color.color_FF6200)
+        UIUtils.setGradientDrawable(this, null, binding.ivBg, R.color.color_FF6200)
         if (savedInstanceState == null && fragment == null) {
             fragment = OrderListFragment.newInstance(OrderListFragment.TYPE_HISTORY)
             childFragmentManager.beginTransaction().setReorderingAllowed(true)
                 .add(R.id.fcv, fragment!!, "OrderListFragment_history").commitNowAllowingStateLoss()
         }
 
-        binding.ivBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
-        binding.ivRight.setOnClickListener {
+        binding.titleView.right?.setOnClickListener {
             showShaixuan()
         }
     }
 
+    private fun initImmersionBar() {
+        val mImmersionBar = ImmersionBar.with(this)
+        mImmersionBar.statusBarDarkFont(true, 0.2f)
+        mImmersionBar.init()
+    }
 
     private fun showShaixuan() {
         if (null == popupWindow) {
@@ -140,7 +129,7 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
                 }
                 val checkedRadioButtonId: Int = rp_1.checkedRadioButtonId
                 val checkedBt = mMenuView.findViewById<RadioButton>(checkedRadioButtonId)
-                binding.tvTitle.text = checkedBt.text.toString() + "历史订单"
+                binding.titleView.setTitleText(checkedBt.text.toString() + "历史订单")
                 fragment?.reflushDatas()
             }
             tv_time_left.setOnClickListener { showBirthdayDialog(tv_time_left) }
@@ -154,7 +143,7 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
             popupWindow!!.isOutsideTouchable = true
             popupWindow!!.setOnDismissListener { close() }
         }
-        popupWindow!!.showAsDropDown(binding.ivBack, 0, 0)
+        popupWindow!!.showAsDropDown(binding.titleView, 0, 0)
         show()
     }
 

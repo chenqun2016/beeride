@@ -1,4 +1,4 @@
-package com.chenchen.bee_rider.ui.order_detail
+package com.chenchen.bee_rider.ui.order
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,11 +19,11 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): FragmentOrderDetailTab1Binding? {
+    ): FragmentOrderDetailTab1Binding {
         return FragmentOrderDetailTab1Binding.inflate(inflater, container, false)
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
+    override fun initViews(savedInstanceState: Bundle?) {
         binding.includeProducts.products.layoutManager = LinearLayoutManager(context)
         val productsAdapter = ProductsAdapter()
         binding.includeProducts.products.adapter = productsAdapter

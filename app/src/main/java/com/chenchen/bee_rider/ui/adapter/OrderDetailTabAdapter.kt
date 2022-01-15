@@ -2,9 +2,8 @@ package com.chenchen.bee_rider.ui.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.chenchen.bee_rider.ui.home.OrderListFragment
-import com.chenchen.bee_rider.ui.order_detail.OrderDetailTab1Fragment
-import com.chenchen.bee_rider.ui.order_detail.OrderDetailTab2Fragment
+import com.chenchen.bee_rider.ui.order.OrderDetailTab1Fragment
+import com.chenchen.bee_rider.ui.order.OrderDetailTab2Fragment
 
 /**
  * 创建时间：2022/1/9

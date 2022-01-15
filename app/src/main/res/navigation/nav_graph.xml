@@ -19,15 +19,40 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
 
+        <action
+            android:id="@+id/next_action_persional"
+            app:destination="@+id/personal_dest"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/next_action_order_detail"
+            app:destination="@+id/order_detail_dest"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
 
     <fragment
         android:id="@+id/history_dest"
-        android:name="com.chenchen.bee_rider.ui.OrderHistoryFragment"
+        android:name="com.chenchen.bee_rider.ui.order.OrderHistoryFragment"
         android:label="history" />
 
     <fragment
-        android:id="@+id/history_detail"
-        android:name="com.chenchen.bee_rider.ui.order_detail.OrderDetailFragment"
+        android:id="@+id/order_detail_dest"
+        android:name="com.chenchen.bee_rider.ui.order.OrderDetailFragment"
         android:label="detail" />
+    <fragment
+        android:id="@+id/personal_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.PersonalFragment"
+        android:label="PersonalFragment" >
+
+        <action
+            android:id="@+id/next_action_history"
+            app:destination="@+id/history_dest" />
+    </fragment>
 </navigation>

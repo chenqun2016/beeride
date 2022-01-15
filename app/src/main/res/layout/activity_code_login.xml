@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageButton
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:padding="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/icon_guanbi" />
+
+    <TextView
+        android:id="@+id/tv_mimalogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/color_282626"
+        android:textSize="15sp"
+        android:text="密码登录"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/tv_shoujihaodenglu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_back"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="@color/color_282626"
+        android:text="手机号登录"/>
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_shoujihaodenglu"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <com.chenchen.bee_rider.view.ClearEditText
+            android:id="@+id/ed_user_phone"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/transparent"
+            android:hint="请输入手机号码"
+            android:inputType="number"
+            android:maxLength="11"
+            android:textColor="@color/color_282626"
+            android:textColorHint="@color/color_ccc"
+            android:textCursorDrawable="@drawable/cursor"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_eee" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/ed_user_code"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60dp"
+                android:hint="请输入验证码"
+                android:inputType="number"
+                android:background="@color/transparent"
+                android:maxLength="10"
+                android:gravity="center_vertical"
+                android:textColor="@color/color_282626"
+                android:textColorHint="@color/color_ccc"
+                android:textCursorDrawable="@drawable/cursor"
+                android:textSize="16sp" />
+
+            <com.chenchen.bee_rider.view.SendCodeView
+                android:id="@+id/code_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_eee" />
+
+
+        <TextView
+            android:id="@+id/tv_agree"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="同意协议并登录"
+            android:gravity="center"
+            android:background="@drawable/btn_gradient_grey_round"
+            android:textColor="@color/white"
+            android:textSize="17sp"/>
+
+
+            <TextView
+                android:id="@+id/tv_xieyi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/color_7C7877"
+                android:textSize="12sp"
+                android:layout_marginTop="12dp"
+                android:text=""/>
+    </LinearLayout>
+</RelativeLayout>

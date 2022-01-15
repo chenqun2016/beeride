@@ -48,14 +48,17 @@
             android:name="android.notch_support"
             android:value="true" /> <!-- 适配小米（xiaomi）刘海屏 -->
 
-
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.SplashActivity"
+            android:theme="@style/launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".ui.login.PhoneLoginActivity" />
     </application>
 
 </manifest>

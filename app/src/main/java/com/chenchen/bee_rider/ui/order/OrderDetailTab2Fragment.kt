@@ -1,4 +1,4 @@
-package com.chenchen.bee_rider.ui.order_detail
+package com.chenchen.bee_rider.ui.order
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,11 +21,11 @@ class OrderDetailTab2Fragment :BaseFragment<FragmentOrderDetailTab2Binding>() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): FragmentOrderDetailTab2Binding? {
+    ): FragmentOrderDetailTab2Binding {
        return FragmentOrderDetailTab2Binding.inflate(inflater, container, false)
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
+    override fun initViews(savedInstanceState: Bundle?) {
         binding.recyclerview.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,true)
         val orderDetailTraceAdapter = OrderDetailTraceAdapter()
         binding.recyclerview.adapter = orderDetailTraceAdapter

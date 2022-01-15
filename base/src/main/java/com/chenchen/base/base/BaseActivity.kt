@@ -3,6 +3,7 @@ package com.chenchen.base.base
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewbinding.ViewBinding
 import com.chenchen.base.utils.StatusBar
 import com.chenchen.base.utils.d
 
@@ -11,14 +12,25 @@ import com.chenchen.base.utils.d
  * @Author： 陈陈陈
  * 功能描述：
  */
-open class BaseActivity : AppCompatActivity()  {
+abstract class BaseActivity<VB:ViewBinding> : AppCompatActivity()  {
     protected val TAG: String = this.javaClass.simpleName
+    lateinit var binding:VB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         StatusBar.lightStatusBar(this,true)
         super.onCreate(savedInstanceState)
         d(TAG,"onCreate")
+        binding = getViewBinding()
+        setContentView(binding.root)
+
+        initViews(savedInstanceState)
+        initDatas()
     }
+
+    abstract fun getViewBinding(): VB
+    abstract fun initViews(savedInstanceState: Bundle?)
+    abstract fun initDatas()
+
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()

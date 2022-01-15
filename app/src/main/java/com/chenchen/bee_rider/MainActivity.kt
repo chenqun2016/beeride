@@ -1,12 +1,14 @@
 package com.chenchen.bee_rider
 
 import android.Manifest
+import android.content.ComponentName
 import android.content.res.Resources
-import android.location.Location
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import androidx.navigation.ActivityNavigator
+import androidx.navigation.NavGraph
+import androidx.navigation.NavGraphNavigator
+import androidx.navigation.NavigatorProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
@@ -17,15 +19,16 @@ import com.chenchen.base.base.BaseActivity
 import com.chenchen.base.utils.MMKVUtils
 import com.chenchen.base.utils.d
 import com.chenchen.bee_rider.databinding.ActivityMainBinding
+import com.chenchen.bee_rider.navigator.FixFragmentNavigator
 import com.permissionx.guolindev.PermissionX
+import java.util.*
 
-class MainActivity : BaseActivity() {
-    lateinit var binding:ActivityMainBinding
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun getViewBinding(): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
+    }
+    override fun initViews(savedInstanceState: Bundle?) {
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
 
@@ -37,10 +40,13 @@ class MainActivity : BaseActivity() {
             }
             d("Navigation", "Navigated to $dest")
         }
-
         showPrivacy()
     }
 
+    override fun initDatas() {
+    }
+
+    //TODO 隐私政策弹窗
     private fun showPrivacy() {
         //高德地图隐私
         MapsInitializer.updatePrivacyShow(this,true,true)
@@ -122,4 +128,5 @@ class MainActivity : BaseActivity() {
                 }
             }
         }
+
 }

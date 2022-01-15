@@ -1,4 +1,4 @@
-package com.chenchen.bee_rider.ui.order_detail
+package com.chenchen.bee_rider.ui.order
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -42,30 +42,24 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>(), AMap.OnM
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): FragmentOrderDetailBinding? {
+    ): FragmentOrderDetailBinding {
         return FragmentOrderDetailBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initViews(savedInstanceState: Bundle?) {
         initImmersionBar()
-        initViews(savedInstanceState)
+        binding.ivBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        initStatusBar()
+        initTabViewpager()
+        initMap(savedInstanceState)
     }
 
     private fun initImmersionBar() {
         val mImmersionBar = ImmersionBar.with(this)
         mImmersionBar.statusBarDarkFont(true, 0.2f)
         mImmersionBar.init()
-    }
-
-    private fun initViews(savedInstanceState: Bundle?) {
-        binding.ivBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
-        initStatusBar()
-        initTabViewpager()
-        initMap(savedInstanceState)
     }
 
     private fun initStatusBar() {
@@ -76,7 +70,6 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>(), AMap.OnM
     }
 
     private fun initTabViewpager() {
-
         val adapter = OrderDetailTabAdapter(this)
         binding.viewpager.adapter = adapter
         TabLayoutMediator(

@@ -1,10 +1,16 @@
 package com.chenchen.bee_rider.ui.adapter
 
+import android.animation.Keyframe
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chenchen.base.utils.DisplayUtil
 import com.chenchen.bee_rider.R
 
 /**
@@ -35,6 +41,15 @@ class OrderDetailTraceAdapter :
         }else{
             line.setBackgroundColor(line.resources.getColor(R.color.color_d8d8d8))
             dian.setImageResource(R.drawable.point_grey)
+        }
+        if(holder.layoutPosition == current){
+            val scaleAnimation = ScaleAnimation(1.0f, 0.3f, 1.0f, 0.3f,DisplayUtil.dip2px(dian.context,8f).toFloat(),DisplayUtil.dip2px(dian.context,8f).toFloat())
+            scaleAnimation.repeatCount = -1
+            scaleAnimation.repeatMode = Animation.REVERSE
+            scaleAnimation.duration = 600
+            dian.startAnimation(scaleAnimation)
+        }else{
+            dian.clearAnimation()
         }
 
     }

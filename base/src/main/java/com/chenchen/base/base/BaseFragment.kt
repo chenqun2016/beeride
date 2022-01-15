@@ -24,7 +24,7 @@ abstract class BaseFragment <VB:ViewBinding> :Fragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): VB?
+    ): VB
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +41,13 @@ abstract class BaseFragment <VB:ViewBinding> :Fragment(){
         _binding = null
         d(TAG,"onDestroyView")
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews(savedInstanceState)
+        d(TAG,"onViewCreated")
+    }
+
+    abstract fun initViews(savedInstanceState: Bundle?)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,5 +77,4 @@ abstract class BaseFragment <VB:ViewBinding> :Fragment(){
         super.onDestroy()
         d(TAG,"onDestroy")
     }
-
 }

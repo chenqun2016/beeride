@@ -24,36 +24,36 @@ import com.gyf.immersionbar.ImmersionBar
  * @Author： 陈陈陈
  * 功能描述：
  */
-class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(), View.OnClickListener {
 
     override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): FragmentHomeBinding? {
+    ): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun initViews(savedInstanceState: Bundle?) {
         initImmersionBar()
-        initViews()
+        initView()
     }
 
     private fun initImmersionBar() {
-        //在BaseActivity里初始化
         val mImmersionBar = ImmersionBar.with(this)
         mImmersionBar.statusBarDarkFont(true, 0.2f)
         mImmersionBar.init()
     }
 
-    private fun initViews() {
+    private fun initView() {
         UIUtils.setGradientDrawable(this,binding.statusBar,binding.ivBg,R.color.color_FF6200)
 
-        binding.ivRight.setOnClickListener{
-            findNavController().navigate(R.id.next_action_history)
-        }
+        binding.ivIcon.setOnClickListener(this)
+        binding.tvName.setOnClickListener(this)
+        binding.ivIconWork.setOnClickListener(this)
+        binding.tvWork.setOnClickListener(this)
+
+        binding.ivRight.setOnClickListener(this)
 
         val adapter = HomeAdapter(this)
         binding.viewpager.adapter = adapter
@@ -88,6 +88,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         })
         binding.tabLayout.post {
             binding.tabLayout.getTabAt(0)?.select()
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.tv_work,
+            R.id.iv_icon_work,
+            R.id.tv_name,
+            R.id.iv_icon -> {
+                findNavController().navigate(R.id.next_action_persional)
+            }
+            R.id.iv_right -> {
+                findNavController().navigate(R.id.next_action_history)
+            }
         }
     }
 

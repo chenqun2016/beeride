@@ -42,18 +42,18 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): ModelRecyclerviewBinding? {
+    ): ModelRecyclerviewBinding {
         return ModelRecyclerviewBinding.inflate(inflater, container, false)
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
+    override fun initViews(savedInstanceState: Bundle?) {
         val type = arguments?.getInt("type")
 
         adapter.setType(type)
         adapter.setOnItemClickListener { adapter, _, position ->
             val args = Bundle()
             args.putInt("orderId", position)
-            findNavController().navigate(R.id.history_detail,args,options)
+            findNavController().navigate(R.id.next_action_order_detail,args,options)
         }
         adapter.addChildLongClickViewIds(R.id.tv_accept)
         adapter.setOnItemChildLongClickListener (OnItemChildLongClickListener { _, view, _ ->
@@ -65,7 +65,7 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
         })
         binding.recyclerview.layoutManager = LinearLayoutManager(context)
         binding.recyclerview.adapter = adapter
-        loadmoreUtils = object :LoadmoreUtils(){
+        loadmoreUtils = object :LoadmoreUtils(adapter,binding.srl){
             override fun getDatas(page: Int) {
                 val list = mutableListOf<OrderBean>()
                 list.add(OrderBean())
@@ -76,7 +76,6 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
                 loadmoreUtils?.onSuccess(adapter,list)
             }
         }
-        loadmoreUtils?.initLoadmore(adapter,binding.srl)
         loadmoreUtils?.refresh(adapter)
     }
 

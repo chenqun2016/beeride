@@ -13,10 +13,11 @@ import com.gyf.immersionbar.ImmersionBar
  * 功能描述：
  */
 object  UIUtils {
-    fun setGradientDrawable(fragment:Fragment, statusBar: View, bg:ImageView,color:Int){
-        val layoutParams = statusBar.layoutParams
-        layoutParams?.height = ImmersionBar.getStatusBarHeight(fragment)
-
+    fun setGradientDrawable(fragment:Fragment, statusBar: View?, bg:ImageView,color:Int){
+        if(null != statusBar){
+            val layoutParams = statusBar.layoutParams
+            layoutParams?.height = ImmersionBar.getStatusBarHeight(fragment)
+        }
         val colors = intArrayOf(
             fragment.resources.getColor(color),
             fragment.resources.getColor(color),

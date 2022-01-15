@@ -19,6 +19,14 @@ import java.util.List;
  * 注意：adapter需要 extends BaseQuickAdapter/BaseMultiItemQuickAdapter  implements LoadMoreModule
  */
 public class LoadmoreUtils {
+
+    public LoadmoreUtils(BaseQuickAdapter adapter) {
+        initLoadmore(adapter,null);
+    }
+    public LoadmoreUtils(BaseQuickAdapter adapter,SwipeRefreshLayout swiperefreshlayout) {
+        initLoadmore(adapter,swiperefreshlayout);
+    }
+
     public static final int PAGE_SIZE = 10;
 
     public void setEmptyView(View emptyView) {
@@ -44,11 +52,7 @@ public class LoadmoreUtils {
             return page == 1;
         }
     }
-
-    public void initLoadmore(BaseQuickAdapter adapter) {
-        initLoadmore(adapter,null);
-    }
-    public void initLoadmore(BaseQuickAdapter adapter,SwipeRefreshLayout swipe) {
+    private void initLoadmore(BaseQuickAdapter adapter,SwipeRefreshLayout swipe) {
         adapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
