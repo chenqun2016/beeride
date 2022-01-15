@@ -36,7 +36,7 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
         }
     }
     val adapter = HomeOrderAdapter()
-    var loadmoreUtils: LoadmoreUtils? = null
+    var loadmoreUtils: LoadmoreUtils<OrderBean>? = null
 
     override fun getBinding(
         inflater: LayoutInflater,
@@ -65,7 +65,7 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
         })
         binding.recyclerview.layoutManager = LinearLayoutManager(context)
         binding.recyclerview.adapter = adapter
-        loadmoreUtils = object :LoadmoreUtils(adapter,binding.srl){
+        loadmoreUtils = object :LoadmoreUtils<OrderBean>(adapter,binding.srl){
             override fun getDatas(page: Int) {
                 val list = mutableListOf<OrderBean>()
                 list.add(OrderBean())
@@ -73,14 +73,15 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
                 list.add(OrderBean())
                 list.add(OrderBean())
 
-                loadmoreUtils?.onSuccess(adapter,list)
+                loadmoreUtils?.onSuccess(list)
+//                loadmoreUtils?.onFail(adapter,"")
             }
         }
-        loadmoreUtils?.refresh(adapter)
+        loadmoreUtils?.refresh()
     }
 
     fun reflushDatas() {
-        loadmoreUtils?.refresh(adapter)
+        loadmoreUtils?.refresh()
     }
 
 }
