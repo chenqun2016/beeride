@@ -1,14 +1,9 @@
-package com.chenchen.bee_rider
+package com.chenchen.bee_rider.ui
 
 import android.Manifest
-import android.content.ComponentName
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
-import androidx.navigation.ActivityNavigator
-import androidx.navigation.NavGraph
-import androidx.navigation.NavGraphNavigator
-import androidx.navigation.NavigatorProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
@@ -18,10 +13,10 @@ import com.amap.api.services.core.ServiceSettings
 import com.chenchen.base.base.BaseActivity
 import com.chenchen.base.utils.MMKVUtils
 import com.chenchen.base.utils.d
+import com.chenchen.bee_rider.Constants
+import com.chenchen.bee_rider.R
 import com.chenchen.bee_rider.databinding.ActivityMainBinding
-import com.chenchen.bee_rider.navigator.FixFragmentNavigator
 import com.permissionx.guolindev.PermissionX
-import java.util.*
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 

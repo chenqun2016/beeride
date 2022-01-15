@@ -4,9 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.lifecycleScope
 import com.chenchen.base.base.BaseActivity
-import com.chenchen.bee_rider.MainActivity
+import com.chenchen.bee_rider.ui.MainActivity
 import com.chenchen.bee_rider.R
 import com.chenchen.bee_rider.databinding.ActivityCodeLoginBinding
 import com.chenchen.bee_rider.view.SendCodeView
@@ -37,14 +36,14 @@ class PhoneLoginActivity : BaseActivity<ActivityCodeLoginBinding>() {
             override fun onFailure(t: String?) {
             }
         })
-        binding.edUserPhone.addTextChangedListener {
+        binding.edUserPhone.addTextChangedListener{
             setButtonStatus()
         }
         binding.edUserCode.addTextChangedListener {
             setButtonStatus()
         }
         binding.tvAgree.setOnClickListener {
-            val intent = Intent(this,MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

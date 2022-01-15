@@ -5,9 +5,7 @@ package com.chenchen.base.constants
  * @Author： 陈陈陈
  * 功能描述：
  */
-class HttpConstants {
-    companion object{
-        const val TOKEN = "token"
-        const val USER = "user"
-    }
+object HttpConstants {
+    val TOKEN = "token"
+    val USER = "user"
 }

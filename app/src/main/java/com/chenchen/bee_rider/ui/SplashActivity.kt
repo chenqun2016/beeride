@@ -6,8 +6,6 @@ import android.text.TextUtils
 import com.chenchen.base.base.BaseActivity
 import com.chenchen.base.constants.HttpConstants
 import com.chenchen.base.utils.MMKVUtils
-import com.chenchen.bee_rider.MainActivity
-import com.chenchen.bee_rider.R
 import com.chenchen.bee_rider.databinding.ActivitySplashBinding
 import com.chenchen.bee_rider.ui.login.PhoneLoginActivity
 

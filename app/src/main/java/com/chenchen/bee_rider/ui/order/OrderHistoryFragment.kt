@@ -81,33 +81,39 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
             val rp_1: RadioGroupPlus = mMenuView.findViewById(R.id.rp_1)
             val tv_time_left = mMenuView.findViewById<TextView>(R.id.tv_time_left)
             val tv_time_right = mMenuView.findViewById<TextView>(R.id.tv_time_right)
-            rp_1.setOnCheckedChangeListener { group, checkedId ->
-                val calendar = Calendar.getInstance()
-                val nowString: String = Constants.sdfLong2.format(calendar.time)
-                tv_time_right.text = nowString
-                val passString: String
-                when (checkedId) {
-                    R.id.rb_1 -> {
-                        calendar[Calendar.YEAR] = calendar[Calendar.YEAR] - 1
-                        passString = Constants.sdfLong2.format(calendar.time)
-                        tv_time_left.text = passString
-                    }
-                    R.id.rb_2 -> {
-                        calendar[Calendar.MONTH] = calendar[Calendar.MONTH] - 6
-                        passString = Constants.sdfLong2.format(calendar.time)
-                        tv_time_left.text = passString
-                    }
-                    R.id.rb_3 -> {
-                        calendar[Calendar.MONTH] = calendar[Calendar.MONTH] - 3
-                        passString = Constants.sdfLong2.format(calendar.time)
-                        tv_time_left.text = passString
-                    }
-                    else -> {
+            rp_1.setOnCheckedChangeListener(object : RadioGroupPlus.OnCheckedChangeListener {
+                override fun onCheckedChanged(group: RadioGroupPlus?, checkedId: Int) {
+                    val calendar = Calendar.getInstance()
+                    val nowString: String = Constants.sdfLong2.format(calendar.time)
+                    tv_time_right.text = nowString
+                    val passString: String
+                    when (checkedId) {
+                        R.id.rb_1 -> {
+                            calendar[Calendar.YEAR] = calendar[Calendar.YEAR] - 1
+                            passString = Constants.sdfLong2.format(calendar.time)
+                            tv_time_left.text = passString
+                        }
+                        R.id.rb_2 -> {
+                            calendar[Calendar.MONTH] = calendar[Calendar.MONTH] - 6
+                            passString = Constants.sdfLong2.format(calendar.time)
+                            tv_time_left.text = passString
+                        }
+                        R.id.rb_3 -> {
+                            calendar[Calendar.MONTH] = calendar[Calendar.MONTH] - 3
+                            passString = Constants.sdfLong2.format(calendar.time)
+                            tv_time_left.text = passString
+                        }
+                        else -> {
+                        }
                     }
                 }
-            }
+            })
             val rp_2: RadioGroupPlus = mMenuView.findViewById(R.id.rp_2)
-            rp_2.setOnCheckedChangeListener { group, checkedId -> }
+            rp_2.setOnCheckedChangeListener(object :RadioGroupPlus.OnCheckedChangeListener {
+                override fun onCheckedChanged(group: RadioGroupPlus?, checkedId: Int) {
+
+                }
+            })
             rp_1.check(R.id.rb_1)
             rp_2.check(R.id.rb_11)
             val btn_1 = mMenuView.findViewById<View>(R.id.btn_1)
