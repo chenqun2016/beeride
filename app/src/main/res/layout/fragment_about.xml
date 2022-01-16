@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/color_F5F5F5">
+        <com.chenchen.bee_rider.view.TitleView
+            android:id="@+id/titleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:contentColor="black"
+            app:title="关于趣鲜蜂" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/logo_login"
+            android:layout_marginTop="55dp"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="50dp"
+            android:text="“趣鲜蜂”是2020年创立的本地生活服务平台，平台将采用“会员制+自营+配送上门”的运营模式，为用户提供优质生活服务的企业，主营在线外卖、新零售、即时配送和餐饮供应链等业务。"
+            android:textColor="@color/color_282525"
+            android:textSize="13sp"
+            android:lineSpacingExtra="10dp"
+            android:layout_below="@+id/iv_icon"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</FrameLayout>
