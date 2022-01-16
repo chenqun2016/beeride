@@ -54,5 +54,30 @@
         <action
             android:id="@+id/next_action_history"
             app:destination="@+id/history_dest" />
+        <action
+            android:id="@+id/system_set"
+            app:destination="@+id/system_set_dest" />
     </fragment>
+
+    <fragment
+        android:id="@+id/system_set_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.SystemSettingFragment"
+        android:label="SystemSettingFragment" >
+        <action
+            android:id="@+id/about_fresh_bee"
+            app:destination="@+id/about_dest" />
+
+        <action
+            android:id="@+id/common_web"
+            app:destination="@+id/common_web_dest" />
+    </fragment>
+    <fragment
+        android:id="@+id/about_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.AboutFragment"
+        android:label="about" />
+
+    <fragment
+        android:id="@+id/common_web_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.CommonWebFragment"
+        android:label="common" />
 </navigation>

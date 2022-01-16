@@ -9,10 +9,12 @@ import com.chenchen.base.utils.MMKVUtils
  * 功能描述：
  */
 class MyApplication : Application() {
-
+    companion object {
+        var mInstance: MyApplication? = null
+    }
     override fun onCreate() {
         super.onCreate()
-
+        mInstance = this
         MMKVUtils.init(this)
     }
 }

@@ -73,9 +73,6 @@ class TitleView : FrameLayout {
      * int: 0白色；1黑色
      */
     fun setContentColor(int: Int){
-        if(colorType == int){
-            return
-        }
         colorType = int
         if(int == 0){
             back?.setImageResource(R.drawable.icon_back_bai)

@@ -51,6 +51,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
         binding.clPersional.setRoundConner(DisplayUtil.dip2px(context,10f),ViewHelper.RADIUS_TOP)
         binding.clData.setRoundConner(DisplayUtil.dip2px(context,10f),ViewHelper.RADIUS_BOTTOM)
         binding.tvHistory.setOnClickListener(this)
+        binding.tvSystemSetting.setOnClickListener(this)
         binding.switchButton.setOnCheckedChangeListener { view, isChecked ->
             Toast.makeText(context, "$isChecked", Toast.LENGTH_SHORT).show()
         }
@@ -79,7 +80,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
 
             }
             R.id.tv_system_setting -> {
-
+                findNavController().navigate(R.id.system_set,null, options)
             }
         }
     }
