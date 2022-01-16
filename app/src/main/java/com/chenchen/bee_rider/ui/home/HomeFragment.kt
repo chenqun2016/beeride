@@ -10,11 +10,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.chenchen.base.base.BaseFragment
+import com.chenchen.base.utils.DisplayUtil
 import com.chenchen.bee_rider.R
 import com.chenchen.bee_rider.databinding.FragmentHome2Binding
-import com.chenchen.bee_rider.databinding.FragmentHomeBinding
 import com.chenchen.bee_rider.ui.adapter.HomeAdapter
 import com.chenchen.bee_rider.utils.UIUtils
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
@@ -25,14 +26,14 @@ import com.gyf.immersionbar.ImmersionBar
  * @Author： 陈陈陈
  * 功能描述：
  */
-class HomeFragment : BaseFragment<FragmentHomeBinding>(), View.OnClickListener {
+class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener {
 
     override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): FragmentHomeBinding {
-        return FragmentHomeBinding.inflate(inflater, container, false)
+    ): FragmentHome2Binding {
+        return FragmentHome2Binding.inflate(inflater, container, false)
     }
 
     override fun initViews(savedInstanceState: Bundle?) {
@@ -90,6 +91,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), View.OnClickListener {
         binding.tabLayout.post {
             binding.tabLayout.getTabAt(0)?.select()
         }
+
+        val toolbarHeight = DisplayUtil.dip2px(context,64f)
+        val diff = DisplayUtil.dip2px(context,246f) - toolbarHeight
+        binding.appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val rate = verticalOffset.toFloat() / appBarLayout.totalScrollRange
+            binding.ivBg.translationY = rate * diff
+        })
+        binding.collapsing.setContentScrimColor(resources.getColor(R.color.color_FF6600))
     }
 
     override fun onClick(v: View?) {

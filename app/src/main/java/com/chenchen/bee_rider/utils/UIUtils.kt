@@ -29,6 +29,7 @@ object  UIUtils {
         gradientDrawable.colors = colors //添加颜色组
         gradientDrawable.gradientType = GradientDrawable.LINEAR_GRADIENT //设置线性渐变
         gradientDrawable.orientation = GradientDrawable.Orientation.TOP_BOTTOM //设置渐变方向
-        bg.background = gradientDrawable
+        bg.scaleType = ImageView.ScaleType.FIT_XY
+        bg.setImageDrawable(gradientDrawable)
     }
 }
