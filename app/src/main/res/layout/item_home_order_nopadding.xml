@@ -23,7 +23,7 @@
         android:layout_marginStart="17dp"
         android:layout_marginTop="10dp"
         android:scaleType="fitXY"
-        android:src="@drawable/icon_touxiang"
+        android:src="@drawable/icon_alarm"
         app:layout_constraintTop_toTopOf="@+id/tv_right"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -175,8 +175,8 @@
         android:layout_height="24dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/icon_touxiang"
+        android:scaleType="centerInside"
+        android:src="@drawable/icon_qu"
         app:layout_constraintTop_toTopOf="@+id/tv_store_name"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -186,8 +186,8 @@
         android:layout_height="24dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/icon_touxiang"
+        android:scaleType="centerInside"
+        android:src="@drawable/icon_shou"
         app:layout_constraintTop_toTopOf="@+id/tv_customer_address"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -205,22 +205,22 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_link_store"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:scaleType="fitXY"
         android:layout_marginEnd="10dp"
-        android:src="@drawable/icon_touxiang"
+        android:src="@drawable/icon_nav"
         app:layout_constraintTop_toTopOf="@+id/iv_qu"
         app:layout_constraintRight_toRightOf="parent"/>
 
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_link_customer"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:scaleType="fitXY"
         android:layout_marginEnd="10dp"
-        android:src="@drawable/icon_touxiang"
+        android:src="@drawable/icon_nav"
         app:layout_constraintTop_toTopOf="@+id/iv_shou"
         app:layout_constraintRight_toRightOf="parent"/>
 

@@ -196,7 +196,7 @@
                     android:layout_height="33dp"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:sb_checked_color="@color/color_FF6200"
+                    app:sb_checked_color="#00ff33"
                     app:sb_checkline_text="工作中"
                     app:sb_shadow_effect="false"
                     app:sb_uncheckcircle_color="@color/transparent" />
@@ -223,7 +223,7 @@
                     android:id="@+id/tv_history"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:drawableLeft="@drawable/icon_back_anse"
+                    android:drawableLeft="@drawable/icon_persional_history"
                     android:drawableRight="@drawable/icon_link"
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"
@@ -234,14 +234,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:layout_marginStart="45dp"
+                    android:layout_marginStart="33dp"
                     android:background="@color/color_d8d8d8" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_datas"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:drawableLeft="@drawable/icon_back_anse"
+                    android:drawableLeft="@drawable/icon_persional_datas"
                     android:drawableRight="@drawable/icon_link"
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"
@@ -252,14 +252,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:layout_marginStart="45dp"
+                    android:layout_marginStart="33dp"
                     android:background="@color/color_d8d8d8" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_comments"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:drawableLeft="@drawable/icon_back_anse"
+                    android:drawableLeft="@drawable/icon_persional_comments"
                     android:drawableRight="@drawable/icon_link"
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"
@@ -270,14 +270,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:layout_marginStart="45dp"
+                    android:layout_marginStart="33dp"
                     android:background="@color/color_d8d8d8" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_persional"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:drawableLeft="@drawable/icon_back_anse"
+                    android:drawableLeft="@drawable/icon_persional_own"
                     android:drawableRight="@drawable/icon_link"
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"
@@ -288,14 +288,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:layout_marginStart="45dp"
+                    android:layout_marginStart="33dp"
                     android:background="@color/color_d8d8d8" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_message"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:drawableLeft="@drawable/icon_back_anse"
+                    android:drawableLeft="@drawable/icon_persional_message"
                     android:drawableRight="@drawable/icon_link"
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"
@@ -306,14 +306,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:layout_marginStart="45dp"
+                    android:layout_marginStart="33dp"
                     android:background="@color/color_d8d8d8" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_system_setting"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:drawableLeft="@drawable/icon_back_anse"
+                    android:drawableLeft="@drawable/icon_persional_setting"
                     android:drawableRight="@drawable/icon_link"
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"

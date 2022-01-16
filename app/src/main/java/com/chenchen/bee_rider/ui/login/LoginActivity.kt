@@ -15,7 +15,7 @@ import com.chenchen.bee_rider.view.SendCodeView
  * @Author： 陈陈陈
  * 功能描述：
  */
-class PhoneLoginActivity : BaseActivity<ActivityCodeLoginBinding>() {
+class LoginActivity : BaseActivity<ActivityCodeLoginBinding>() {
 
     override fun getViewBinding(): ActivityCodeLoginBinding {
         return ActivityCodeLoginBinding.inflate(layoutInflater)

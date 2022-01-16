@@ -7,7 +7,7 @@ import com.chenchen.base.base.BaseActivity
 import com.chenchen.base.constants.HttpConstants
 import com.chenchen.base.utils.MMKVUtils
 import com.chenchen.bee_rider.databinding.ActivitySplashBinding
-import com.chenchen.bee_rider.ui.login.PhoneLoginActivity
+import com.chenchen.bee_rider.ui.login.LoginActivity
 
 /**
  * 创建时间：2021/1/15
@@ -23,7 +23,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(){
         if(!TextUtils.isEmpty(MMKVUtils.getString(HttpConstants.TOKEN))){
             startActivity(Intent(this, MainActivity::class.java))
         }else{
-            startActivity(Intent(this, PhoneLoginActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
         }
         finish()
     }

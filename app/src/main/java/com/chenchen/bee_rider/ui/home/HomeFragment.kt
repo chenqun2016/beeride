@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.chenchen.base.base.BaseFragment
 import com.chenchen.bee_rider.R
+import com.chenchen.bee_rider.databinding.FragmentHome2Binding
 import com.chenchen.bee_rider.databinding.FragmentHomeBinding
 import com.chenchen.bee_rider.ui.adapter.HomeAdapter
 import com.chenchen.bee_rider.utils.UIUtils
