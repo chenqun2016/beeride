@@ -13,6 +13,7 @@ import com.chenchen.base.base.BaseFragment
 import com.chenchen.base.utils.DisplayUtil
 import com.chenchen.bee_rider.R
 import com.chenchen.bee_rider.databinding.FragmentPersonalBinding
+import com.chenchen.bee_rider.utils.UIUtils
 import com.chenchen.bee_rider.utils.ViewHelper
 import com.chenchen.bee_rider.utils.options
 import com.chenchen.bee_rider.utils.setRoundConner
@@ -34,7 +35,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
     }
 
     override fun initViews(savedInstanceState: Bundle?) {
-        initImmersionBar()
+        UIUtils.setGradientDrawable(this,null,binding.ivBg,R.color.color_FF6200)
         binding.scrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, totalScrollY, oldScrollX, oldScrollY ->
             if(totalScrollY >= 100){
                 binding.titleView.setBackgroundAlpha(255)
@@ -48,20 +49,14 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
             }
         }
         )
-        binding.clPersional.setRoundConner(DisplayUtil.dip2px(context,10f),ViewHelper.RADIUS_TOP)
-        binding.clData.setRoundConner(DisplayUtil.dip2px(context,10f),ViewHelper.RADIUS_BOTTOM)
+//        binding.clPersional.setRoundConner(DisplayUtil.dip2px(context,10f),ViewHelper.RADIUS_TOP)
+        binding.clData.setRoundConner(DisplayUtil.dip2px(context,10f),ViewHelper.RADIUS_ALL)
         binding.tvHistory.setOnClickListener(this)
         binding.tvSystemSetting.setOnClickListener(this)
         binding.switchButton.setOnCheckedChangeListener { view, isChecked ->
             Toast.makeText(context, "$isChecked", Toast.LENGTH_SHORT).show()
         }
     }
-    private fun initImmersionBar() {
-        val mImmersionBar = ImmersionBar.with(this)
-        mImmersionBar.statusBarDarkFont(false, 0.2f)
-        mImmersionBar.init()
-    }
-
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.tv_history -> {

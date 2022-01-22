@@ -7,7 +7,6 @@ import com.chenchen.base.base.BaseActivity
 import com.chenchen.base.constants.HttpConstants
 import com.chenchen.base.utils.MMKVUtils
 import com.chenchen.bee_rider.databinding.ActivitySplashBinding
-import com.chenchen.bee_rider.ui.login.LoginActivity
 
 /**
  * 创建时间：2021/1/15
@@ -20,11 +19,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(){
        return ActivitySplashBinding.inflate(layoutInflater)
     }
     override fun initViews(savedInstanceState: Bundle?) {
-        if(!TextUtils.isEmpty(MMKVUtils.getString(HttpConstants.TOKEN))){
-            startActivity(Intent(this, MainActivity::class.java))
-        }else{
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 

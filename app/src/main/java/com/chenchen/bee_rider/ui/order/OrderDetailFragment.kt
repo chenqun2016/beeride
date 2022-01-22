@@ -31,7 +31,6 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>(), AMap.OnM
     AMap.OnInfoWindowClickListener {
 
     private var aMap: AMap? = null
-    var backIconWhite = true
 
     override fun onDestroyView() {
         binding.map.onDestroy()
@@ -47,19 +46,12 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>(), AMap.OnM
     }
 
     override fun initViews(savedInstanceState: Bundle?) {
-        initImmersionBar()
         binding.ivBack.setOnClickListener {
             findNavController().navigateUp()
         }
         initStatusBar()
         initTabViewpager()
         initMap(savedInstanceState)
-    }
-
-    private fun initImmersionBar() {
-        val mImmersionBar = ImmersionBar.with(this)
-        mImmersionBar.statusBarDarkFont(true, 0.2f)
-        mImmersionBar.init()
     }
 
     private fun initStatusBar() {
@@ -72,6 +64,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>(), AMap.OnM
     private fun initTabViewpager() {
         val adapter = OrderDetailTabAdapter(this)
         binding.viewpager.adapter = adapter
+        binding.viewpager.isUserInputEnabled = false
         TabLayoutMediator(
             binding.tabLayout, binding.viewpager
         ) { tab: TabLayout.Tab, position: Int ->
@@ -84,32 +77,14 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>(), AMap.OnM
 
         binding.appbar.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val scrollRangle = appBarLayout.totalScrollRange
-            when {
-                verticalOffset == 0 -> { //展开
-                    binding.background.alpha = 0f
-                    binding.tabLayout.alpha = 0f
-                }
-                abs(verticalOffset) >= scrollRangle -> {
-                    binding.background.alpha = 1f
-                    binding.tabLayout.alpha = 1f
-                }
-                else -> {
-                    //保留一位小数
-                    val alpha = abs(verticalOffset) * 1.0f / scrollRangle
-                    binding.background.alpha = alpha
-                    binding.tabLayout.alpha = alpha
-                    backIconWhite = if(alpha >= 0.5f){
-                        if(backIconWhite){
-                            binding.ivBack.setImageResource(R.drawable.icon_back_anse)
-                        }
-                        false
-                    }else{
-                        if(!backIconWhite){
-                            binding.ivBack.setImageResource(R.drawable.icon_back_bai)
-                        }
-                        true
-                    }
-                }
+            if(abs(verticalOffset) == scrollRangle){
+                binding.background.alpha = 1f
+                binding.tabLayout.alpha = 1f
+                binding.ivBack.setImageResource(R.drawable.icon_back_anse)
+            }else{
+                binding.background.alpha = 0f
+                binding.tabLayout.alpha = 0f
+                binding.ivBack.setImageResource(R.drawable.icon_back_bai)
             }
         })
     }

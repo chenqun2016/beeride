@@ -31,7 +31,6 @@ class SystemSettingFragment : BaseFragment<FragmentSystemSettingBinding>(), View
     }
 
     override fun initViews(savedInstanceState: Bundle?) {
-        initImmersionBar()
         binding.tvVersionText.text = "当前版本V" + DeviceUtils.getAppVersionName()
         binding.tvCacheText.text = CacheDataManager.getTotalCacheSize(activity)
         binding.tvPasswordSet.setOnClickListener(this)
@@ -43,13 +42,6 @@ class SystemSettingFragment : BaseFragment<FragmentSystemSettingBinding>(), View
         binding.llVersion.setOnClickListener(this)
         binding.tvAbout.setOnClickListener(this)
     }
-
-    private fun initImmersionBar() {
-        val mImmersionBar = ImmersionBar.with(this)
-        mImmersionBar.statusBarDarkFont(true, 0.2f)
-        mImmersionBar.init()
-    }
-
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tv_password_set -> {

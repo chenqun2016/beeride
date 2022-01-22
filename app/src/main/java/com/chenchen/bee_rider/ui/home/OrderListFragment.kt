@@ -53,7 +53,7 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
         adapter.setOnItemClickListener { adapter, _, position ->
             val args = Bundle()
             args.putInt("orderId", position)
-            findNavController().navigate(R.id.next_action_order_detail,args,options)
+            findNavController().navigate(R.id.order_detail_dest,args,options)
         }
         adapter.addChildLongClickViewIds(R.id.tv_accept)
         adapter.setOnItemChildLongClickListener (OnItemChildLongClickListener { _, view, _ ->

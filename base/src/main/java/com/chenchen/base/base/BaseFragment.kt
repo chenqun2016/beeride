@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.chenchen.base.utils.d
+import com.gyf.immersionbar.ImmersionBar
+import com.gyf.immersionbar.components.ImmersionFragment
 
 
 /**
@@ -14,7 +16,7 @@ import com.chenchen.base.utils.d
  * @Author： 陈陈陈
  * 功能描述：
  */
-abstract class BaseFragment <VB:ViewBinding> :Fragment(){
+abstract class BaseFragment <VB:ViewBinding> : ImmersionFragment(){
     protected val TAG: String = this.javaClass.simpleName
 
     private var _binding: VB? = null
@@ -34,6 +36,16 @@ abstract class BaseFragment <VB:ViewBinding> :Fragment(){
         d(TAG,"onCreateView")
         _binding = getBinding(inflater,container,savedInstanceState)
         return _binding?.root
+    }
+
+    override fun initImmersionBar() {
+        val mImmersionBar = ImmersionBar.with(this)
+        mImmersionBar.statusBarDarkFont(true, 0.2f)
+        mImmersionBar.init()
+    }
+
+    override fun immersionBarEnabled(): Boolean {
+        return true
     }
 
     override fun onDestroyView() {

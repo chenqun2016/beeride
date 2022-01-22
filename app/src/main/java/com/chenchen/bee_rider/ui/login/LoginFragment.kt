@@ -1,31 +1,40 @@
 package com.chenchen.bee_rider.ui.login
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import com.chenchen.base.base.BaseActivity
-import com.chenchen.bee_rider.ui.MainActivity
+import androidx.navigation.fragment.findNavController
+import com.blankj.utilcode.util.KeyboardUtils
+import com.chenchen.base.base.BaseFragment
 import com.chenchen.bee_rider.R
-import com.chenchen.bee_rider.databinding.ActivityCodeLoginBinding
+import com.chenchen.bee_rider.databinding.FragmentCodeLoginBinding
+import com.chenchen.bee_rider.utils.options
 import com.chenchen.bee_rider.view.SendCodeView
 
 /**
- * 创建时间：2022/1/15
+ * 创建时间：2022/1/22
  * @Author： 陈陈陈
  * 功能描述：
  */
-class LoginActivity : BaseActivity<ActivityCodeLoginBinding>() {
-
-    override fun getViewBinding(): ActivityCodeLoginBinding {
-        return ActivityCodeLoginBinding.inflate(layoutInflater)
+class LoginFragment : BaseFragment<FragmentCodeLoginBinding>() {
+    override fun getBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): FragmentCodeLoginBinding {
+        return FragmentCodeLoginBinding.inflate(inflater,container,false)
     }
 
     override fun initViews(savedInstanceState: Bundle?) {
         binding.ivBack.setOnClickListener {
-            finish()
+            findNavController().navigateUp()
         }
-        binding.codeText.initDatas(object :SendCodeView.MyOnClickListener{
+        binding.tvMimalogin.setOnClickListener {
+            findNavController().navigate(R.id.password_login_dest,null, options)
+        }
+        binding.codeText.initDatas(object : SendCodeView.MyOnClickListener{
             override fun onGetPhoneNum(): String {
                 return ""
             }
@@ -43,14 +52,13 @@ class LoginActivity : BaseActivity<ActivityCodeLoginBinding>() {
             setButtonStatus()
         }
         binding.tvAgree.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            if(null != activity){
+                KeyboardUtils.hideSoftInput(requireActivity())
+            }
+            findNavController().popBackStack(R.id.code_login_dest,true)
+            findNavController().navigate(R.id.home_dest,null, options)
         }
     }
-    override fun initDatas() {
-    }
-
 
     private fun setButtonStatus() {
         if (!TextUtils.isEmpty(binding.edUserCode.text)&&!TextUtils.isEmpty(binding.edUserPhone.text)) {

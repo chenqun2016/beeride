@@ -51,6 +51,5 @@ class OrderDetailTraceAdapter :
         }else{
             dian.clearAnimation()
         }
-
     }
 }

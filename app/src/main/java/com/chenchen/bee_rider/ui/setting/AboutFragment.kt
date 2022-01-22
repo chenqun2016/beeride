@@ -25,13 +25,5 @@ class AboutFragment : BaseFragment<FragmentAboutBinding>() {
     }
 
     override fun initViews(savedInstanceState: Bundle?) {
-        initImmersionBar()
     }
-
-    private fun initImmersionBar() {
-        val mImmersionBar = ImmersionBar.with(this)
-        mImmersionBar.statusBarDarkFont(true, 0.2f)
-        mImmersionBar.init()
-    }
-
 }

@@ -3,12 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/home_dest">
+    app:startDestination="@id/preview_dest">
+
+    <fragment
+        android:id="@+id/preview_dest"
+        android:name="com.chenchen.bee_rider.ui.login.PreviewFragment"
+        android:label="preview" />
+
+    <fragment
+        android:id="@+id/code_login_dest"
+        android:name="com.chenchen.bee_rider.ui.login.LoginFragment"
+        android:label="codeLogin" />
+
+    <fragment
+        android:id="@+id/password_login_dest"
+        android:name="com.chenchen.bee_rider.ui.login.PasswordLoginFragment"
+        android:label="passwordLogin" >
+
+        <action
+            android:id="@+id/next_action_home"
+            app:destination="@+id/home_dest"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/home_dest"
         android:name="com.chenchen.bee_rider.ui.home.HomeFragment"
-        tools:layout="@layout/fragment_home"
+        tools:layout="@layout/fragment_home2"
         android:label="Home" >
 
         <action

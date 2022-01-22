@@ -32,7 +32,6 @@ class CommonWebFragment : BaseFragment<FragmentCommonWebBinding>() {
     }
 
     override fun initViews(savedInstanceState: Bundle?) {
-        initImmersionBar()
         //        是否使用内部标题
         innertitle = requireArguments().getBoolean("innertitle", true)
         //-1时不能在页面内跳转
@@ -48,12 +47,6 @@ class CommonWebFragment : BaseFragment<FragmentCommonWebBinding>() {
                 binding.webview.loadDataWithBaseURL(null, data, "text/html", "utf-8", null)
             }
         }
-    }
-
-    private fun initImmersionBar() {
-        val mImmersionBar = ImmersionBar.with(this)
-        mImmersionBar.statusBarDarkFont(true, 0.2f)
-        mImmersionBar.init()
     }
 
     private val mWebChromeClient: WebChromeClient = object : WebChromeClient() {

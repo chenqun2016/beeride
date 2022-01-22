@@ -50,7 +50,6 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
     }
 
     override fun initViews(savedInstanceState: Bundle?) {
-        initImmersionBar()
         UIUtils.setGradientDrawable(this, null, binding.ivBg, R.color.color_FF6200)
         if (savedInstanceState == null && fragment == null) {
             fragment = OrderListFragment.newInstance(OrderListFragment.TYPE_HISTORY)
@@ -61,12 +60,6 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
         binding.titleView.right?.setOnClickListener {
             showShaixuan()
         }
-    }
-
-    private fun initImmersionBar() {
-        val mImmersionBar = ImmersionBar.with(this)
-        mImmersionBar.statusBarDarkFont(true, 0.2f)
-        mImmersionBar.init()
     }
 
     private fun showShaixuan() {

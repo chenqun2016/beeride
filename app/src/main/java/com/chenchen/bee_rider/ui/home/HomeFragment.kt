@@ -37,14 +37,7 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
     }
 
     override fun initViews(savedInstanceState: Bundle?) {
-        initImmersionBar()
         initView()
-    }
-
-    private fun initImmersionBar() {
-        val mImmersionBar = ImmersionBar.with(this)
-        mImmersionBar.statusBarDarkFont(true, 0.2f)
-        mImmersionBar.init()
     }
 
     private fun initView() {
@@ -54,7 +47,6 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
         binding.tvName.setOnClickListener(this)
         binding.ivIconWork.setOnClickListener(this)
         binding.tvWork.setOnClickListener(this)
-
         binding.ivRight.setOnClickListener(this)
 
         val adapter = HomeAdapter(this)
