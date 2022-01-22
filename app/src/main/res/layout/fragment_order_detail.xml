@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinator"
@@ -7,92 +7,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
+    <FrameLayout
+        android:id="@+id/fcv"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/transparent"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:elevation="0dp">
+        android:layout_height="match_parent"/>
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="@color/transparent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <com.chenchen.bee_rider.view.MyMapView
-                android:id="@+id/map"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_collapseMode="parallax" />
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/transparent"
-                android:elevation="0dp"
-                android:minHeight="40dp"
-                app:contentInsetLeft="0dp"
-                app:contentInsetRight="0dp"
-                app:contentInsetStart="0dp"
-                app:contentInsetStartWithNavigation="0dp"
-                app:elevation="0dp"
-                app:layout_collapseMode="pin">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <View
-                        android:id="@+id/background"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:alpha="0"
-                        android:background="@drawable/bg_gradient_white_grey" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/iv_back"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentBottom="true"
-                        android:background="@color/transparent"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/icon_back_bai" />
-
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tabLayout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="25dp"
-                        android:elevation="0dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_alignBottom="@+id/iv_back"
-                        android:layout_alignTop="@+id/iv_back"
-                        app:tabBackground="@color/transparent"
-                        app:tabRippleColor = "@android:color/transparent"
-                        android:background="@color/transparent"
-                        app:tabIndicatorHeight="2dp"
-                        app:tabIndicator="@drawable/line_tab_indicator"
-                        app:tabIndicatorColor="@color/color_FF6200"
-                        app:tabIndicatorFullWidth="false"
-                        app:tabIndicatorGravity="bottom"
-                        app:tabMode="auto"
-                        app:tabSelectedTextColor="@color/color_FF6200"
-                        app:tabTextColor="@color/color_222222" />
-                </RelativeLayout>
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewpager"
+    <RelativeLayout
+        android:id="@+id/titlebar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
-        app:behavior_overlapTop="375dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:orientation="vertical">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <View
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:alpha="0"
+            android:background="@drawable/bg_gradient_white_grey" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/transparent"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_back_bai" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_alignTop="@+id/iv_back"
+            android:layout_alignBottom="@+id/iv_back"
+            android:layout_centerHorizontal="true"
+            android:background="@color/transparent"
+            android:elevation="0dp"
+            app:tabBackground="@color/transparent"
+            app:tabIndicator="@drawable/line_tab_indicator"
+            app:tabIndicatorColor="@color/color_FF6200"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorGravity="bottom"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="auto"
+            app:tabRippleColor="@android:color/transparent"
+            app:tabSelectedTextColor="@color/color_FF6200"
+            app:tabTextColor="@color/color_222222" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

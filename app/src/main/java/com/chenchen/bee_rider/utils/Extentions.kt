@@ -1,5 +1,6 @@
 package com.chenchen.bee_rider.utils
 
+import android.view.View
 import android.view.ViewGroup
 import com.chenchen.base.utils.d
 import com.google.gson.Gson
@@ -29,6 +30,11 @@ fun Any.toApiBody() :RequestBody?{
 
 fun ViewGroup.setRoundConner(radius:Int,radiusSide:Int){
     ViewHelper.setViewOutline(this,radius,radiusSide)
+}
+
+fun View.startAlphaAnim(show:Boolean){
+    val alpha = if(show) 1 else 0
+    this.animate().alpha(alpha.toFloat()).setDuration(400).start()
 }
 
 /**

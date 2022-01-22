@@ -1,36 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
+    android:background="@color/color_F5F5F5"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:orientation="vertical"
-        android:paddingTop="10dp"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/color_F5F5F5"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0dp">
 
-<!--        <TextView-->
-<!--            android:layout_width="100dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:text="导航"-->
-<!--            android:background="@drawable/bg_round20dp_white"-->
-<!--            android:gravity="center"-->
-<!--            android:textStyle="bold"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:textSize="16sp"-->
-<!--            android:layout_marginBottom="20dp"-->
-<!--            android:textColor="@color/color_3D7DFB"/>-->
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            app:contentScrim="@color/transparent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-        <include
-            android:id="@+id/include_detail"
-            layout="@layout/item_order_detail_top"/>
+            <com.chenchen.bee_rider.view.MyMapView
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax" />
 
-        <include
-            android:id="@+id/include_products"
-            layout="@layout/item_order_detail_tab1_product"/>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/color_F5F5F5"
+                android:elevation="0dp"
+                android:minHeight="70dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:elevation="0dp"
+                app:layout_collapseMode="pin">
 
-        <include
-            android:id="@+id/include_messages"
-            layout="@layout/item_order_detail_tab1_message"/>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</androidx.core.widget.NestedScrollView>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:behavior_overlapTop="375dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/daohang"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_round20dp_white"
+                android:gravity="center"
+                android:text="导航"
+                android:textColor="@color/color_3D7DFB"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <include
+                android:id="@+id/include_detail"
+                layout="@layout/item_order_detail_top" />
+
+            <include
+                android:id="@+id/include_products"
+                layout="@layout/item_order_detail_tab1_product" />
+
+            <include
+                android:id="@+id/include_messages"
+                layout="@layout/item_order_detail_tab1_message" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

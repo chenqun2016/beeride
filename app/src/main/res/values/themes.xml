@@ -4,13 +4,13 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/color_3D7DFB</item>
         <item name="colorPrimaryVariant">@color/color_3D7DFB</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/color_F5F5F5</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/color_3D7DFB</item>
         <item name="colorSecondaryVariant">@color/color_3D7DFB</item>
         <item name="colorOnSecondary">@color/color_3D7DFB</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/theme_color</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/color_F5F5F5</item>
         <!-- Customize your theme here. -->
     </style>
 
