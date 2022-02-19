@@ -1,5 +1,6 @@
 package com.chenchen.bee_rider.utils
 
+import android.animation.Animator
 import android.view.View
 import android.view.ViewGroup
 import com.chenchen.base.utils.d
@@ -32,9 +33,25 @@ fun ViewGroup.setRoundConner(radius:Int,radiusSide:Int){
     ViewHelper.setViewOutline(this,radius,radiusSide)
 }
 
-fun View.startAlphaAnim(show:Boolean){
+fun View.startAlphaAnim(show:Boolean,isVisibleOrGone:Boolean = false){
     val alpha = if(show) 1 else 0
-    this.animate().alpha(alpha.toFloat()).setDuration(400).start()
+    this.animate().alpha(alpha.toFloat()).setDuration(400).setListener(object :Animator.AnimatorListener{
+        override fun onAnimationStart(animation: Animator?) {
+            if(isVisibleOrGone && show){
+                visibility = View.VISIBLE
+            }
+        }
+        override fun onAnimationEnd(animation: Animator?) {
+            if(isVisibleOrGone && !show){
+                visibility = View.GONE
+            }
+        }
+        override fun onAnimationCancel(animation: Animator?) {
+        }
+
+        override fun onAnimationRepeat(animation: Animator?) {
+        }
+    }).start()
 }
 
 /**

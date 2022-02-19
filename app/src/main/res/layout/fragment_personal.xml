@@ -27,8 +27,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="170dp"
                 android:layout_marginEnd="10dp"
+                android:background="#aaf5f5f5"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -52,7 +53,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="6dp"
                     android:text="张山峰"
-                    android:textColor="@color/white"
+                    android:textColor="@color/color_222222"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toRightOf="@+id/iv_icon"
@@ -65,22 +66,21 @@
                     android:layout_marginBottom="6dp"
                     android:gravity="center"
                     android:text="工作中"
-                    android:textColor="@color/white"
+                    android:textColor="@color/color_222222"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_icon"
                     app:layout_constraintLeft_toLeftOf="@+id/tv_name" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_data"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="75dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp"
-                android:paddingTop="18dp"
-                android:paddingBottom="20dp"
-                android:background="#FFFFFE"
+                android:background="#FEFFFFFF"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cl_persional">
 
@@ -90,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:text="0"
-                    android:textColor="@color/color_FF6200"
+                    android:textColor="@color/color_222222"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/tv_today"
@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:text="0"
-                    android:textColor="@color/color_FF6200"
+                    android:textColor="@color/color_222222"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/tv_total"
@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:text="0"
-                    android:textColor="@color/color_FF6200"
+                    android:textColor="@color/color_222222"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/tv_rate"
@@ -128,6 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
+                    android:layout_marginBottom="15dp"
                     android:text="今日单量"
                     android:textColor="@color/color_888888"
                     android:textSize="14sp"
@@ -158,6 +159,7 @@
                     app:layout_constraintLeft_toRightOf="@+id/tv_total"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_total" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

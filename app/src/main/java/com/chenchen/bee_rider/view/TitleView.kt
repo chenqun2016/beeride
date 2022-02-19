@@ -4,14 +4,19 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
+import android.view.ContextThemeWrapper
 import android.view.View
+import android.view.ViewGroup
+import android.view.ViewParent
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.chenchen.bee_rider.R
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.gyf.immersionbar.ImmersionBar
 
 /**
@@ -32,10 +37,21 @@ class TitleView : FrameLayout {
 
     private fun initViews(context: Context, attrs: AttributeSet?) {
         val view = inflate(context, R.layout.title_view, this)
+
         val statusBar = view.findViewById<View>(R.id.status_bar)
         if(context is Activity){
             statusBar.layoutParams.height = ImmersionBar.getStatusBarHeight(context)
         }
+        if(context is Fragment){
+            statusBar.layoutParams.height = ImmersionBar.getStatusBarHeight(context)
+        }
+        if(context is ContextThemeWrapper && context.baseContext is Activity){
+            statusBar.layoutParams.height = ImmersionBar.getStatusBarHeight(context.baseContext as Activity)
+        }
+        post{
+            setCollapsingToolbarLayoutMinHeight(parent)
+        }
+
         clTitleView = view.findViewById(R.id.cl_title_view)
         clTitleView?.background?.alpha = 0
 
@@ -43,6 +59,14 @@ class TitleView : FrameLayout {
         back?.setOnClickListener {
             if(context is Activity){
                 val findNavController = context.findNavController(R.id.nav_host_fragment)
+                findNavController.navigateUp()
+            }
+            if(context is Fragment){
+                val findNavController = context.findNavController()
+                findNavController.navigateUp()
+            }
+            if(context is ContextThemeWrapper && context.baseContext is Activity){
+                val findNavController = (context.baseContext as Activity).findNavController(R.id.nav_host_fragment)
                 findNavController.navigateUp()
             }
         }
@@ -66,6 +90,19 @@ class TitleView : FrameLayout {
             right?.visibility = View.GONE
         }
         setContentColor(colorType)
+    }
+
+    private fun setCollapsingToolbarLayoutMinHeight(p:ViewParent?) {
+        if(null == p){
+            return
+        }
+        if(p is CollapsingToolbarLayout){
+            if(p.minimumHeight<=0){
+                p.minimumHeight = height
+            }
+        }else{
+            setCollapsingToolbarLayoutMinHeight(p.parent)
+        }
     }
 
     /**

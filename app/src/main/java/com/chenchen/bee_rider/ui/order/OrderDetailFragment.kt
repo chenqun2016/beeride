@@ -42,11 +42,13 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
         LiveDataBus.get().with("reflushToolbar").observe(this,object :Observer<Boolean>{
             override fun onChanged(t: Boolean?) {
                 if(t == true){
-                    binding.tabLayout.startAlphaAnim(true)
+                    binding.tabLayout.startAlphaAnim(show = true, isVisibleOrGone = true)
                     binding.ivBack.setImageResource(R.drawable.icon_back_anse)
+                    binding.background.startAlphaAnim(true)
                 }else{
-                    binding.tabLayout.startAlphaAnim(false)
+                    binding.tabLayout.startAlphaAnim(show = false, isVisibleOrGone = true)
                     binding.ivBack.setImageResource(R.drawable.icon_back_bai)
+                    binding.background.startAlphaAnim(false)
                 }
             }
         })
@@ -55,7 +57,9 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
 
     private fun initStatusBar() {
         val statusBarHeight = ImmersionBar.getStatusBarHeight(this)
-        binding.titlebar.setPadding(0,statusBarHeight,0,0)
+        val layoutParams = binding.background.layoutParams
+        layoutParams.height += statusBarHeight
+
     }
 
     private fun initTabViewpager() {

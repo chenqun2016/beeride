@@ -25,8 +25,8 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="50dp"
             android:text="“趣鲜蜂”是2020年创立的本地生活服务平台，平台将采用“会员制+自营+配送上门”的运营模式，为用户提供优质生活服务的企业，主营在线外卖、新零售、即时配送和餐饮供应链等业务。"
             android:textColor="@color/color_282525"

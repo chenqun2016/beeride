@@ -21,7 +21,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
         android:textColor="@color/color_272525"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -40,8 +39,6 @@
         android:layout_below="@+id/iv_goods_name"
         android:layout_alignLeft="@+id/iv_goods_name" />
 
-
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/iv_goods_price"
         android:layout_width="wrap_content"
@@ -58,7 +55,7 @@
         android:id="@+id/iv_goods_price_past"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:text="¥10"
         android:layout_marginTop="4dp"
         android:textColor="@color/color_ccc"

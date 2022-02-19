@@ -11,6 +11,7 @@ import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.LatLngBounds
 import com.amap.api.maps.model.Marker
+import com.blankj.utilcode.util.LogUtils
 import com.chenchen.base.base.BaseFragment
 import com.chenchen.base.utils.DisplayUtil
 import com.chenchen.base.utils.LiveDataBus
@@ -51,12 +52,13 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
         layoutParams.height = DisplayUtil.dip2px(context,40f)+ImmersionBar.getStatusBarHeight(this)
         binding.toolbar.layoutParams = layoutParams
         binding.toolbar.minimumHeight = layoutParams.height
-
         binding.includeProducts.products.layoutManager = LinearLayoutManager(context)
         val productsAdapter = ProductsAdapter()
         binding.includeProducts.products.adapter = productsAdapter
         val products = mutableListOf<String>("1","2","3")
         productsAdapter.setNewInstance(products)
+
+        binding.includeDetail.includeOrderItem.tvContact.visibility = View.VISIBLE
 
         initMap(savedInstanceState)
 
@@ -66,8 +68,9 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
                 closed = c
                 binding.daohang.startAlphaAnim(!closed)
                 LiveDataBus.get().with("reflushToolbar").postValue(closed)
+                binding.map.startAlphaAnim(!closed,true)
             }
-            binding.toolbar.background.alpha = (abs(verticalOffset)/appBarLayout.totalScrollRange.toFloat() * 255).toInt()
+            binding.map.translationY = verticalOffset*0.5f
         })
     }
     var closed :Boolean = false

@@ -13,7 +13,15 @@
     <fragment
         android:id="@+id/code_login_dest"
         android:name="com.chenchen.bee_rider.ui.login.LoginFragment"
-        android:label="codeLogin" />
+        android:label="codeLogin" >
+        <action
+            android:id="@+id/next_action_home"
+            app:destination="@+id/home_dest" />
+
+        <action
+            android:id="@+id/next_action_password_login"
+            app:destination="@+id/password_login_dest" />
+    </fragment>
 
     <fragment
         android:id="@+id/password_login_dest"
@@ -22,11 +30,11 @@
 
         <action
             android:id="@+id/next_action_home"
-            app:destination="@+id/home_dest"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@+id/home_dest" />
+
+        <action
+            android:id="@+id/next_action_reset_password"
+            app:destination="@+id/reset_password_dest" />
     </fragment>
 
     <fragment
@@ -36,29 +44,12 @@
         android:label="Home" >
 
         <action
-            android:id="@+id/next_action_history"
-            app:destination="@+id/history_dest"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-
-        <action
             android:id="@+id/next_action_persional"
-            app:destination="@+id/personal_dest"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@+id/personal_dest" />
 
         <action
-            android:id="@+id/next_action_order_detail"
-            app:destination="@+id/order_detail_dest"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-
+            android:id="@+id/next_action_system_set"
+            app:destination="@+id/system_set_dest" />
     </fragment>
 
     <fragment
@@ -81,6 +72,10 @@
         <action
             android:id="@+id/system_set"
             app:destination="@+id/system_set_dest" />
+
+        <action
+            android:id="@+id/next_action_comment"
+            app:destination="@+id/comments_dest" />
     </fragment>
 
     <fragment
@@ -104,4 +99,14 @@
         android:id="@+id/common_web_dest"
         android:name="com.chenchen.bee_rider.ui.setting.CommonWebFragment"
         android:label="common" />
+
+    <fragment
+        android:id="@+id/comments_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.CommentsFragment"
+        android:label="comments" />
+
+    <fragment
+        android:id="@+id/reset_password_dest"
+        android:name="com.chenchen.bee_rider.ui.login.ResetPasswordFragment"
+        android:label="resetpassword" />
 </navigation>

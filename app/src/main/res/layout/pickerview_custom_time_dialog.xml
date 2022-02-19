@@ -20,7 +20,7 @@
             android:textSize="14sp"
             android:textColor="@color/color_7C7877"
             android:gravity="center"
-            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
             android:paddingRight="15dp"
             android:text="取消"/>
 
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
             android:paddingRight="15dp"
             android:text="确定"
             android:textColor="@color/color_3e7dfb"

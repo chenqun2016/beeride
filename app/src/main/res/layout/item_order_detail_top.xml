@@ -15,5 +15,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/line_order_detail_tab1_top"
         android:layout_gravity="center_horizontal"/>
-    <include layout="@layout/item_home_order_nopadding"/>
+    <include
+        android:id="@+id/include_order_item"
+        layout="@layout/item_home_order_nopadding"/>
 </androidx.appcompat.widget.LinearLayoutCompat>

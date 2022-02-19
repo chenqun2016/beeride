@@ -15,6 +15,7 @@ import com.chenchen.bee_rider.R
 import com.chenchen.bee_rider.databinding.FragmentHome2Binding
 import com.chenchen.bee_rider.ui.adapter.HomeAdapter
 import com.chenchen.bee_rider.utils.UIUtils
+import com.chenchen.bee_rider.utils.options
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -48,6 +49,7 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
         binding.ivIconWork.setOnClickListener(this)
         binding.tvWork.setOnClickListener(this)
         binding.ivRight.setOnClickListener(this)
+        binding.ivSetting.setOnClickListener(this)
 
         val adapter = HomeAdapter(this)
         binding.viewpager.adapter = adapter
@@ -99,10 +101,12 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
             R.id.iv_icon_work,
             R.id.tv_name,
             R.id.iv_icon -> {
-                findNavController().navigate(R.id.next_action_persional)
+                findNavController().navigate(R.id.next_action_persional,null, options)
+            }
+            R.id.iv_setting -> {
+                findNavController().navigate(R.id.next_action_system_set,null, options)
             }
             R.id.iv_right -> {
-                findNavController().navigate(R.id.next_action_history)
             }
         }
     }

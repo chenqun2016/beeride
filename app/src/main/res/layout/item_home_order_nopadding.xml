@@ -152,19 +152,38 @@
 
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_contact"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:text="联系商家"
+        android:textColor="@color/color_FF6200"
+        android:visibility="gone"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:background="@drawable/btn_stroke_yellow"
+        app:layout_constraintRight_toLeftOf="@+id/tv_accept"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_customer_distance"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_accept"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="10dp"
+        app:layout_goneMarginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:text="长按接单"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:gravity="center"
         android:textStyle="bold"
         android:background="@drawable/btn_gradient_yellow_round"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_contact"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_customer_distance"/>

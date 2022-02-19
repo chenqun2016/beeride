@@ -1,6 +1,5 @@
 package com.chenchen.bee_rider.ui.login
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -11,7 +10,7 @@ import com.chenchen.base.constants.HttpConstants
 import com.chenchen.base.utils.MMKVUtils
 import com.chenchen.bee_rider.R
 import com.chenchen.bee_rider.databinding.FragmentPreviewBinding
-import com.chenchen.bee_rider.utils.options
+import com.chenchen.bee_rider.utils.UIUtils
 
 /**
  * 创建时间：2022/1/22
@@ -30,11 +29,9 @@ class PreviewFragment :BaseFragment<FragmentPreviewBinding>() {
     override fun initViews(savedInstanceState: Bundle?) {
         binding.tvConfirm.setOnClickListener {
             if(!TextUtils.isEmpty(MMKVUtils.getString(HttpConstants.TOKEN))){
-                findNavController().popBackStack(R.id.preview_dest,true)
-                findNavController().navigate(R.id.home_dest,null, options)
+                findNavController().navigate(R.id.home_dest,null, UIUtils.getNavOptions(R.id.preview_dest))
             }else{
-                findNavController().popBackStack(R.id.preview_dest,true)
-                findNavController().navigate(R.id.code_login_dest,null, options)
+                findNavController().navigate(R.id.code_login_dest,null, UIUtils.getNavOptions(R.id.preview_dest))
             }
         }
     }
