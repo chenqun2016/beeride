@@ -10,8 +10,8 @@ import android.widget.LinearLayout
 import com.chenchen.bee_rider.R
 
 class MyPasswordView : LinearLayout {
-    var editTextView: EditText? = null
-    var imagebutton: ImageButton? = null
+    lateinit var editTextView: EditText
+    lateinit var imagebutton: ImageButton
 
     constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(
         context,
@@ -34,21 +34,21 @@ class MyPasswordView : LinearLayout {
         inflate(context, R.layout.item_password, this)
         editTextView = findViewById<View>(R.id.password_edit) as EditText
         imagebutton = findViewById<View>(R.id.imagebutton) as ImageButton
-        imagebutton!!.setImageResource(R.drawable.icon_biyan)
+        imagebutton.setImageResource(R.drawable.icon_biyan)
         post {
-            imagebutton!!.setOnClickListener {
+            imagebutton.setOnClickListener {
                 if (toogle) {
-                    imagebutton!!.setImageResource(R.drawable.icon_biyan)
+                    imagebutton.setImageResource(R.drawable.icon_biyan)
                     toogle = false
-                    editTextView!!.inputType =
+                    editTextView.inputType =
                         InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
                 } else {
-                    imagebutton!!.setImageResource(R.drawable.icon_zhengyan)
+                    imagebutton.setImageResource(R.drawable.icon_zhengyan)
                     toogle = true
-                    editTextView!!.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                    editTextView.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
                 }
-                editTextView!!.setSelection(
-                    editTextView!!.text.toString().trim { it <= ' ' }.length
+                editTextView.setSelection(
+                    editTextView.text.toString().trim { it <= ' ' }.length
                 )
             }
         }

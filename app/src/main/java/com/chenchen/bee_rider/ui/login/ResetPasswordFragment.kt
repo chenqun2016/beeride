@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.chenchen.base.base.BaseFragment
 import com.chenchen.bee_rider.R
 import com.chenchen.bee_rider.databinding.FragmentResetPasswordBinding
+import com.chenchen.bee_rider.utils.setButtonClickableBy
 import com.chenchen.bee_rider.view.SendCodeView
 
 /**
@@ -39,6 +40,8 @@ class ResetPasswordFragment : BaseFragment<FragmentResetPasswordBinding>(), View
             override fun onFailure(t: String?) {
             }
         })
+
+        binding.tvAgree.setButtonClickableBy(binding.edUserPhone,binding.edUserCode,binding.edUserPass.editTextView)
     }
 
     override fun onClick(v: View?) {

@@ -45,12 +45,13 @@ class SystemSettingFragment : BaseFragment<FragmentSystemSettingBinding>(), View
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tv_password_set -> {
+                findNavController().navigate(R.id.password_setting_dest, Bundle(),options)
             }
-
             R.id.tv_order_set -> {
+                findNavController().navigate(R.id.order_setting_dest, Bundle(),options)
             }
-
             R.id.tv_notification_set -> {
+                findNavController().navigate(R.id.notice_setting_dest, Bundle(),options)
             }
 
             R.id.ll_clear_cache -> {

@@ -10,6 +10,7 @@ import com.chenchen.bee_rider.R
 import com.chenchen.bee_rider.databinding.FragmentPasswordLoginBinding
 import com.chenchen.bee_rider.utils.UIUtils
 import com.chenchen.bee_rider.utils.options
+import com.chenchen.bee_rider.utils.setButtonClickableBy
 
 /**
  * 创建时间：2022/1/22
@@ -30,6 +31,7 @@ class PasswordLoginFragment :BaseFragment<FragmentPasswordLoginBinding>(), View.
         binding.tvAgree.setOnClickListener(this)
         binding.tvForgetmima.setOnClickListener(this)
 
+        binding.tvAgree.setButtonClickableBy(binding.edUserPhone,binding.edUserPass.editTextView)
         UIUtils.setXieYiText(this,binding.tvXieyi)
     }
 

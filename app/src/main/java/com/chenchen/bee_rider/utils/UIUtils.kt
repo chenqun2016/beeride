@@ -131,4 +131,14 @@ object  UIUtils {
             e.printStackTrace()
         }
     }
+
+    fun setButtonStatus(button:View,enable:Boolean) {
+        if (enable) {
+            button.isEnabled = true
+            button.setBackgroundResource(R.drawable.btn_gradient_yellow_round)
+        } else {
+            button.isEnabled = false
+            button.setBackgroundResource(R.drawable.btn_gradient_grey_round)
+        }
+    }
 }

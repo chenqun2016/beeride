@@ -196,7 +196,7 @@
                     android:layout_height="33dp"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:sb_checked_color="#00ff33"
+                    app:sb_checked_color="@color/color_FF6200"
                     app:sb_checkline_text="工作中"
                     app:sb_shadow_effect="false"
                     app:sb_uncheckcircle_color="@color/transparent" />

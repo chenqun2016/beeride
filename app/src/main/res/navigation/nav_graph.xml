@@ -109,4 +109,25 @@
         android:id="@+id/reset_password_dest"
         android:name="com.chenchen.bee_rider.ui.login.ResetPasswordFragment"
         android:label="resetpassword" />
+
+    <fragment
+        android:id="@+id/notice_setting_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.NoticeSettingFragment"
+        android:label="noticesetting" />
+
+    <fragment
+        android:id="@+id/order_setting_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.OrderSettingFragment"
+        android:label="ordersetting" />
+
+    <fragment
+        android:id="@+id/password_setting_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.PasswordSettingFragment"
+        android:label="passwordsetting" />
+
+
+    <fragment
+        android:id="@+id/password_setting2_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.PasswordSettingFragment2"
+        android:label="passwordsetting2" />
 </navigation>

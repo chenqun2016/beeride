@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_F5F5F5">
+
+    <com.chenchen.bee_rider.view.TitleView
+        android:id="@+id/titleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:contentColor="black"
+        app:title="通知与提示音设置" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_round10dp_white">
+
+        <TextView
+            android:id="@+id/tv_notice_voice"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/color_222222"
+            android:textSize="16sp" />
+
+        <com.chenchen.bee_rider.view.SwitchButton
+            android:id="@+id/sb_notice_voice"
+            android:layout_width="51dp"
+            android:layout_height="30dp"
+            app:sb_checkline_color="@color/transparent"
+            app:sb_checked_color="@color/color_FF6200"
+            app:sb_checkline_text=""
+            app:sb_shadow_effect="false"
+            app:sb_uncheckcircle_color="@color/transparent" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_round10dp_white">
+
+        <TextView
+            android:id="@+id/tv_notice_zhengdong"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/color_222222"
+            android:textSize="16sp" />
+
+        <com.chenchen.bee_rider.view.SwitchButton
+            android:id="@+id/sb_notice_zhengdong"
+            android:layout_width="51dp"
+            android:layout_height="30dp"
+            app:sb_checkline_color="@color/transparent"
+            app:sb_checked_color="@color/color_FF6200"
+            app:sb_checkline_text=""
+            app:sb_shadow_effect="false"
+            app:sb_uncheckcircle_color="@color/transparent" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -21,6 +21,7 @@ import com.chenchen.bee_rider.R
 import com.chenchen.bee_rider.databinding.FragmentCodeLoginBinding
 import com.chenchen.bee_rider.utils.UIUtils
 import com.chenchen.bee_rider.utils.options
+import com.chenchen.bee_rider.utils.setButtonClickableBy
 import com.chenchen.bee_rider.view.SendCodeView
 
 /**
@@ -53,24 +54,8 @@ class LoginFragment : BaseFragment<FragmentCodeLoginBinding>(), View.OnClickList
             override fun onFailure(t: String?) {
             }
         })
-        binding.edUserPhone.addTextChangedListener{
-            setButtonStatus()
-        }
-        binding.edUserCode.addTextChangedListener {
-            setButtonStatus()
-        }
-
+        binding.tvAgree.setButtonClickableBy(binding.edUserPhone,binding.edUserCode)
         UIUtils.setXieYiText(this,binding.tvXieyi)
-    }
-
-    private fun setButtonStatus() {
-        if (!TextUtils.isEmpty(binding.edUserCode.text)&&!TextUtils.isEmpty(binding.edUserPhone.text)) {
-            binding.tvAgree.isEnabled = true
-            binding.tvAgree.setBackgroundResource(R.drawable.btn_gradient_yellow_round)
-        } else {
-            binding.tvAgree.isEnabled = false
-            binding.tvAgree.setBackgroundResource(R.drawable.btn_gradient_grey_round)
-        }
     }
 
     override fun onClick(v: View?) {

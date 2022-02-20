@@ -3,7 +3,11 @@ package com.chenchen.bee_rider.utils
 import android.animation.Animator
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
 import com.chenchen.base.utils.d
+import com.chenchen.bee_rider.R
 import com.google.gson.Gson
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -31,6 +35,20 @@ fun Any.toApiBody() :RequestBody?{
 
 fun ViewGroup.setRoundConner(radius:Int,radiusSide:Int){
     ViewHelper.setViewOutline(this,radius,radiusSide)
+}
+
+fun TextView.setButtonClickableBy(vararg args: EditText){
+    isEnabled = false
+    setBackgroundResource(R.drawable.btn_gradient_grey_round)
+    for (i in args.indices) {
+        args[i].addTextChangedListener {
+            var enable = true
+            for (j in args.indices){
+                enable = enable && !args[j].text.isNullOrEmpty()
+            }
+            UIUtils.setButtonStatus(this,enable)
+        }
+    }
 }
 
 fun View.startAlphaAnim(show:Boolean,isVisibleOrGone:Boolean = false){
