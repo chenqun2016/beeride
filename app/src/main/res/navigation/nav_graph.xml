@@ -130,4 +130,34 @@
         android:id="@+id/password_setting2_dest"
         android:name="com.chenchen.bee_rider.ui.setting.PasswordSettingFragment2"
         android:label="passwordsetting2" />
+
+    <fragment
+        android:id="@+id/userinfo_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.userinfo.UserInfoFragment"
+        android:label="userinfo" />
+
+    <fragment
+        android:id="@+id/userinfo_iten_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.userinfo.UserInfoItemFragment"
+        android:label="userinfoitem" />
+
+    <fragment
+        android:id="@+id/userinfo_certi_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.userinfo.CertificatesFragment"
+        android:label="userinfo_certificates" />
+
+    <fragment
+        android:id="@+id/userinfo_certificate_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.userinfo.CertificateFragment"
+        android:label="userinfo_certificate" />
+
+    <fragment
+        android:id="@+id/userinfo_areas_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.userinfo.AreasFragment"
+        android:label="userinfo_areas" />
+
+    <fragment
+        android:id="@+id/userinfo_contacts_dest"
+        android:name="com.chenchen.bee_rider.ui.setting.userinfo.ContactsFragment"
+        android:label="userinfo_contacts" />
 </navigation>

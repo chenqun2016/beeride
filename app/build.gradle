@@ -46,4 +46,11 @@ dependencies {
     //时间选择器和选项选择器
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.6.0'
+
+//    图片选择器，
+//    implementation 'io.github.lucksiege:pictureselector:v3.0.4'
+    //图片
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 }

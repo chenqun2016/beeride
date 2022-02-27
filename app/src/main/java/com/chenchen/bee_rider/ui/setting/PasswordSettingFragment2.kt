@@ -7,10 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.chenchen.base.base.BaseFragment
 import com.chenchen.bee_rider.R
 import com.chenchen.bee_rider.databinding.FragmentPasswordSetting2Binding
-import com.chenchen.bee_rider.utils.UIUtils
-import com.chenchen.bee_rider.utils.options
 import com.chenchen.bee_rider.utils.setButtonClickableBy
-import com.chenchen.bee_rider.view.SendCodeView
 
 /**
  * 创建时间：2022/2/20

@@ -75,7 +75,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
                 findNavController().navigate(R.id.next_action_comment,null, options)
             }
             R.id.tv_persional -> {
-
+                findNavController().navigate(R.id.userinfo_dest,null, options)
             }
             R.id.tv_message -> {
 

@@ -35,4 +35,10 @@ object Constants {
      * 一键接单
      */
     var SETTING_ORDER_ACCEPT_ONEKEY = "setting_order_accept_onekey"
+
+    //用户信息
+    var USER_INFO = "user_info"
+
+    //用户个人信息页面回调
+    var ITEMRESULT = "itemResult"
 }
