@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bee.rider.Constants
 import com.chenchen.base.base.BaseFragment
 import com.chenchen.base.utils.LiveDataBus
 import com.bee.rider.R
@@ -63,8 +64,9 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
     }
 
     private fun initTabViewpager() {
-        fragment1 = OrderDetailTab1Fragment()
-        fragment2 = OrderDetailTab2Fragment()
+        val id = arguments?.getString(Constants.ORDERID, "")
+        fragment1 = OrderDetailTab1Fragment.newInstance(id)
+        fragment2 = OrderDetailTab2Fragment.newInstance(id)
         val tab = binding.tabLayout.newTab()
         tab.text = "订单详细"
         val tab2 = binding.tabLayout.newTab()

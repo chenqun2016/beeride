@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bee.rider.Constants
 import com.chad.library.adapter.base.listener.OnItemChildLongClickListener
 import com.chenchen.base.base.BaseFragment
 import com.chenchen.base.utils.LoadmoreUtils
@@ -15,12 +17,16 @@ import com.bee.rider.R
 import com.bee.rider.bean.OrderBean
 import com.bee.rider.bean.OrderListBean
 import com.bee.rider.databinding.ModelRecyclerviewBinding
+import com.bee.rider.http.NetworkApi
+import com.bee.rider.params.InitiativeCreateParams
 import com.bee.rider.params.OrderListParams
 import com.bee.rider.params.QueryVO
 import com.bee.rider.ui.adapter.HomeOrderAdapter
 import com.bee.rider.utils.options
 import com.bee.rider.vm.HomeViewModel
+import com.chenchen.base.utils.MMKVUtils
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 /**
  * 创建时间：2022/1/3
@@ -57,17 +63,28 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
 
     override fun initViews(savedInstanceState: Bundle?) {
         val type = arguments?.getInt("type")
-
         adapter.setType(type)
-        adapter.setOnItemClickListener { adapter, _, position ->
+        adapter.setOnItemClickListener { a, _, position ->
             val args = Bundle()
-            args.putInt("orderId", position)
+            args.putString(Constants.ORDERID, adapter.data[position].takeoutId.toString())
             findNavController().navigate(R.id.order_detail_dest, args, options)
         }
         adapter.addChildLongClickViewIds(R.id.tv_accept)
-        adapter.setOnItemChildLongClickListener(OnItemChildLongClickListener { _, view, _ ->
+        adapter.setOnItemChildLongClickListener(OnItemChildLongClickListener { _, view, position ->
             if (view.id == R.id.tv_accept) {
-                Toast.makeText(context, "接单", Toast.LENGTH_SHORT).show()
+                val recordsBean = adapter.data[position]
+
+                val param = InitiativeCreateParams(MMKVUtils.getInt(Constants.HORSEMANID,0),recordsBean.takeoutId,recordsBean.takeoutId)
+                viewModel.viewModelScope.launch {
+                    val it = NetworkApi.initiativeCreate(param)
+                    if (it.isSuccess) {
+                        val bean = it.getOrNull()
+                        Toast.makeText(context, "接单成功", Toast.LENGTH_SHORT).show()
+                        adapter.removeAt(position)
+                    } else {
+                        loadmoreUtils?.onFail(it.exceptionOrNull()?.message)
+                    }
+                }
                 return@OnItemChildLongClickListener true
             }
             false
@@ -86,23 +103,23 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
                 viewModel.doHomeList(params)
             }
         }
-        loadmoreUtils?.refresh()
 
         viewModel.homeList.observe(this, {
             if (it.isSuccess) {
                 val bean = it.getOrNull()
                 if (null != bean) {
                     loadmoreUtils?.onSuccess(bean.records)
+                }else{
+                    loadmoreUtils?.onFail("")
                 }
             } else {
                 loadmoreUtils?.onFail(it.exceptionOrNull()?.message)
             }
         })
+
+        loadmoreUtils?.refresh()
     }
-
-
     fun reflushDatas() {
         loadmoreUtils?.refresh()
     }
-
 }

@@ -5,7 +5,6 @@ package com.chenchen.base.network.base
  */
 data class BaseResponse<T>(
     var code: Int = 0,
-    val message: String? = null,
     val data: T? = null,
     var msg :String? = ""
 )

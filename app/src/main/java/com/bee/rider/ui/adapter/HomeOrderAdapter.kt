@@ -28,11 +28,21 @@ class HomeOrderAdapter() : BaseQuickAdapter<OrderListBean.RecordsBean, BaseViewH
                 holder.getView<Group>(R.id.id_order_detail_gone).visibility = View.VISIBLE
             }
         }
+        holder.setText(R.id.tv_right,"#${item.floor}")
+        holder.setText(R.id.tv_time,"${item.expectedTime}前送达")
+        holder.setText(R.id.tv_store_name, item.storeName)
+        holder.setText(R.id.tv_store_address, item.storeAddressDetail)
+        holder.setText(R.id.tv_customer_address, item.detailAddress)
+        holder.setText(R.id.tv_customer_name_phone,"${item.linkman}/${item.phone}")
+        holder.setText(R.id.tv_store_name, item.storeName)
+        //TODO
+        holder.setText(R.id.tv_time_2,"(系统派送)")
+        holder.setText(R.id.tv_store_distance,"距离1.5km")
+        holder.setText(R.id.tv_customer_distance, "距离1.5km")
     }
 
     var mType :Int? = TYPE_NOMAL
     fun setType(type: Int?) {
         mType = type
-
     }
 }

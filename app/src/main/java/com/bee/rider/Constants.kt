@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat
  */
 object Constants {
 
-    const val base_url = "http://dev-bee-biz-dis-center.quxianfeng.vip/"
+    const val base_url = "http://dev-beeweb2.quxianfeng.vip:15889/bee-member-zuul-gateway/dis-center/"
 
     //    隐私权政策
     const val agreement_privacy = "http://www.quxianfeng.vip/yhyszc.html"
@@ -44,4 +44,10 @@ object Constants {
 
     //用户个人信息页面回调
     var ITEMRESULT = "itemResult"
+
+    //订单id
+    var ORDERID = "orderId"
+
+    //骑手id
+    var HORSEMANID = "horsemanid"
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bee.rider.Constants
 import com.blankj.utilcode.util.KeyboardUtils
 import com.chenchen.base.base.BaseFragment
 import com.bee.rider.R
@@ -61,6 +62,7 @@ class LoginFragment : BaseFragment<FragmentCodeLoginBinding>(), View.OnClickList
                 val bean = it.getOrNull()
                 if(null != bean){
                     MMKVUtils.putString(HttpConstants.TOKEN,bean.token)
+                    MMKVUtils.putInt(Constants.HORSEMANID,bean.id)
                     findNavController().navigate(R.id.next_action_home,null, UIUtils.getNavOptions(R.id.code_login_dest))
                 }
             }

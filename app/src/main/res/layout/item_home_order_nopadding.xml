@@ -169,8 +169,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_customer_distance"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/tv_accept"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
@@ -182,7 +183,9 @@
         android:textSize="16sp"
         android:gravity="center"
         android:textStyle="bold"
+        app:backgroundTint="@null"
         android:background="@drawable/btn_gradient_yellow_round"
+        app:rippleColor="@color/color_FF0101"
         app:layout_constraintLeft_toRightOf="@+id/tv_contact"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

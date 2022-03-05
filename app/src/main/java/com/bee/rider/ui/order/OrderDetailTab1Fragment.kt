@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amap.api.location.AMapLocation
 import com.amap.api.maps.AMap
@@ -20,6 +21,7 @@ import com.bee.rider.Constants
 import com.bee.rider.databinding.FragmentOrderDetailTab1Binding
 import com.bee.rider.ui.adapter.ProductsAdapter
 import com.bee.rider.utils.startAlphaAnim
+import com.bee.rider.vm.OrderDetailViewModel
 import com.google.android.material.appbar.AppBarLayout
 import com.gyf.immersionbar.ImmersionBar
 import kotlin.math.abs
@@ -31,6 +33,20 @@ import kotlin.math.abs
  */
 class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() , AMap.OnMapLoadedListener,
     AMap.OnInfoWindowClickListener{
+
+    companion object{
+        fun newInstance(id: String?): OrderDetailTab1Fragment{
+            val args = Bundle()
+            args.putString(Constants.ORDERID, id)
+            val fragment = OrderDetailTab1Fragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+    private val viewModel: OrderDetailViewModel by viewModels()
+
+
 
     private var aMap: AMap? = null
 
@@ -72,6 +88,12 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
             }
             binding.map.translationY = verticalOffset*0.5f
         })
+
+        viewModel.orderDetail.observe(this,{
+
+        })
+        val id = arguments?.getString(Constants.ORDERID)
+        viewModel.doOrderDetail(id+"")
     }
     var closed :Boolean = false
     private fun initMap(savedInstanceState: Bundle?) {

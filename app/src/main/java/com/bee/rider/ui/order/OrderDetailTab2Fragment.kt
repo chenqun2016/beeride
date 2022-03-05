@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import androidx.core.view.marginTop
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bee.rider.Constants
 import com.chenchen.base.base.BaseFragment
 import com.chenchen.base.utils.DisplayUtil
 import com.bee.rider.databinding.FragmentOrderDetailTab2Binding
@@ -20,7 +21,15 @@ import com.gyf.immersionbar.ImmersionBar
  * 功能描述：
  */
 class OrderDetailTab2Fragment :BaseFragment<FragmentOrderDetailTab2Binding>() {
-
+    companion object{
+        fun newInstance(id: String?): OrderDetailTab2Fragment{
+            val args = Bundle()
+            args.putString(Constants.ORDERID, id)
+            val fragment = OrderDetailTab2Fragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
     override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,

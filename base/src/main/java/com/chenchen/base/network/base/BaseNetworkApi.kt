@@ -58,8 +58,8 @@ abstract class BaseNetworkApi<I>(private val baseUrl: String) : IService<I> {
              return if (response.code == 200) {
                  Result.success(response.data)
              }else{
-                 Toast.makeText(AppGlobals.getApplication(),response.message,Toast.LENGTH_SHORT).show()
-                 Result.failure(NetworkException.of(response.code, response.message+""))
+                 Toast.makeText(AppGlobals.getApplication(),response.msg,Toast.LENGTH_SHORT).show()
+                 Result.failure(NetworkException.of(response.code, response.msg+""))
              }
         } catch (throwable: Throwable) {
              Toast.makeText(AppGlobals.getApplication(),throwable.message,Toast.LENGTH_SHORT).show()

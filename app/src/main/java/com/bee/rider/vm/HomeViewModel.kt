@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bee.rider.bean.OrderListBean
 import com.bee.rider.http.NetworkApi
+import com.bee.rider.params.InitiativeCreateParams
 import com.bee.rider.params.OrderListParams
 import kotlinx.coroutines.launch
 
@@ -22,4 +23,6 @@ class HomeViewModel : ViewModel(){
             homeList.value = result
         }
     }
+
+
 }

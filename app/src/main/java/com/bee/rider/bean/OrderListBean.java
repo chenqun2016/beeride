@@ -19,21 +19,23 @@ public class OrderListBean {
     public Integer total;
 
     public static class RecordsBean {
-        public String accomplishTime;
-        public String buildingName;
-        public String deliverySn;
-        public String detailAddress;
-        public String expectedTime;
-        public Integer floor;
         public Integer id;
-        public String linkman;
+        public Integer horsemanId;
+        public Integer takeoutId;
         public Integer orderId;
-        public String phone;
-        public String storeAddressDetail;
-        public String storeContactMobile;
+        public String deliverySn;
+        public Object expectedTime;
+        public Object accomplishTime;
         public Integer storeId;
-        public String storeLatitude;
-        public String storeLongitude;
         public String storeName;
+        public String storeContactMobile;
+        public String storeAddressDetail;
+        public String storeLongitude;
+        public String storeLatitude;
+        public String linkman;
+        public String phone;
+        public String buildingName;
+        public Integer floor;
+        public String detailAddress;
     }
 }
