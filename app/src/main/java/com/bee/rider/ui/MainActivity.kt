@@ -1,25 +1,32 @@
 package com.bee.rider.ui
 
 import android.Manifest
+import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.amap.api.maps.MapsInitializer
 import com.amap.api.services.core.ServiceSettings
+import com.bee.rider.Constants
+import com.bee.rider.R
+import com.bee.rider.bean.AppUpdateInfoBean
+import com.bee.rider.databinding.ActivityMainBinding
+import com.bee.rider.params.UpdateInfoParams
+import com.bee.rider.service.CheckUpdateService
+import com.bee.rider.utils.DeviceUtils
+import com.bee.rider.vm.MainViewModel
 import com.chenchen.base.base.BaseActivity
 import com.chenchen.base.utils.MMKVUtils
 import com.chenchen.base.utils.d
-import com.bee.rider.Constants
-import com.bee.rider.R
-import com.bee.rider.databinding.ActivityMainBinding
 import com.permissionx.guolindev.PermissionX
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
-
+    private val viewModel: MainViewModel by viewModels()
     override fun getViewBinding(): ActivityMainBinding {
         return ActivityMainBinding.inflate(layoutInflater)
     }
@@ -39,21 +46,46 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun initDatas() {
+        viewModel.updateInfo.observe(this, {
+          setUpDateInfo(it)
+        })
+       // viewModel.updateInfo(UpdateInfoParams( DeviceUtils.getAppVersionName(),"Android-USER"))
+    }
+
+    private fun setUpDateInfo(it: Result<AppUpdateInfoBean?>) {
+        if (it.isSuccess) {
+            val bean = it.getOrNull()
+            if (bean != null) {
+                val isForceUpdate: Int = bean.isForceUpdate //是否强制更新(0:否,1:是)
+                // TODO: 2022/3/5 根据是否强制更新展示最新的弹框UI
+                startUpdate(bean.url)
+            }
+        }
+    }
+
+    /**
+     * 下载更新
+     */
+    private fun startUpdate(url: String) {
+        val intent = Intent(this, CheckUpdateService::class.java)
+        intent.putExtra("url", url)
+        CheckUpdateService.enqueueWork(this, intent)
     }
 
     //TODO 隐私政策弹窗
     private fun showPrivacy() {
         //高德地图隐私
-        MapsInitializer.updatePrivacyShow(this,true,true)
-        MapsInitializer.updatePrivacyAgree(this,true)
-        ServiceSettings.updatePrivacyShow(this,true,true)
-        ServiceSettings.updatePrivacyAgree(this,true)
+        MapsInitializer.updatePrivacyShow(this, true, true)
+        MapsInitializer.updatePrivacyAgree(this, true)
+        ServiceSettings.updatePrivacyShow(this, true, true)
+        ServiceSettings.updatePrivacyAgree(this, true)
 
         getPermissions()
     }
 
     private fun getPermissions() {
-        val permissions = listOf(Manifest.permission.ACCESS_FINE_LOCATION,
+        val permissions = listOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -111,8 +143,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             if (amapLocation != null) {
                 if (amapLocation.errorCode == 0) {
                     //可在其中解析amapLocation获取相应内容。
-                    d("location","location==" + amapLocation.toStr())
-                    MMKVUtils.putParcelable(Constants.LOCATION,amapLocation)
+                    d("location", "location==" + amapLocation.toStr())
+                    MMKVUtils.putParcelable(Constants.LOCATION, amapLocation)
                 } else {
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                     Log.e(
