@@ -1,4 +1,4 @@
-package com.chenchen.bee_rider.bean;
+package com.bee.rider.bean;
 
 /**
  - @Description:

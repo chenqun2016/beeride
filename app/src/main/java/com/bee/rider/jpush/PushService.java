@@ -1,4 +1,4 @@
-package com.chenchen.bee_rider.jpush;
+package com.bee.rider.jpush;
 
 
 import cn.jpush.android.service.JCommonService;

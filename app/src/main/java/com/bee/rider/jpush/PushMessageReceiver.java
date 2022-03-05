@@ -1,10 +1,10 @@
-package com.chenchen.bee_rider.jpush;
+package com.bee.rider.jpush;
 
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.chenchen.bee_rider.bean.JPushBean;
+import com.bee.rider.bean.JPushBean;
 import com.google.gson.Gson;
 
 import cn.jpush.android.api.CmdMessage;
