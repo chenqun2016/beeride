@@ -32,8 +32,8 @@ object CheckUpdateService : JobIntentService() {
     /**
      * Convenience method for enqueuing work in to this service.
      */
-    fun enqueueWork(context: Context?, work: Intent?) {
-        JobIntentService.enqueueWork(context!!, CheckUpdateService::class.java, JOB_ID, work!!)
+    fun enqueueWork(context: Context, work: Intent) {
+        enqueueWork(context, CheckUpdateService::class.java, JOB_ID, work)
     }
 
 
@@ -56,14 +56,11 @@ object CheckUpdateService : JobIntentService() {
         )
        val downloadManager:DownloadManager = applicationContext.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         this.downloadManager = downloadManager
-        if(downloadManager !=null) {
-            mTaskId = downloadManager.enqueue(request)
-            applicationContext.registerReceiver(
-                receiver,
-                IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
-            )
-        }
-
+        mTaskId = downloadManager.enqueue(request)
+        applicationContext.registerReceiver(
+            receiver,
+            IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+        )
     }
 
     val receiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -86,7 +83,7 @@ object CheckUpdateService : JobIntentService() {
                         Log.i("CheckUpdateService","下载成功")
                         val file: File = File(
                             applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
-                            "beeUser.apk"
+                            "beeRider.apk"
                         )
                         AppUtils.installApp(file)
                     }
