@@ -9,6 +9,9 @@ import java.text.SimpleDateFormat
  * 功能描述：
  */
 object Constants {
+
+    const val base_url = "http://dev-bee-biz-dis-center.quxianfeng.vip/"
+
     //    隐私权政策
     const val agreement_privacy = "http://www.quxianfeng.vip/yhyszc.html"
 

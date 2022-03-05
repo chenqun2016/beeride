@@ -13,16 +13,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.blankj.utilcode.util.KeyboardUtils
 import com.chenchen.base.base.BaseFragment
 import com.chenchen.bee_rider.Constants
 import com.chenchen.bee_rider.R
 import com.chenchen.bee_rider.databinding.FragmentCodeLoginBinding
+import com.chenchen.bee_rider.params.LoginParams
 import com.chenchen.bee_rider.utils.UIUtils
 import com.chenchen.bee_rider.utils.options
 import com.chenchen.bee_rider.utils.setButtonClickableBy
 import com.chenchen.bee_rider.view.SendCodeView
+import com.chenchen.bee_rider.vm.LoginViewModel
 
 /**
  * 创建时间：2022/1/22
@@ -30,6 +33,9 @@ import com.chenchen.bee_rider.view.SendCodeView
  * 功能描述：
  */
 class LoginFragment : BaseFragment<FragmentCodeLoginBinding>(), View.OnClickListener {
+    private val viewModel: LoginViewModel by viewModels()
+
+
     override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,6 +62,14 @@ class LoginFragment : BaseFragment<FragmentCodeLoginBinding>(), View.OnClickList
         })
         binding.tvAgree.setButtonClickableBy(binding.edUserPhone,binding.edUserCode)
         UIUtils.setXieYiText(this,binding.tvXieyi)
+
+        viewModel.login.observe(this,{
+            val bean = it.getOrNull()
+            //登录成功
+            if(null != bean){
+                findNavController().navigate(R.id.next_action_home,null, UIUtils.getNavOptions(R.id.code_login_dest))
+            }
+        })
     }
 
     override fun onClick(v: View?) {
@@ -64,7 +78,8 @@ class LoginFragment : BaseFragment<FragmentCodeLoginBinding>(), View.OnClickList
                 if(null != activity){
                     KeyboardUtils.hideSoftInput(requireActivity())
                 }
-                findNavController().navigate(R.id.next_action_home,null, UIUtils.getNavOptions(R.id.code_login_dest))
+                val params = LoginParams("","")
+                viewModel.doLogin(params)
             }
             R.id.iv_back -> {
                 activity?.finish()
