@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.chenchen.bee_rider"
+        applicationId "com.bee.rider"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -18,6 +18,12 @@ android {
             // 设置支持的SO库架构
             abiFilters 'armeabi-v7a'
         }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME :  "com.bee.rider",
+                JPUSH_APPKEY  : "241d7d92c2dd6f5f34902f99",//值来自开发者平台取得的AppKey
+                JPUSH_CHANNEL : "default_developer",
+        ]
     }
 
 
@@ -53,4 +59,6 @@ dependencies {
 //    implementation 'io.github.lucksiege:pictureselector:v3.0.4'
     //图片
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation files('libs/jcore-android-3.1.2.jar')
+    implementation files('libs/jpush-android-4.6.0.jar')
 }
