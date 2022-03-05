@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black">
+    android:background="@drawable/bg_preview">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_1"
@@ -17,7 +17,8 @@
         android:layout_marginEnd="30dp"
         android:textSize="36sp"
         android:textColor="@color/white"
-        android:text="HI,辛勤的小蜜蜂"/>
+        android:text="HI,辛勤的小蜜蜂"
+        android:textStyle="bold"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_2"
@@ -53,12 +54,12 @@
         android:layout_height="48dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_3"
-        android:background="@drawable/btn_gradient_yellow_round"
+        android:background="@drawable/bg_round40dp_white"
         android:gravity="center"
         android:layout_marginTop="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:textSize="18sp"
-        android:textColor="@color/white"
+        android:textColor="@color/color_FF6200"
         android:text="开始劳作"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

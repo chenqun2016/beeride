@@ -5,6 +5,7 @@ import com.bee.rider.Constants
 import com.bee.rider.params.InitiativeCreateParams
 import com.bee.rider.params.LoginParams
 import com.bee.rider.params.OrderListParams
+import com.bee.rider.params.UpdateInfoParams
 import com.bee.rider.utils.toApiBody
 
 /**
@@ -25,5 +26,8 @@ object NetworkApi : BaseNetworkApi<INetworkService>(Constants.base_url) {
     }
     suspend fun initiativeCreate(param: InitiativeCreateParams) = getResult {
         service.initiativeCreate(param.toApiBody())
+    }
+    suspend fun appUpdateInfo(param: UpdateInfoParams) = getResult {
+        service.appUpdateInfo(param.toApiBody())
     }
 }
