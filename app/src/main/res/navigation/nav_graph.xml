@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/preview_dest"
-        android:name="com.chenchen.bee_rider.ui.login.PreviewFragment"
+        android:name="com.bee.rider.ui.login.PreviewFragment"
         android:label="preview" />
 
     <fragment
         android:id="@+id/code_login_dest"
-        android:name="com.chenchen.bee_rider.ui.login.LoginFragment"
+        android:name="com.bee.rider.ui.login.LoginFragment"
         android:label="codeLogin" >
         <action
             android:id="@+id/next_action_home"
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/password_login_dest"
-        android:name="com.chenchen.bee_rider.ui.login.PasswordLoginFragment"
+        android:name="com.bee.rider.ui.login.PasswordLoginFragment"
         android:label="passwordLogin" >
 
         <action
@@ -39,7 +39,7 @@
 
     <fragment
         android:id="@+id/home_dest"
-        android:name="com.chenchen.bee_rider.ui.home.HomeFragment"
+        android:name="com.bee.rider.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home2"
         android:label="Home" >
 
@@ -54,16 +54,16 @@
 
     <fragment
         android:id="@+id/history_dest"
-        android:name="com.chenchen.bee_rider.ui.order.OrderHistoryFragment"
+        android:name="com.bee.rider.ui.order.OrderHistoryFragment"
         android:label="history" />
 
     <fragment
         android:id="@+id/order_detail_dest"
-        android:name="com.chenchen.bee_rider.ui.order.OrderDetailFragment"
+        android:name="com.bee.rider.ui.order.OrderDetailFragment"
         android:label="detail" />
     <fragment
         android:id="@+id/personal_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.PersonalFragment"
+        android:name="com.bee.rider.ui.setting.PersonalFragment"
         android:label="PersonalFragment" >
 
         <action
@@ -80,7 +80,7 @@
 
     <fragment
         android:id="@+id/system_set_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.SystemSettingFragment"
+        android:name="com.bee.rider.ui.setting.SystemSettingFragment"
         android:label="SystemSettingFragment" >
         <action
             android:id="@+id/about_fresh_bee"
@@ -92,72 +92,72 @@
     </fragment>
     <fragment
         android:id="@+id/about_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.AboutFragment"
+        android:name="com.bee.rider.ui.setting.AboutFragment"
         android:label="about" />
 
     <fragment
         android:id="@+id/common_web_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.CommonWebFragment"
+        android:name="com.bee.rider.ui.setting.CommonWebFragment"
         android:label="common" />
 
     <fragment
         android:id="@+id/comments_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.CommentsFragment"
+        android:name="com.bee.rider.ui.setting.CommentsFragment"
         android:label="comments" />
 
     <fragment
         android:id="@+id/reset_password_dest"
-        android:name="com.chenchen.bee_rider.ui.login.ResetPasswordFragment"
+        android:name="com.bee.rider.ui.login.ResetPasswordFragment"
         android:label="resetpassword" />
 
     <fragment
         android:id="@+id/notice_setting_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.NoticeSettingFragment"
+        android:name="com.bee.rider.ui.setting.NoticeSettingFragment"
         android:label="noticesetting" />
 
     <fragment
         android:id="@+id/order_setting_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.OrderSettingFragment"
+        android:name="com.bee.rider.ui.setting.OrderSettingFragment"
         android:label="ordersetting" />
 
     <fragment
         android:id="@+id/password_setting_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.PasswordSettingFragment"
+        android:name="com.bee.rider.ui.setting.PasswordSettingFragment"
         android:label="passwordsetting" />
 
 
     <fragment
         android:id="@+id/password_setting2_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.PasswordSettingFragment2"
+        android:name="com.bee.rider.ui.setting.PasswordSettingFragment2"
         android:label="passwordsetting2" />
 
     <fragment
         android:id="@+id/userinfo_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.userinfo.UserInfoFragment"
+        android:name="com.bee.rider.ui.setting.userinfo.UserInfoFragment"
         android:label="userinfo" />
 
     <fragment
         android:id="@+id/userinfo_iten_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.userinfo.UserInfoItemFragment"
+        android:name="com.bee.rider.ui.setting.userinfo.UserInfoItemFragment"
         android:label="userinfoitem" />
 
     <fragment
         android:id="@+id/userinfo_certi_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.userinfo.CertificatesFragment"
+        android:name="com.bee.rider.ui.setting.userinfo.CertificatesFragment"
         android:label="userinfo_certificates" />
 
     <fragment
         android:id="@+id/userinfo_certificate_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.userinfo.CertificateFragment"
+        android:name="com.bee.rider.ui.setting.userinfo.CertificateFragment"
         android:label="userinfo_certificate" />
 
     <fragment
         android:id="@+id/userinfo_areas_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.userinfo.AreasFragment"
+        android:name="com.bee.rider.ui.setting.userinfo.AreasFragment"
         android:label="userinfo_areas" />
 
     <fragment
         android:id="@+id/userinfo_contacts_dest"
-        android:name="com.chenchen.bee_rider.ui.setting.userinfo.ContactsFragment"
+        android:name="com.bee.rider.ui.setting.userinfo.ContactsFragment"
         android:label="userinfo_contacts" />
 </navigation>
