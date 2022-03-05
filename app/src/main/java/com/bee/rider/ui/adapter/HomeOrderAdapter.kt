@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.bee.rider.R
 import com.bee.rider.bean.OrderBean
+import com.bee.rider.bean.OrderListBean
 import com.bee.rider.ui.home.OrderListFragment.Companion.TYPE_HISTORY
 import com.bee.rider.ui.home.OrderListFragment.Companion.TYPE_NOMAL
 
@@ -15,8 +16,8 @@ import com.bee.rider.ui.home.OrderListFragment.Companion.TYPE_NOMAL
  * @Author： 陈陈陈
  * 功能描述：
  */
-class HomeOrderAdapter() : BaseQuickAdapter<OrderBean, BaseViewHolder>(R.layout.item_home_order),LoadMoreModule{
-    override fun convert(holder: BaseViewHolder, item: OrderBean) {
+class HomeOrderAdapter() : BaseQuickAdapter<OrderListBean.RecordsBean, BaseViewHolder>(R.layout.item_home_order),LoadMoreModule{
+    override fun convert(holder: BaseViewHolder, item: OrderListBean.RecordsBean) {
         when(mType){
             TYPE_HISTORY ->{
                 holder.getView<Group>(R.id.id_order_history_gone).visibility = View.GONE

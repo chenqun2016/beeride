@@ -1,23 +1,13 @@
 package com.bee.rider.ui.login
 
-import android.graphics.Color
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.TextPaint
-import android.text.TextUtils
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
-import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.blankj.utilcode.util.KeyboardUtils
 import com.chenchen.base.base.BaseFragment
-import com.bee.rider.Constants
 import com.bee.rider.R
 import com.bee.rider.databinding.FragmentCodeLoginBinding
 import com.bee.rider.params.LoginParams
