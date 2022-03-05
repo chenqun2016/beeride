@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.chenchen.bee_rider">
+    package="com.bee.rider">
 
 
     <!--允许程序打开网络套接字-->
@@ -252,7 +252,7 @@
     </application>
 
 <!--    图片选择框架-->
-    <queries package="com.chenchen.bee_rider">
+    <queries package="com.bee.rider">
         <intent>
             <action android:name="android.media.action.IMAGE_CAPTURE">
 

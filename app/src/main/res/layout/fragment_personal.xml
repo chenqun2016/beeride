@@ -190,7 +190,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <com.chenchen.bee_rider.view.SwitchButton
+                <com.bee.rider.view.SwitchButton
                     android:id="@+id/switchButton"
                     android:layout_width="83dp"
                     android:layout_height="33dp"
@@ -324,7 +324,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.chenchen.bee_rider.view.TitleView
+    <com.bee.rider.view.TitleView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

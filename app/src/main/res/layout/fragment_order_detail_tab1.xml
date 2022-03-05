@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.chenchen.bee_rider.view.MyMapView
+    <com.bee.rider.view.MyMapView
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
