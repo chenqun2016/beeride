@@ -1,6 +1,7 @@
 package com.bee.rider
 
 import android.app.Application
+import cn.jpush.android.api.JPushInterface
 import com.chenchen.base.utils.MMKVUtils
 
 /**
@@ -16,5 +17,7 @@ class MyApplication : Application() {
         super.onCreate()
         mInstance = this
         MMKVUtils.init(this)
+        JPushInterface.setDebugMode(true)
+        JPushInterface.init(this)
     }
 }
