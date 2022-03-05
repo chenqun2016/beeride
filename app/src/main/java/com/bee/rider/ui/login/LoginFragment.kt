@@ -26,6 +26,8 @@ import com.bee.rider.utils.options
 import com.bee.rider.utils.setButtonClickableBy
 import com.bee.rider.view.SendCodeView
 import com.bee.rider.vm.LoginViewModel
+import com.chenchen.base.constants.HttpConstants
+import com.chenchen.base.utils.MMKVUtils
 
 /**
  * 创建时间：2022/1/22
@@ -64,10 +66,13 @@ class LoginFragment : BaseFragment<FragmentCodeLoginBinding>(), View.OnClickList
         UIUtils.setXieYiText(this,binding.tvXieyi)
 
         viewModel.login.observe(this,{
-            val bean = it.getOrNull()
             //登录成功
-            if(null != bean){
-                findNavController().navigate(R.id.next_action_home,null, UIUtils.getNavOptions(R.id.code_login_dest))
+            if(it.isSuccess){
+                val bean = it.getOrNull()
+                if(null != bean){
+                    MMKVUtils.putString(HttpConstants.TOKEN,bean.token)
+                    findNavController().navigate(R.id.next_action_home,null, UIUtils.getNavOptions(R.id.code_login_dest))
+                }
             }
         })
     }
@@ -78,8 +83,7 @@ class LoginFragment : BaseFragment<FragmentCodeLoginBinding>(), View.OnClickList
                 if(null != activity){
                     KeyboardUtils.hideSoftInput(requireActivity())
                 }
-                val params = LoginParams("","")
-                viewModel.doLogin(params)
+                viewModel.doLogin(LoginParams(binding.edUserPhone.text.toString(),binding.edUserCode.text.toString()))
             }
             R.id.iv_back -> {
                 activity?.finish()

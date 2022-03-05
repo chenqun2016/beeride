@@ -7,4 +7,5 @@ package com.bee.rider.bean;
  * 功能描述：
  */
 public class LoginBean {
+    public String token;
 }

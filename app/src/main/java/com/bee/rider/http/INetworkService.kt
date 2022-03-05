@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 interface INetworkService {
 
-    @POST("auth/login")
+    @POST("app-dis-horseman/login")
     suspend fun login(@Body body: RequestBody?): BaseResponse<LoginBean>
 
 }

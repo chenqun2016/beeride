@@ -55,14 +55,14 @@ abstract class BaseNetworkApi<I>(private val baseUrl: String) : IService<I> {
     protected suspend fun <T> getResult(block: suspend () -> BaseResponse<T>): Result<T?> {
          try {
             val response = block()
-            if (response.code == 200) {
-                return Result.success(response.data)
-            }else{
-                Toast.makeText(AppGlobals.getApplication(),response.message,Toast.LENGTH_SHORT).show()
-                return Result.failure(NetworkException.of(response.code, response.message+""))
-//                return Result.success(null)
-            }
+             return if (response.code == 200) {
+                 Result.success(response.data)
+             }else{
+                 Toast.makeText(AppGlobals.getApplication(),response.message,Toast.LENGTH_SHORT).show()
+                 Result.failure(NetworkException.of(response.code, response.message+""))
+             }
         } catch (throwable: Throwable) {
+             Toast.makeText(AppGlobals.getApplication(),throwable.message,Toast.LENGTH_SHORT).show()
              return Result.failure(throwable)
         }
     }
