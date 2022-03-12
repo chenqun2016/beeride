@@ -30,4 +30,8 @@ object NetworkApi : BaseNetworkApi<INetworkService>(Constants.base_url) {
     suspend fun appUpdateInfo(param: UpdateInfoParams) = getResult {
         service.appUpdateInfo(param.toApiBody())
     }
+
+    suspend fun getOperateHistory(orderId:String?) = getResult {
+        service.getOperateHistory(orderId)
+    }
 }

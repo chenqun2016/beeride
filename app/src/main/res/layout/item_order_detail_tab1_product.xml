@@ -48,5 +48,6 @@
     <include layout="@layout/item_ordering_des"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/item_des"
         android:layout_below="@+id/line2"/>
 </RelativeLayout>

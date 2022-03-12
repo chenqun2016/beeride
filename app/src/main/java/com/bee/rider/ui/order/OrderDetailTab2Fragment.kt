@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.view.marginTop
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bee.rider.Constants
@@ -13,6 +14,7 @@ import com.chenchen.base.base.BaseFragment
 import com.chenchen.base.utils.DisplayUtil
 import com.bee.rider.databinding.FragmentOrderDetailTab2Binding
 import com.bee.rider.ui.adapter.OrderDetailTraceAdapter
+import com.bee.rider.vm.OrderDetailViewModel
 import com.gyf.immersionbar.ImmersionBar
 
 /**
@@ -21,6 +23,8 @@ import com.gyf.immersionbar.ImmersionBar
  * 功能描述：
  */
 class OrderDetailTab2Fragment :BaseFragment<FragmentOrderDetailTab2Binding>() {
+    private val viewModel: OrderDetailViewModel by viewModels()
+
     companion object{
         fun newInstance(id: String?): OrderDetailTab2Fragment{
             val args = Bundle()
@@ -48,6 +52,16 @@ class OrderDetailTab2Fragment :BaseFragment<FragmentOrderDetailTab2Binding>() {
 
         val datas = mutableListOf("1提交订单","21提交订单","31提交订单","41提交订单","51提交订单")
         orderDetailTraceAdapter.setNewInstance(datas)
+
+        getDatas()
+    }
+
+    private fun getDatas() {
+        viewModel.getOperateHistory.observe(this,{
+
+        })
+        val id = arguments?.getString(Constants.ORDERID)
+        viewModel.doGetOperateHistory(id)
     }
 
 }

@@ -1,9 +1,6 @@
 package com.bee.rider.http
 
-import com.bee.rider.bean.AppUpdateInfoBean
-import com.bee.rider.bean.LoginBean
-import com.bee.rider.bean.OrderDetailBean
-import com.bee.rider.bean.OrderListBean
+import com.bee.rider.bean.*
 import com.chenchen.base.network.base.BaseResponse
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -27,4 +24,8 @@ interface INetworkService {
     suspend fun initiativeCreate(@Body body: RequestBody?): BaseResponse<Any>
     @POST("app-sys/appUpdateInfo")
     suspend fun appUpdateInfo(@Body body: RequestBody?): BaseResponse<AppUpdateInfoBean>
+
+    @GET("/app-dis-horseman-takeout/getOperateHistory/{orderId}")
+    suspend fun getOperateHistory(@Path("orderId") orderId:String?): BaseResponse<List<OrderDetailTraceBean>>
+
 }

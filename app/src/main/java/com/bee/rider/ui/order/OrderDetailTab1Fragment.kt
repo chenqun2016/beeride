@@ -1,10 +1,14 @@
 package com.bee.rider.ui.order
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amap.api.location.AMapLocation
 import com.amap.api.maps.AMap
@@ -12,18 +16,23 @@ import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.LatLngBounds
 import com.amap.api.maps.model.Marker
-import com.blankj.utilcode.util.LogUtils
+import com.bee.rider.Constants
+import com.bee.rider.R
+import com.bee.rider.bean.OrderDetailBean
+import com.bee.rider.databinding.FragmentOrderDetailTab1Binding
+import com.bee.rider.http.NetworkApi
+import com.bee.rider.params.InitiativeCreateParams
+import com.bee.rider.ui.adapter.ProductsAdapter
+import com.bee.rider.utils.UIUtils
+import com.bee.rider.utils.startAlphaAnim
+import com.bee.rider.vm.OrderDetailViewModel
 import com.chenchen.base.base.BaseFragment
 import com.chenchen.base.utils.DisplayUtil
 import com.chenchen.base.utils.LiveDataBus
 import com.chenchen.base.utils.MMKVUtils
-import com.bee.rider.Constants
-import com.bee.rider.databinding.FragmentOrderDetailTab1Binding
-import com.bee.rider.ui.adapter.ProductsAdapter
-import com.bee.rider.utils.startAlphaAnim
-import com.bee.rider.vm.OrderDetailViewModel
 import com.google.android.material.appbar.AppBarLayout
 import com.gyf.immersionbar.ImmersionBar
+import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 /**
@@ -32,7 +41,7 @@ import kotlin.math.abs
  * 功能描述：
  */
 class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() , AMap.OnMapLoadedListener,
-    AMap.OnInfoWindowClickListener{
+    AMap.OnInfoWindowClickListener, View.OnClickListener {
 
     companion object{
         fun newInstance(id: String?): OrderDetailTab1Fragment{
@@ -45,6 +54,8 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
     }
 
     private val viewModel: OrderDetailViewModel by viewModels()
+    var mData :OrderDetailBean? = null
+    var productsAdapter :ProductsAdapter? = null
 
 
 
@@ -63,18 +74,45 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
         return FragmentOrderDetailTab1Binding.inflate(inflater, container, false)
     }
 
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.tv_accept -> {
+                val param = InitiativeCreateParams(MMKVUtils.getInt(Constants.HORSEMANID,0),mData?.disTakeout?.id,mData?.disTakeout?.id)
+                viewModel.viewModelScope.launch {
+                    val it = NetworkApi.initiativeCreate(param)
+                    if (it.isSuccess) {
+                        val bean = it.getOrNull()
+                        Toast.makeText(context, "接单成功", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            R.id.tv_contact -> {
+                startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mData?.shopStoreDetailVO?.contactMobile)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            }
+            R.id.tv_copy -> {
+                context?.let { it1 ->
+                    UIUtils.copyContentToClipboard(binding.includeMessages.tvOrdernumDes.text.toString(),
+                        it1
+                    )
+                }
+            }
+        }
+    }
+
     override fun initViews(savedInstanceState: Bundle?) {
         val layoutParams = binding.toolbar.layoutParams
         layoutParams.height = DisplayUtil.dip2px(context,40f)+ImmersionBar.getStatusBarHeight(this)
         binding.toolbar.layoutParams = layoutParams
         binding.toolbar.minimumHeight = layoutParams.height
         binding.includeProducts.products.layoutManager = LinearLayoutManager(context)
-        val productsAdapter = ProductsAdapter()
+        productsAdapter = ProductsAdapter()
         binding.includeProducts.products.adapter = productsAdapter
-        val products = mutableListOf<String>("1","2","3")
-        productsAdapter.setNewInstance(products)
 
         binding.includeDetail.includeOrderItem.tvContact.visibility = View.VISIBLE
+        binding.includeMessages.tvCopy.setOnClickListener(this)
+        binding.includeDetail.includeOrderItem.tvAccept.setOnClickListener(this)
+        binding.includeDetail.includeOrderItem.tvContact.setOnClickListener(this)
 
         initMap(savedInstanceState)
 
@@ -90,11 +128,53 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
         })
 
         viewModel.orderDetail.observe(this,{
-
+            if (it.isSuccess){
+                mData = it.getOrNull()
+                if(null != mData){
+                    setDatas(mData!!)
+                }
+            }
         })
         val id = arguments?.getString(Constants.ORDERID)
         viewModel.doOrderDetail(id+"")
     }
+
+    private fun setDatas(item: OrderDetailBean) {
+        binding.includeDetail.includeOrderItem.tvRight.text = "#"
+        binding.includeDetail.includeOrderItem.tvTime.text = "${item.receiveTime}前送达"
+        binding.includeDetail.includeOrderItem.tvStoreName.text = item.storeName
+        binding.includeDetail.includeOrderItem.tvStoreAddress.text = item.shopStoreDetailVO.addressDetail
+        binding.includeDetail.includeOrderItem.tvCustomerAddress.text = item.receiverDetailAddress
+        binding.includeDetail.includeOrderItem.tvCustomerNamePhone.text = "${item.receiverName}/${item.receiverPhone}"
+//TODO
+        binding.includeDetail.includeOrderItem.tvTime2.text = "(系统派送)"
+        binding.includeDetail.includeOrderItem.tvStoreDistance.text = "距离1.5km"
+        binding.includeDetail.includeOrderItem.tvCustomerDistance.text = "距离1.5km"
+
+        binding.includeProducts.tvStore.text = item.storeName
+        productsAdapter?.setNewInstance(item.orderItemList)
+
+        binding.includeProducts.itemDes.tvBaozhuangfeiValue.text =  "¥${item.packingFeeAmount}"
+        binding.includeProducts.itemDes.tvPeisongfeiValue.text = "¥${item.freightAmount}"
+        binding.includeProducts.itemDes.tvYouhuiquanValue.text = "¥${item.couponAmount}"
+        binding.includeProducts.itemDes.tvTotalYouhuiValue.text = "¥${item.couponAmount}"
+        binding.includeProducts.itemDes.tvTotalValue.text = "¥${item.totalAmount}"
+
+        binding.includeMessages.tvPeopleDes.text = ""
+        binding.includeMessages.tvTimeDes.text = item.deliveryTime
+        binding.includeMessages.tvAddressDes.text = item.receiverDetailAddress
+        binding.includeMessages.tvAddressDes.text = "${item.receiverDetailAddress} \n ${item.receiverName} ${item.receiverPhone}"
+        if(item.disTakeout.type){
+            binding.includeMessages.tvTypeDes.text = "趣鲜蜂专送"
+        }else{
+            binding.includeMessages.tvTypeDes.text = ""
+        }
+        binding.includeMessages.tvOrdernumDes.text = item.orderSn
+        binding.includeMessages.tvPayTypeDes.text = if(item.payType == 1) "米粒支付" else ""
+        binding.includeMessages.tvPayTimeDes.text = UIUtils.getNomalTime(item.createTime)
+        binding.includeMessages.tvBeizhuDes.text = item.note
+    }
+
     var closed :Boolean = false
     private fun initMap(savedInstanceState: Bundle?) {
         binding.map.onCreate(savedInstanceState)

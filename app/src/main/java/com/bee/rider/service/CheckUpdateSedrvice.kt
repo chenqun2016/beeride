@@ -20,20 +20,22 @@ import java.io.File
  * @Author： 陈陈陈
  * 功能描述：
  */
-object CheckUpdateService : JobIntentService() {
+class CheckUpdateService : JobIntentService() {
     var downloadManager: DownloadManager? = null
     var mTaskId: Long = 0
 
-    /**
-     * 这个Service 唯一的id
-     */
-    val JOB_ID = 10111011
+    companion object{
+        /**
+         * 这个Service 唯一的id
+         */
+        val JOB_ID = 10111011
 
-    /**
-     * Convenience method for enqueuing work in to this service.
-     */
-    fun enqueueWork(context: Context, work: Intent) {
-        enqueueWork(context, CheckUpdateService::class.java, JOB_ID, work)
+        /**
+         * Convenience method for enqueuing work in to this service.
+         */
+        fun enqueueWork(context: Context, work: Intent) {
+            enqueueWork(context, CheckUpdateService::class.java, JOB_ID, work)
+        }
     }
 
 

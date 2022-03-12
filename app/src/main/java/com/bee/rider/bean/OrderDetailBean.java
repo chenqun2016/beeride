@@ -1,5 +1,6 @@
 package com.bee.rider.bean;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -10,194 +11,183 @@ import java.util.List;
  */
 public class OrderDetailBean {
 
-    public Integer autoConfirmDay;
-    public String billContent;
-    public String billHeader;
-    public String billReceiverEmail;
-    public String billReceiverPhone;
-    public Integer billType;
-    public Integer blance;
-    public Integer buildingId;
-    public String buildingName;
-    public Boolean comment;
-    public String commentTime;
-    public Integer confirmStatus;
-    public Integer couponAmount;
-    public Integer couponId;
-    public Integer createBy;
-    public String createName;
-    public String createTime;
-    public Integer deleteStatus;
-    public String deliverySn;
-    public String deliveryTime;
-    public Integer discountAmount;
+    public Integer id;
+    public Integer memberId;
+    public String orderSn;
+    public Integer sourceType;
+    public Integer orderType;
+    public Integer totalAmount;
+    public Integer payAmount;
     public Integer feightTemplateDetailId;
     public Integer freightAmount;
-    public Integer growth;
-    public List<HistoryListBean> historyList;
-    public Integer id;
-    public Integer integration;
-    public Integer integrationAmount;
+    public Object packingFeeAmount;
+    public String status;
     public Integer isPay;
-    public Integer memberId;
-    public String modifyTime;
-    public String note;
-    public List<OrderItemListBean> orderItemList;
-    public String orderSn;
-    public Integer orderType;
-    public Integer payAmount;
+    public Object paymentTime;
     public Integer payType;
-    public String paymentTime;
-    public Integer pickupWay;
+    public Object promotionInfo;
+    public Object couponId;
     public Integer promotionAmount;
-    public String promotionInfo;
-    public String receiveTime;
-    public String receiverCity;
-    public String receiverDetailAddress;
+    public Integer integrationAmount;
+    public Integer couponAmount;
+    public Integer discountAmount;
+    public Object autoConfirmDay;
+    public Integer integration;
+    public Integer growth;
+    public Integer billType;
+    public Object billHeader;
+    public Object billContent;
+    public Object billReceiverPhone;
+    public Object billReceiverEmail;
     public String receiverName;
     public String receiverPhone;
     public String receiverPostCode;
-    public String receiverProvince;
-    public String receiverRegion;
-    public ShopStoreDetailVOBean shopStoreDetailVO;
-    public Integer sourceType;
-    public String status;
+    public String receiverDetailAddress;
+    public String note;
+    public Integer deleteStatus;
+    public Object useIntegration;
+    public Object deliverySn;
+    public String deliveryTime;
+    public Integer confirmStatus;
+    public Object receiveTime;
+    public Object commentTime;
+    public Object modifyTime;
+    public Integer buildingId;
+    public String buildingName;
     public Integer storeId;
     public String storeName;
-    public Integer totalAmount;
+    public Boolean comment;
+    public String receiverProvince;
+    public String receiverCity;
+    public String receiverRegion;
+    public Integer pickupWay;
+    public Integer createBy;
+    public String createName;
+    public Date createTime;
     public Integer updateBy;
     public String updateName;
     public String updateTime;
-    public Integer useIntegration;
+    public Object blance;
+    public List<OrderItemListBean> orderItemList;
+    public List<HistoryListBean> historyList;
+    public ShopStoreDetailVOBean shopStoreDetailVO;
+    public Object disHorseman;
+    public DisTakeoutBean disTakeout;
 
     public static class ShopStoreDetailVOBean {
-        public String addressDetail;
-        public String appBackgroudUrl;
-        public Integer areaId;
+        public Integer id;
+        public String loginname;
+        public Object password;
+        public String name;
+        public String subtitle;
         public Integer brandId;
         public String brandName;
-        public Integer buildingAreaId;
-        public String businessTimes;
-        public String contactMobile;
-        public String contactName;
-        public String description;
-        public Integer feightTemplateId;
-        public Integer id;
-        public List<IndustryCategoryVOSBean> industryCategoryVOS;
-        public Integer isShow;
-        public String latitude;
-        public String loginname;
         public String logoUrl;
-        public String longitude;
-        public String name;
-        public String password;
-        public List<PermissionCategoryVOSBean> permissionCategoryVOS;
-        public List<ShopStoreCertVOSBean> shopStoreCertVOS;
-        public ShopStoreExtVOBean shopStoreExtVO;
-        public List<ShopStorePhotoAlbumVOSBean> shopStorePhotoAlbumVOS;
-        public Integer status;
-        public String storeLabel;
+        public String appBackgroudUrl;
+        public String businessTimes;
         public Integer storeLevel;
         public String storeType;
-        public String subtitle;
-        public Integer userStatus;
+        public String storeLabel;
+        public String contactName;
+        public String contactMobile;
+        public Integer areaId;
+        public Integer buildingAreaId;
+        public String addressDetail;
+        public String longitude;
+        public String latitude;
+        public Object userStatus;
+        public Integer isShow;
+        public String description;
+        public Integer status;
+        public Integer feightTemplateId;
+        public ShopStoreExtVOBean shopStoreExtVO;
+        public Object industryCategoryVOS;
+        public Object permissionCategoryVOS;
+        public List<?> shopStorePhotoAlbumVOS;
+        public List<?> shopStoreCertVOS;
 
         public static class ShopStoreExtVOBean {
-            public String businessLicenseNo;
-            public String companyName;
             public Integer id;
-            public String idNumber;
+            public Integer storeId;
+            public String companyName;
             public String legalPerson;
+            public String idNumber;
+            public String businessLicenseNo;
             public String licenseKey;
             public String registeredAddress;
-            public Integer storeId;
-        }
-
-        public static class IndustryCategoryVOSBean {
-            public Integer id;
-            public Integer industryCategoryId;
-            public Integer showStatus;
-            public Integer sort;
-            public Integer storeId;
-        }
-
-        public static class PermissionCategoryVOSBean {
-            public Integer id;
-            public Integer productCategoryId;
-            public String productCategoryName;
-            public Integer storeId;
-        }
-
-        public static class ShopStoreCertVOSBean {
-            public Integer fileId;
-            public String filename;
-            public Integer id;
-            public String isMainPic;
-            public Integer sort;
-            public Integer storeId;
-            public String type;
-            public String url;
-        }
-
-        public static class ShopStorePhotoAlbumVOSBean {
-            public Integer fileId;
-            public String filename;
-            public Integer id;
-            public String isMainPic;
-            public Integer sort;
-            public Integer storeId;
-            public String type;
-            public String url;
         }
     }
 
-    public static class HistoryListBean {
-        public Integer createBy;
-        public String createName;
-        public String createTime;
+    public static class DisTakeoutBean {
         public Integer id;
-        public String note;
-        public String operateMan;
+        public String allocationRuleId;
+        public String sorterSn;
         public Integer orderId;
-        public Integer orderItemId;
-        public String orderStatus;
-        public String preStatus;
+        public Object storeId;
+        public Object storeName;
+        public Integer deliveryAddressId;
+        public Integer status;
+        public Boolean type;
+        public String deliverySn;
+        public Object expectedTime;
+        public Object accomplishTime;
+        public Integer delFlag;
+        public Object createBy;
+        public Object createName;
+        public String createTime;
+        public Object updateBy;
+        public Object updateName;
+        public Object updateTime;
     }
 
     public static class OrderItemListBean {
+        public Integer id;
+        public Integer orderId;
+        public String orderSn;
+        public Integer productId;
+        public Integer flashSaleGoodsId;
+        public String productPic;
+        public String productName;
+        public String productBrand;
+        public String productSn;
+        public Integer productPrice;
+        public Integer productQuantity;
+        public Integer productSkuId;
+        public String productSkuCode;
+        public Integer productCategoryId;
+        public Object sp1;
+        public Object sp2;
+        public Object sp3;
+        public String productAttr;
+        public Object promotionName;
+        public Integer promotionAmount;
         public Integer couponAmount;
+        public Integer integrationAmount;
+        public Integer realAmount;
+        public Integer giftIntegration;
+        public Integer giftGrowth;
+        public Integer storeId;
+        public String storeName;
+        public Object status;
+        public Integer type;
         public Integer createBy;
         public String createName;
         public String createTime;
-        public Integer giftGrowth;
-        public Integer giftIntegration;
-        public Integer id;
-        public Integer integrationAmount;
-        public Integer orderId;
-        public String orderSn;
-        public String productAttr;
-        public String productBrand;
-        public Integer productCategoryId;
-        public Integer productId;
-        public String productName;
-        public String productPic;
-        public Integer productPrice;
-        public Integer productQuantity;
-        public String productSkuCode;
-        public Integer productSkuId;
-        public String productSn;
-        public Integer promotionAmount;
-        public String promotionName;
-        public Integer realAmount;
-        public String sp1;
-        public String sp2;
-        public String sp3;
-        public Integer status;
-        public Integer storeId;
-        public String storeName;
-        public Integer type;
         public Integer updateBy;
         public String updateName;
         public String updateTime;
+    }
+
+    public static class HistoryListBean {
+        public Integer id;
+        public Integer orderId;
+        public Integer orderItemId;
+        public String operateMan;
+        public String orderStatus;
+        public Object note;
+        public Object preStatus;
+        public Integer createBy;
+        public String createName;
+        public String createTime;
     }
 }

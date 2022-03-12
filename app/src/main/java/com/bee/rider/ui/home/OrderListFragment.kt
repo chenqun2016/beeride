@@ -103,7 +103,6 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
                 viewModel.doHomeList(params)
             }
         }
-
         viewModel.homeList.observe(this, {
             if (it.isSuccess) {
                 val bean = it.getOrNull()
@@ -116,7 +115,6 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
                 loadmoreUtils?.onFail(it.exceptionOrNull()?.message)
             }
         })
-
         loadmoreUtils?.refresh()
     }
     fun reflushDatas() {

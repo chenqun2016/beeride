@@ -1,5 +1,8 @@
 package com.bee.rider.utils
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -20,7 +23,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.bee.rider.Constants
 import com.bee.rider.R
+import com.blankj.utilcode.util.TimeUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.gyf.immersionbar.ImmersionBar
+import java.util.*
 
 /**
  * 创建时间：2022/1/8
@@ -139,6 +145,28 @@ object  UIUtils {
         } else {
             button.isEnabled = false
             button.setBackgroundResource(R.drawable.btn_gradient_grey_round)
+        }
+    }
+
+    //yyyy-MM-dd HH:mm:ss
+    fun getNomalTime(createTime: Date?): String? {
+        return if (null == createTime) {
+            ""
+        } else TimeUtils.date2String(createTime)
+    }
+
+    fun copyContentToClipboard(content: String?, context: Context) {
+        try {
+            //获取剪贴板管理器：
+            val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            // 创建普通字符型ClipData
+            val mClipData = ClipData.newPlainText("Label", content)
+            // 将ClipData内容放到系统剪贴板里。
+            cm.setPrimaryClip(mClipData)
+            ToastUtils.showShort( "已复制")
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            ToastUtils.showShort( "复制失败")
         }
     }
 }
