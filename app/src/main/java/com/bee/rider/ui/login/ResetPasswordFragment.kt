@@ -24,6 +24,7 @@ class ResetPasswordFragment : BaseFragment<FragmentResetPasswordBinding>(), View
     ): FragmentResetPasswordBinding {
         return FragmentResetPasswordBinding.inflate(inflater)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         binding.ivBack.setOnClickListener(this)

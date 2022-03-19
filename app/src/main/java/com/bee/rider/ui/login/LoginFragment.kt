@@ -28,13 +28,25 @@ import com.chenchen.base.utils.MMKVUtils
 class LoginFragment : BaseFragment<FragmentCodeLoginBinding>(), View.OnClickListener {
     private val viewModel: LoginViewModel by viewModels()
 
-
     override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): FragmentCodeLoginBinding {
         return FragmentCodeLoginBinding.inflate(inflater,container,false)
+    }
+    override fun initOnce(savedInstanceState: Bundle?) {
+        viewModel.login.observe(this,{
+            //登录成功
+            if(it.isSuccess){
+                val bean = it.getOrNull()
+                if(null != bean){
+                    MMKVUtils.putString(HttpConstants.TOKEN,bean.token)
+                    MMKVUtils.putInt(Constants.HORSEMANID,bean.id)
+                    findNavController().navigate(R.id.next_action_home,null, UIUtils.getNavOptions(R.id.code_login_dest))
+                }
+            }
+        })
     }
 
     override fun initViews(savedInstanceState: Bundle?) {
@@ -56,17 +68,6 @@ class LoginFragment : BaseFragment<FragmentCodeLoginBinding>(), View.OnClickList
         binding.tvAgree.setButtonClickableBy(binding.edUserPhone,binding.edUserCode)
         UIUtils.setXieYiText(this,binding.tvXieyi)
 
-        viewModel.login.observe(this,{
-            //登录成功
-            if(it.isSuccess){
-                val bean = it.getOrNull()
-                if(null != bean){
-                    MMKVUtils.putString(HttpConstants.TOKEN,bean.token)
-                    MMKVUtils.putInt(Constants.HORSEMANID,bean.id)
-                    findNavController().navigate(R.id.next_action_home,null, UIUtils.getNavOptions(R.id.code_login_dest))
-                }
-            }
-        })
     }
 
     override fun onClick(v: View?) {

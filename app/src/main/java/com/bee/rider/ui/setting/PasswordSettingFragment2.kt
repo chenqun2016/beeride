@@ -22,6 +22,7 @@ class PasswordSettingFragment2 : BaseFragment<FragmentPasswordSetting2Binding>()
     ): FragmentPasswordSetting2Binding {
         return FragmentPasswordSetting2Binding.inflate(inflater)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         binding.edUserPass.editTextView.hint = "请输入6-24位密码"

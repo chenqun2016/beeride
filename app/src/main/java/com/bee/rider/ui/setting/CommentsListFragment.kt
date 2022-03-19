@@ -27,6 +27,7 @@ class CommentsListFragment :BaseFragment<ModelRecyclerviewBinding>() {
     }
     val adapter = CommentListAdapter()
     var loadmoreUtils: LoadmoreUtils<CommentBean>? = null
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun getBinding(
         inflater: LayoutInflater,

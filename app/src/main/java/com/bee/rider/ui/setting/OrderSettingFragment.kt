@@ -21,6 +21,7 @@ class OrderSettingFragment  : BaseFragment<FragmentNoticeSettingBinding>() {
     ): FragmentNoticeSettingBinding {
         return FragmentNoticeSettingBinding.inflate(inflater)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         binding.titleView.setTitleText("订单设置")

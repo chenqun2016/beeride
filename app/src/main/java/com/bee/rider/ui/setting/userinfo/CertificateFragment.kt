@@ -19,6 +19,7 @@ class CertificateFragment : BaseFragment<FragmentCertificateBinding>() {
     ): FragmentCertificateBinding {
         return  FragmentCertificateBinding.inflate(inflater)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         val title = arguments?.getString("title")

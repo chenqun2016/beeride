@@ -24,6 +24,7 @@ class PasswordSettingFragment : BaseFragment<FragmentPasswordSettingBinding>() {
     ): FragmentPasswordSettingBinding {
         return FragmentPasswordSettingBinding.inflate(inflater)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         binding.codeText.initDatas(object :SendCodeView.MyOnClickListener{

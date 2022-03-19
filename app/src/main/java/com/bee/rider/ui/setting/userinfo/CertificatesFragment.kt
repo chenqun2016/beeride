@@ -23,6 +23,7 @@ class CertificatesFragment : BaseFragment<FragmentCertificatesBinding>(), View.O
     ): FragmentCertificatesBinding {
         return  FragmentCertificatesBinding.inflate(inflater)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         binding.tvIdcard.setOnClickListener(this)

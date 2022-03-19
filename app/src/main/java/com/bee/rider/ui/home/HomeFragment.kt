@@ -36,6 +36,7 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
     ): FragmentHome2Binding {
         return FragmentHome2Binding.inflate(inflater, container, false)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         initView()
@@ -110,6 +111,5 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
             }
         }
     }
-
 
 }

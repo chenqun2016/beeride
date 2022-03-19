@@ -25,6 +25,7 @@ class PasswordLoginFragment :BaseFragment<FragmentPasswordLoginBinding>(), View.
     ): FragmentPasswordLoginBinding {
         return FragmentPasswordLoginBinding.inflate(inflater,container,false)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         binding.ivBack.setOnClickListener(this)

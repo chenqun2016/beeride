@@ -30,6 +30,7 @@ class CommonWebFragment : BaseFragment<FragmentCommonWebBinding>() {
     ): FragmentCommonWebBinding {
         return FragmentCommonWebBinding.inflate(inflater, container, false)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         //        是否使用内部标题

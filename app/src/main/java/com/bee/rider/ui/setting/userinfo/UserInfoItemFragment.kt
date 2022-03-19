@@ -24,6 +24,7 @@ class UserInfoItemFragment : BaseFragment<FragmentUserinfoItemBinding>() {
     ): FragmentUserinfoItemBinding {
         return FragmentUserinfoItemBinding.inflate(inflater)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         val type = arguments?.getInt("type", 0)

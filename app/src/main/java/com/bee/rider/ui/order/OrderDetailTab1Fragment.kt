@@ -57,9 +57,18 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
     var mData :OrderDetailBean? = null
     var productsAdapter :ProductsAdapter? = null
 
-
-
     private var aMap: AMap? = null
+
+    override fun initOnce(savedInstanceState: Bundle?) {
+        viewModel.orderDetail.observe(this,{
+            if (it.isSuccess){
+                mData = it.getOrNull()
+                if(null != mData){
+                    setDatas(mData!!)
+                }
+            }
+        })
+    }
 
     override fun onDestroyView() {
         binding.map.onDestroy()
@@ -127,14 +136,7 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
             binding.map.translationY = verticalOffset*0.5f
         })
 
-        viewModel.orderDetail.observe(this,{
-            if (it.isSuccess){
-                mData = it.getOrNull()
-                if(null != mData){
-                    setDatas(mData!!)
-                }
-            }
-        })
+
         val id = arguments?.getString(Constants.ORDERID)
         viewModel.doOrderDetail(id+"")
     }

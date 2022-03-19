@@ -33,6 +33,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
     ): FragmentPersonalBinding {
         return FragmentPersonalBinding.inflate(inflater,container,false)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         UIUtils.setGradientDrawable(this,null,binding.ivBg,R.color.color_FF6200)

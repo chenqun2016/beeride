@@ -19,6 +19,7 @@ class AreasFragment : BaseFragment<FragmentAreasBinding>() {
     ): FragmentAreasBinding {
         return FragmentAreasBinding.inflate(inflater)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
 

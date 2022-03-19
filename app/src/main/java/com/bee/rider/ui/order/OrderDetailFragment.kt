@@ -33,13 +33,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
     ): FragmentOrderDetailBinding {
         return FragmentOrderDetailBinding.inflate(inflater, container, false)
     }
-
-    override fun initViews(savedInstanceState: Bundle?) {
-        binding.ivBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
-        initStatusBar()
-        initTabViewpager()
+    override fun initOnce(savedInstanceState: Bundle?) {
         LiveDataBus.get().with("reflushToolbar").observe(this,object :Observer<Boolean>{
             override fun onChanged(t: Boolean?) {
                 if(t == true){
@@ -53,6 +47,14 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
                 }
             }
         })
+    }
+
+    override fun initViews(savedInstanceState: Bundle?) {
+        binding.ivBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        initStatusBar()
+        initTabViewpager()
         binding.tabLayout.alpha = 0f
     }
 

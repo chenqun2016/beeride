@@ -34,8 +34,6 @@ import kotlinx.coroutines.launch
  * 功能描述：
  */
 class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
-    private val viewModel: HomeViewModel by viewModels()
-
     companion object {
         //历史订单
         const val TYPE_HISTORY = 999
@@ -49,7 +47,7 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
             return fragment
         }
     }
-
+    private val viewModel: HomeViewModel by viewModels()
     val adapter = HomeOrderAdapter()
     var loadmoreUtils: LoadmoreUtils<OrderListBean.RecordsBean>? = null
 
@@ -61,6 +59,20 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
         return ModelRecyclerviewBinding.inflate(inflater, container, false)
     }
 
+    override fun initOnce(savedInstanceState: Bundle?) {
+        viewModel.homeList.observe(this, {
+            if (it.isSuccess) {
+                val bean = it.getOrNull()
+                if (null != bean) {
+                    loadmoreUtils?.onSuccess(bean.records)
+                }else{
+                    loadmoreUtils?.onFail("")
+                }
+            } else {
+                loadmoreUtils?.onFail(it.exceptionOrNull()?.message)
+            }
+        })
+    }
     override fun initViews(savedInstanceState: Bundle?) {
         val type = arguments?.getInt("type")
         adapter.setType(type)
@@ -103,21 +115,11 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
                 viewModel.doHomeList(params)
             }
         }
-        viewModel.homeList.observe(this, {
-            if (it.isSuccess) {
-                val bean = it.getOrNull()
-                if (null != bean) {
-                    loadmoreUtils?.onSuccess(bean.records)
-                }else{
-                    loadmoreUtils?.onFail("")
-                }
-            } else {
-                loadmoreUtils?.onFail(it.exceptionOrNull()?.message)
-            }
-        })
+
         loadmoreUtils?.refresh()
     }
     fun reflushDatas() {
         loadmoreUtils?.refresh()
     }
+
 }

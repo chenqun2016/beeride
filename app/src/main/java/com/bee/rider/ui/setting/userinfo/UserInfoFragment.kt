@@ -36,6 +36,7 @@ class UserInfoFragment : BaseFragment<FragmentUserinfoBinding>(), View.OnClickLi
     ): FragmentUserinfoBinding {
         return FragmentUserinfoBinding.inflate(inflater)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         val gString = MMKVUtils.getString(Constants.USER_INFO, "")

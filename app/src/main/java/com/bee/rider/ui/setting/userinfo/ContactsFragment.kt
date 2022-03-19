@@ -19,6 +19,7 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>() {
     ): FragmentContactsBinding {
         return FragmentContactsBinding.inflate(inflater)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         binding.tvIdcardResult.text = "上海"

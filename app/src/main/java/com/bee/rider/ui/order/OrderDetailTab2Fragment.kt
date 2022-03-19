@@ -41,6 +41,11 @@ class OrderDetailTab2Fragment :BaseFragment<FragmentOrderDetailTab2Binding>() {
     ): FragmentOrderDetailTab2Binding {
        return FragmentOrderDetailTab2Binding.inflate(inflater, container, false)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {
+        viewModel.getOperateHistory.observe(this,{
+
+        })
+    }
 
     override fun initViews(savedInstanceState: Bundle?) {
         val layoutParams = binding.clContent.layoutParams as FrameLayout.LayoutParams
@@ -57,9 +62,7 @@ class OrderDetailTab2Fragment :BaseFragment<FragmentOrderDetailTab2Binding>() {
     }
 
     private fun getDatas() {
-        viewModel.getOperateHistory.observe(this,{
 
-        })
         val id = arguments?.getString(Constants.ORDERID)
         viewModel.doGetOperateHistory(id)
     }

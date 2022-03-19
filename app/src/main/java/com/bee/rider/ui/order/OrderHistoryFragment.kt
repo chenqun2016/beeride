@@ -48,6 +48,7 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
     ): FragmentOrderHistoryBinding {
         return FragmentOrderHistoryBinding.inflate(inflater, container, false)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         UIUtils.setGradientDrawable(this, null, binding.ivBg, R.color.color_FF6200)

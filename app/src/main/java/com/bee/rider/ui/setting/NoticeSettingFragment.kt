@@ -21,6 +21,7 @@ class NoticeSettingFragment : BaseFragment<FragmentNoticeSettingBinding>() {
     ): FragmentNoticeSettingBinding {
         return FragmentNoticeSettingBinding.inflate(inflater)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         binding.tvNoticeVoice.text = "播放提示音"

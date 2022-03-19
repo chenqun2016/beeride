@@ -28,6 +28,7 @@ class CommentsFragment : BaseFragment<FragmentCommentsBinding>() {
     ): FragmentCommentsBinding {
         return FragmentCommentsBinding.inflate(inflater)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         UIUtils.setGradientDrawable(binding.llTitleContent,R.color.color_FE8102, R.color.color_FF6200)

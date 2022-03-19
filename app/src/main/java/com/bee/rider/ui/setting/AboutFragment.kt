@@ -23,6 +23,7 @@ class AboutFragment : BaseFragment<FragmentAboutBinding>() {
     ): FragmentAboutBinding {
         return FragmentAboutBinding.inflate(inflater, container, false)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
     }

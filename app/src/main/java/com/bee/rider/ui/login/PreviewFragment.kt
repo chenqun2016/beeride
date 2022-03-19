@@ -25,6 +25,7 @@ class PreviewFragment :BaseFragment<FragmentPreviewBinding>() {
     ): FragmentPreviewBinding {
         return FragmentPreviewBinding.inflate(inflater,container,false)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         binding.tvConfirm.setOnClickListener {

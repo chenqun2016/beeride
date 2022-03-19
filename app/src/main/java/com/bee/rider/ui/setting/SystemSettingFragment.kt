@@ -29,6 +29,7 @@ class SystemSettingFragment : BaseFragment<FragmentSystemSettingBinding>(), View
     ): FragmentSystemSettingBinding {
         return FragmentSystemSettingBinding.inflate(inflater, container, false)
     }
+    override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
         binding.tvVersionText.text = "当前版本V" + DeviceUtils.getAppVersionName()
