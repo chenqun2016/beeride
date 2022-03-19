@@ -37,7 +37,6 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
     companion object {
         //历史订单
         const val TYPE_HISTORY = 999
-        const val TYPE_NOMAL = 0
 
         fun newInstance(type: Int): OrderListFragment {
             val args = Bundle()
@@ -50,6 +49,8 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
     private val viewModel: HomeViewModel by viewModels()
     val adapter = HomeOrderAdapter()
     var loadmoreUtils: LoadmoreUtils<OrderListBean.RecordsBean>? = null
+    var beginDate:String? = null
+    var endDate:String? = null
 
     override fun getBinding(
         inflater: LayoutInflater,
@@ -61,6 +62,19 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
 
     override fun initOnce(savedInstanceState: Bundle?) {
         viewModel.homeList.observe(this, {
+            if (it.isSuccess) {
+                val bean = it.getOrNull()
+                if (null != bean) {
+                    loadmoreUtils?.onSuccess(bean.records)
+                }else{
+                    loadmoreUtils?.onFail("")
+                }
+            } else {
+                loadmoreUtils?.onFail(it.exceptionOrNull()?.message)
+            }
+        })
+
+        viewModel.historyList.observe(this, {
             if (it.isSuccess) {
                 val bean = it.getOrNull()
                 if (null != bean) {
@@ -105,21 +119,27 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
         binding.recyclerview.adapter = adapter
         loadmoreUtils = object : LoadmoreUtils<OrderListBean.RecordsBean>(adapter, binding.srl) {
             override fun getDatas(page: Int) {
-                var status: Int = 10
-                when (type) {
-                    0 -> status = 10
-                    1 -> status = 20
-                    2 -> status = 30
+                if(type == TYPE_HISTORY){
+                    val params = OrderListParams(QueryVO(10,beginDate,endDate), page, PAGE_SIZE)
+                    viewModel.doHistoryList(params)
+                }else{
+                    var status: Int = 10
+                    when (type) {
+                        0 -> status = 10
+                        1 -> status = 20
+                        2 -> status = 30
+                    }
+                    val params = OrderListParams(QueryVO(status), page, PAGE_SIZE)
+                    viewModel.doHomeList(params)
                 }
-                val params = OrderListParams(QueryVO(status), page, LoadmoreUtils.PAGE_SIZE)
-                viewModel.doHomeList(params)
             }
         }
 
         loadmoreUtils?.refresh()
     }
-    fun reflushDatas() {
+    fun reflushDatas(beginDate :String?,endDate:String?) {
+        this.beginDate = beginDate
+        this.endDate = endDate
         loadmoreUtils?.refresh()
     }
-
 }

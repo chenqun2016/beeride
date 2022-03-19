@@ -8,10 +8,13 @@ import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import android.widget.ImageView
 import android.widget.TextView
+import com.alibaba.idst.nui.CommonUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.chenchen.base.utils.DisplayUtil
 import com.bee.rider.R
+import com.bee.rider.bean.OrderDetailTraceBean
+import com.bee.rider.utils.UIUtils
 
 /**
  * 创建时间：2022/1/9
@@ -19,18 +22,18 @@ import com.bee.rider.R
  * 功能描述：
  */
 class OrderDetailTraceAdapter :
-    BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_order_detail_trace) {
-    override fun convert(holder: BaseViewHolder, item: String) {
+    BaseQuickAdapter<OrderDetailTraceBean, BaseViewHolder>(R.layout.item_order_detail_trace) {
+    override fun convert(holder: BaseViewHolder, item: OrderDetailTraceBean) {
         val current = 2
         val title = holder.getView<TextView>(R.id.step_title)
-        title.text = item
+        title.text = item.orderStatusName
         if(holder.layoutPosition == current){
             title.context.resources.getColor(R.color.color_FF6200)
         }else{
             title.context.resources.getColor(R.color.color_222222)
         }
         title.setTextColor(title.context.resources.getColor(R.color.color_222222))
-        holder.getView<TextView>(R.id.step_time).text = "2020-1-9"
+        holder.getView<TextView>(R.id.step_time).text = UIUtils.getNomalTime(item.createTime)
 
         val dian = holder.getView<ImageView>(R.id.dian)
         val line = holder.getView<View>(R.id.left_line)

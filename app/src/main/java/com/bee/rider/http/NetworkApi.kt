@@ -20,7 +20,9 @@ object NetworkApi : BaseNetworkApi<INetworkService>(Constants.base_url) {
     suspend fun homeList(param: OrderListParams) = getResult {
         service.homeList(param.toApiBody())
     }
-
+    suspend fun historyList(param: OrderListParams) = getResult {
+        service.historyList(param.toApiBody())
+    }
     suspend fun orderDetail(id:String) = getResult {
         service.orderDetail(id)
     }

@@ -9,12 +9,12 @@ import java.util.List;
  * 功能描述：
  */
 public class UserBean {
-    public Integer id;
+    public int id;
     public String username;
     public Object password;
     public String nickname;
     public String phone;
-    public Integer status;
+    public int status;
     public String createTime;
     public String icon;
     public int gender;
@@ -31,7 +31,7 @@ public class UserBean {
     public Object buyCount;
     public Object buyMoney;
     public Object luckeyCount;
-    public Integer memberLevelId;
+    public int memberLevelId;
     public String memberLevelName;
     public Object avatar;
     public Object weixinOpenid;

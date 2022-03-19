@@ -24,5 +24,11 @@ class HomeViewModel : ViewModel(){
         }
     }
 
-
+    val historyList : MutableLiveData<Result<OrderListBean?>> = MutableLiveData()
+    fun doHistoryList(param: OrderListParams){
+        viewModelScope.launch {
+            val result = NetworkApi.historyList(param)
+            historyList.value = result
+        }
+    }
 }

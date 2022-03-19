@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,6 +55,8 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
         UIUtils.setGradientDrawable(this, null, binding.ivBg, R.color.color_FF6200)
         if (savedInstanceState == null && fragment == null) {
             fragment = OrderListFragment.newInstance(OrderListFragment.TYPE_HISTORY)
+            //TODO 默认选中时间段
+            fragment?.reflushDatas(beginDate,endDate)
             childFragmentManager.beginTransaction().setReorderingAllowed(true)
                 .add(R.id.fcv, fragment!!, "OrderListFragment_history").commitNowAllowingStateLoss()
         }
@@ -130,7 +133,10 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
                 val checkedRadioButtonId: Int = rp_1.checkedRadioButtonId
                 val checkedBt = mMenuView.findViewById<RadioButton>(checkedRadioButtonId)
                 binding.titleView.setTitleText(checkedBt.text.toString() + "历史订单")
-                fragment?.reflushDatas()
+                if(!TextUtils.isEmpty(beginDate) && !TextUtils.isEmpty(endDate)){
+                    //TODO 时间格式
+                    fragment?.reflushDatas(beginDate!!,endDate!!)
+                }
             }
             tv_time_left.setOnClickListener { showBirthdayDialog(tv_time_left) }
             tv_time_right.setOnClickListener { showBirthdayDialog(tv_time_right) }

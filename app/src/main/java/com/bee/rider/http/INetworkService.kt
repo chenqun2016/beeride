@@ -16,6 +16,9 @@ interface INetworkService {
     @POST("app-dis-horseman-takeout/list")
     suspend fun homeList(@Body body: RequestBody?): BaseResponse<OrderListBean>
 
+    @POST("app-dis-horseman-takeout/historyList")
+    suspend fun historyList(@Body body: RequestBody?): BaseResponse<OrderListBean>
+
     @GET("app-dis-horseman-takeout/get/{takeoutId}")
     suspend fun orderDetail(@Path("takeoutId") takeoutId:String): BaseResponse<OrderDetailBean>
 
@@ -25,7 +28,7 @@ interface INetworkService {
     @POST("app-sys/appUpdateInfo")
     suspend fun appUpdateInfo(@Body body: RequestBody?): BaseResponse<AppUpdateInfoBean>
 
-    @GET("/app-dis-horseman-takeout/getOperateHistory/{orderId}")
+    @GET("app-dis-horseman-takeout/getOperateHistory/{orderId}")
     suspend fun getOperateHistory(@Path("orderId") orderId:String?): BaseResponse<List<OrderDetailTraceBean>>
 
 }

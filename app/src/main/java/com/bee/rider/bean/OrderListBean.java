@@ -10,23 +10,23 @@ import java.util.List;
  */
 public class OrderListBean {
 
-    public Integer current;
+    public int current;
     public Boolean hitCount;
-    public Integer pages;
+    public int pages;
     public List<RecordsBean> records;
     public Boolean searchCount;
-    public Integer size;
-    public Integer total;
+    public int size;
+    public int total;
 
     public static class RecordsBean {
-        public Integer id;
-        public Integer horsemanId;
-        public Integer takeoutId;
-        public Integer orderId;
+        public int id;
+        public int horsemanId;
+        public int takeoutId;
+        public int orderId;
         public String deliverySn;
         public Object expectedTime;
         public Object accomplishTime;
-        public Integer storeId;
+        public int storeId;
         public String storeName;
         public String storeContactMobile;
         public String storeAddressDetail;
@@ -35,7 +35,7 @@ public class OrderListBean {
         public String linkman;
         public String phone;
         public String buildingName;
-        public Integer floor;
+        public int floor;
         public String detailAddress;
     }
 }

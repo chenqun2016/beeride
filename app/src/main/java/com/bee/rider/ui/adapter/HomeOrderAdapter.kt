@@ -6,10 +6,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.bee.rider.R
-import com.bee.rider.bean.OrderBean
 import com.bee.rider.bean.OrderListBean
 import com.bee.rider.ui.home.OrderListFragment.Companion.TYPE_HISTORY
-import com.bee.rider.ui.home.OrderListFragment.Companion.TYPE_NOMAL
 
 /**
  * 创建时间：2022/1/3
@@ -23,11 +21,12 @@ class HomeOrderAdapter() : BaseQuickAdapter<OrderListBean.RecordsBean, BaseViewH
                 holder.getView<Group>(R.id.id_order_history_gone).visibility = View.GONE
                 holder.getView<Group>(R.id.id_order_detail_gone).visibility = View.GONE
             }
-            TYPE_NOMAL ->{
+            else ->{
                 holder.getView<Group>(R.id.id_order_history_gone).visibility = View.VISIBLE
                 holder.getView<Group>(R.id.id_order_detail_gone).visibility = View.VISIBLE
             }
         }
+        holder.getView<View>(R.id.tv_accept).visibility = if(mType == 0) View.VISIBLE else View.GONE
         holder.setText(R.id.tv_right,"#${item.floor}")
         holder.setText(R.id.tv_time,"${item.expectedTime}前送达")
         holder.setText(R.id.tv_store_name, item.storeName)
@@ -41,7 +40,7 @@ class HomeOrderAdapter() : BaseQuickAdapter<OrderListBean.RecordsBean, BaseViewH
         holder.setText(R.id.tv_customer_distance, "距离1.5km")
     }
 
-    var mType :Int? = TYPE_NOMAL
+    var mType :Int? = 0
     fun setType(type: Int?) {
         mType = type
     }

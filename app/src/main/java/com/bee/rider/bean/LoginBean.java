@@ -11,13 +11,13 @@ import java.util.List;
 public class LoginBean {
 
     public String token;
-    public Integer id;
+    public int id;
     public String accountNo;
     public Object levelId;
     public String password;
-    public Integer type;
-    public Integer authType;
-    public Integer isWork;
+    public int type;
+    public int authType;
+    public int isWork;
     public String name;
     public Boolean sex;
     public String linkPhone;
@@ -34,16 +34,16 @@ public class LoginBean {
     public String createTime;
     public String levelName;
     public Object transactionAmount;
-    public Integer orderCount;
-    public Integer userData;
-    public Integer returnCount;
-    public Integer loginTimes;
+    public int orderCount;
+    public int userData;
+    public int returnCount;
+    public int loginTimes;
     public List<PictureListBean> pictureList;
 
     public static class PictureListBean {
-        public Integer id;
-        public Integer horsemanId;
-        public Integer fileId;
+        public int id;
+        public int horsemanId;
+        public int fileId;
         public String type;
     }
 }

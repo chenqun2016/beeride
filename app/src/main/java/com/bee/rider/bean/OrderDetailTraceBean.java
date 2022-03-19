@@ -1,5 +1,7 @@
 package com.bee.rider.bean;
 
+import java.util.Date;
+
 /**
  * 创建时间：2022/3/12
  *
@@ -8,4 +10,9 @@ package com.bee.rider.bean;
  */
 public class OrderDetailTraceBean {
 
+    public String createName;
+    public Date createTime;
+    public int orderId;
+    public String orderStatus;
+    public String orderStatusName;
 }

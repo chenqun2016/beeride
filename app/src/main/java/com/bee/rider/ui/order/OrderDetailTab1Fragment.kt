@@ -93,6 +93,7 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
                     if (it.isSuccess) {
                         val bean = it.getOrNull()
                         Toast.makeText(context, "接单成功", Toast.LENGTH_SHORT).show()
+                        binding.includeDetail.includeOrderItem.tvAccept.visibility = View.GONE
                     }
                 }
             }
@@ -142,6 +143,7 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
     }
 
     private fun setDatas(item: OrderDetailBean) {
+        binding.includeDetail.includeOrderItem.tvAccept.visibility = if(item.queryStatus == 10) View.VISIBLE else View.GONE
         binding.includeDetail.includeOrderItem.tvRight.text = "#"
         binding.includeDetail.includeOrderItem.tvTime.text = "${item.receiveTime}前送达"
         binding.includeDetail.includeOrderItem.tvStoreName.text = item.storeName

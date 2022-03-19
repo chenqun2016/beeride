@@ -24,6 +24,7 @@ import com.gyf.immersionbar.ImmersionBar
  */
 class OrderDetailTab2Fragment :BaseFragment<FragmentOrderDetailTab2Binding>() {
     private val viewModel: OrderDetailViewModel by viewModels()
+    val orderDetailTraceAdapter = OrderDetailTraceAdapter()
 
     companion object{
         fun newInstance(id: String?): OrderDetailTab2Fragment{
@@ -43,7 +44,12 @@ class OrderDetailTab2Fragment :BaseFragment<FragmentOrderDetailTab2Binding>() {
     }
     override fun initOnce(savedInstanceState: Bundle?) {
         viewModel.getOperateHistory.observe(this,{
-
+            if (it.isSuccess){
+                val mData = it.getOrNull()
+                if(null != mData && mData.isNotEmpty()){
+                    orderDetailTraceAdapter.setNewInstance(mData.toMutableList())
+                }
+            }
         })
     }
 
@@ -52,11 +58,10 @@ class OrderDetailTab2Fragment :BaseFragment<FragmentOrderDetailTab2Binding>() {
         layoutParams.topMargin = DisplayUtil.dip2px(context,50f)+ImmersionBar.getStatusBarHeight(this)
 
         binding.recyclerview.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,true)
-        val orderDetailTraceAdapter = OrderDetailTraceAdapter()
         binding.recyclerview.adapter = orderDetailTraceAdapter
 
-        val datas = mutableListOf("1提交订单","21提交订单","31提交订单","41提交订单","51提交订单")
-        orderDetailTraceAdapter.setNewInstance(datas)
+//        val datas = mutableListOf("1提交订单","21提交订单","31提交订单","41提交订单","51提交订单")
+//        orderDetailTraceAdapter.setNewInstance(datas)
 
         getDatas()
     }
