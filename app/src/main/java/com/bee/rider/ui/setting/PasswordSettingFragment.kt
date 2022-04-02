@@ -27,15 +27,7 @@ class PasswordSettingFragment : BaseFragment<FragmentPasswordSettingBinding>() {
     override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
-        binding.codeText.initDatas(object :SendCodeView.MyOnClickListener{
-            override fun onGetPhoneNum(): String {
-                return ""
-            }
-            override fun onSuccess(t: String?) {
-            }
-            override fun onFailure(t: String?) {
-            }
-        })
+        binding.codeText.initDatas(binding.tvPhone,binding.edUserCode,lifecycle)
         binding.tvConfirm.setButtonClickableBy(binding.edUserCode)
 
         binding.tvConfirm.setOnClickListener {

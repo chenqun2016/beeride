@@ -10,9 +10,6 @@ import retrofit2.http.Path
 
 interface INetworkService {
 
-    @POST("app-dis-horseman/login")
-    suspend fun login(@Body body: RequestBody?): BaseResponse<LoginBean>
-
     @POST("app-dis-horseman-takeout/list")
     suspend fun homeList(@Body body: RequestBody?): BaseResponse<OrderListBean>
 

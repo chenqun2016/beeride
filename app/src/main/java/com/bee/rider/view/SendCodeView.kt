@@ -1,30 +1,43 @@
 package com.bee.rider.view
 
 import android.content.Context
+import android.text.Editable
 import android.text.SpannableString
 import android.text.Spanned
+import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import android.view.View
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.lifecycleScope
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.coroutineScope
 import com.bee.rider.R
+import com.bee.rider.http.LoginApi
 import com.bee.rider.utils.countDownCoroutines
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
 
 /**
  * @author 陈陈陈
  */
 class SendCodeView : FrameLayout, View.OnClickListener {
+    private var mPhoneText: TextView? = null
+    private var mcodeText: TextView? = null
+    private lateinit var lifecycle: Lifecycle
+
     private var tv_getcode: TextView? = null
-    private var mListener: MyOnClickListener? = null
     private var mIsWorking = false
     private var i = 0
     private val clickableColor = R.color.color_3e7dfb
     private val unClickableColor = R.color.color_ccc
+
+    /**
+     * 是否发送过验证码
+     */
+    var hasSendCode = false
 
     constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(
         context,
@@ -47,45 +60,76 @@ class SendCodeView : FrameLayout, View.OnClickListener {
     }
 
     /**
+     * 监听手机号空间格式是否正确
+     */
+    val textWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(it: CharSequence?, start: Int, before: Int, count: Int) {
+            if (null != it && it.toString().isNotEmpty() && it.toString().length == 11) {
+                setCodeState(true)
+            } else {
+                setCodeState(false)
+            }
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+        }
+    }
+
+    /**
      * 初始化   必须调用
      *
      * @param listener
      */
-    fun initDatas(listener: MyOnClickListener?) {
-        mListener = listener
+    fun initDatas(phoneText: TextView, codeText: TextView, lifecycle: Lifecycle) {
+        this.mPhoneText = phoneText
+        this.mcodeText = codeText
+        setCodeState(false)
+        mPhoneText?.addTextChangedListener(textWatcher)
+        this.lifecycle = lifecycle
+        lifecycle.addObserver(lifeObserver)
     }
 
-
+    private val lifeObserver: LifecycleEventObserver = LifecycleEventObserver { source, event ->
+        if (event == Lifecycle.Event.ON_DESTROY) {
+            mPhoneText?.removeTextChangedListener(textWatcher)
+            mPhoneText = null
+            mcodeText = null
+        }
+    }
 
     override fun onClick(view: View) {
-        if (null == mListener) {
-            return
-        }
         doGetCode()
     }
 
     private fun doGetCode() {
+        hasSendCode = true
         mIsWorking = true
         setCodeState(false)
+        mcodeText?.text = ""
         sendCode()
     }
 
     private fun sendCode() {
         //TODO 请求网络
-        val phone = mListener!!.onGetPhoneNum()
-        onHttpNext("")
-        //        onHttpError();
+        if (null == mPhoneText) {
+            return
+        }
+        val phone = mPhoneText?.text.toString()
+        lifecycle.coroutineScope.launchWhenResumed {
+            val result = LoginApi.smsCode(phone)
+            if (result.isSuccess) {
+                onHttpNext("")
+            } else {
+                onHttpError()
+            }
+        }
     }
 
     private fun onHttpNext(s: String) {
-        mListener!!.onSuccess(s)
-//        startThread()
-        val scope : CoroutineScope = if(context is FragmentActivity){
-            (context as FragmentActivity).lifecycleScope
-        }else{
-            GlobalScope
-        }
-        countDownCoroutines(60,onTick = {
+        countDownCoroutines(60, onTick = {
             val strs = "剩余" + it + "s"
             val msp = SpannableString(strs)
             msp.setSpan(
@@ -93,15 +137,14 @@ class SendCodeView : FrameLayout, View.OnClickListener {
                 strs.length, Spanned.SPAN_EXCLUSIVE_INCLUSIVE
             )
             tv_getcode!!.text = msp
-        },onFinish = {
+        }, onFinish = {
             setCodeState(true)
             tv_getcode!!.text = "重新发送"
             mIsWorking = false
-        },scope)
+        }, lifecycle.coroutineScope)
     }
 
     private fun onHttpError() {
-        mListener!!.onFailure("")
         mIsWorking = false
         setCodeState(true)
     }
@@ -114,11 +157,5 @@ class SendCodeView : FrameLayout, View.OnClickListener {
                 unClickableColor
             )
         )
-    }
-
-    interface MyOnClickListener {
-        fun onGetPhoneNum(): String
-        fun onSuccess(t: String?)
-        fun onFailure(t: String?)
     }
 }

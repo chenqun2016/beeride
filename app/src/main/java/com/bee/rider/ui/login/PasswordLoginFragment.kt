@@ -4,13 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bee.rider.Constants
 import com.chenchen.base.base.BaseFragment
 import com.bee.rider.R
 import com.bee.rider.databinding.FragmentPasswordLoginBinding
+import com.bee.rider.params.LoginParams
 import com.bee.rider.utils.UIUtils
 import com.bee.rider.utils.options
 import com.bee.rider.utils.setButtonClickableBy
+import com.bee.rider.vm.LoginViewModel
+import com.blankj.utilcode.util.KeyboardUtils
+import com.chenchen.base.constants.HttpConstants
+import com.chenchen.base.utils.MMKVUtils
+import kotlinx.coroutines.launch
 
 /**
  * 创建时间：2022/1/22
@@ -18,6 +27,8 @@ import com.bee.rider.utils.setButtonClickableBy
  * 功能描述：
  */
 class PasswordLoginFragment :BaseFragment<FragmentPasswordLoginBinding>(), View.OnClickListener {
+    private val viewModel: LoginViewModel by viewModels()
+
     override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,7 +36,19 @@ class PasswordLoginFragment :BaseFragment<FragmentPasswordLoginBinding>(), View.
     ): FragmentPasswordLoginBinding {
         return FragmentPasswordLoginBinding.inflate(inflater,container,false)
     }
-    override fun initOnce(savedInstanceState: Bundle?) {}
+    override fun initOnce(savedInstanceState: Bundle?) {
+        viewModel.passwordLogin.observe(this,{
+            //登录成功
+            if(it.isSuccess){
+                val token = it.getOrNull()
+                if(null != token){
+                    MMKVUtils.putString(HttpConstants.TOKEN,token)
+//                    MMKVUtils.putInt(Constants.HORSEMANID,bean.id)
+                    findNavController().navigate(R.id.next_action_home,null, UIUtils.getNavOptions(R.id.code_login_dest))
+                }
+            }
+        })
+    }
 
     override fun initViews(savedInstanceState: Bundle?) {
         binding.ivBack.setOnClickListener(this)
@@ -42,7 +65,10 @@ class PasswordLoginFragment :BaseFragment<FragmentPasswordLoginBinding>(), View.
                 findNavController().popBackStack()
             }
             R.id.tv_agree -> {
-                findNavController().navigate(R.id.next_action_home,null, UIUtils.getNavOptions(R.id.code_login_dest))
+                if(null != activity){
+                    KeyboardUtils.hideSoftInput(requireActivity())
+                }
+                viewModel.doPasswordLogin(LoginParams(binding.edUserPhone.text.toString(),binding.edUserPass.editTextView.text.toString()))
             }
             R.id.tv_forgetmima -> {
                 findNavController().navigate(R.id.next_action_reset_password,null, options)

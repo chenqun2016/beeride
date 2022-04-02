@@ -30,18 +30,7 @@ class ResetPasswordFragment : BaseFragment<FragmentResetPasswordBinding>(), View
         binding.ivBack.setOnClickListener(this)
         binding.tvAgree.setOnClickListener(this)
 
-        binding.codeText.initDatas(object : SendCodeView.MyOnClickListener{
-            override fun onGetPhoneNum(): String {
-                return ""
-            }
-
-            override fun onSuccess(t: String?) {
-            }
-
-            override fun onFailure(t: String?) {
-            }
-        })
-
+        binding.codeText.initDatas(binding.edUserPhone,binding.edUserCode,lifecycle)
         binding.tvAgree.setButtonClickableBy(binding.edUserPhone,binding.edUserCode,binding.edUserPass.editTextView)
     }
 

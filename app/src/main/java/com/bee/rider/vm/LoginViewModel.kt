@@ -3,9 +3,9 @@ package com.bee.rider.vm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bee.rider.bean.LoginBean
-import com.bee.rider.http.NetworkApi
+import com.bee.rider.http.LoginApi
 import com.bee.rider.params.LoginParams
+import com.bee.rider.params.SmsCodeLoginParams
 import kotlinx.coroutines.launch
 
 /**
@@ -15,11 +15,25 @@ import kotlinx.coroutines.launch
  */
 class LoginViewModel : ViewModel(){
 
-    val login : MutableLiveData<Result<LoginBean?>> = MutableLiveData()
-    fun doLogin(param: LoginParams){
+    /**
+     * 密码登录
+     */
+    val passwordLogin : MutableLiveData<Result<String?>> = MutableLiveData()
+    fun doPasswordLogin(param: LoginParams){
         viewModelScope.launch {
-            val result = NetworkApi.login(param)
-            login.value = result
+            val result = LoginApi.login(param)
+            passwordLogin.value = result
+        }
+    }
+
+    /**
+     * 验证码登录
+     */
+    val smsLogin : MutableLiveData<Result<String?>> = MutableLiveData()
+    fun doSmsLogin(param: SmsCodeLoginParams){
+        viewModelScope.launch {
+            val result = LoginApi.loginSmscode(param)
+            smsLogin.value = result
         }
     }
 }

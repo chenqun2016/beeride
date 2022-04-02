@@ -12,6 +12,7 @@ import com.chenchen.base.base.BaseFragment
 import com.bee.rider.R
 import com.bee.rider.databinding.FragmentCodeLoginBinding
 import com.bee.rider.params.LoginParams
+import com.bee.rider.params.SmsCodeLoginParams
 import com.bee.rider.utils.UIUtils
 import com.bee.rider.utils.options
 import com.bee.rider.utils.setButtonClickableBy
@@ -36,13 +37,12 @@ class LoginFragment : BaseFragment<FragmentCodeLoginBinding>(), View.OnClickList
         return FragmentCodeLoginBinding.inflate(inflater,container,false)
     }
     override fun initOnce(savedInstanceState: Bundle?) {
-        viewModel.login.observe(this,{
+        viewModel.smsLogin.observe(this,{
             //登录成功
             if(it.isSuccess){
-                val bean = it.getOrNull()
-                if(null != bean){
-                    MMKVUtils.putString(HttpConstants.TOKEN,bean.token)
-                    MMKVUtils.putInt(Constants.HORSEMANID,bean.id)
+                val token = it.getOrNull()
+                if(null != token){
+                    MMKVUtils.putString(HttpConstants.TOKEN,token)
                     findNavController().navigate(R.id.next_action_home,null, UIUtils.getNavOptions(R.id.code_login_dest))
                 }
             }
@@ -54,18 +54,8 @@ class LoginFragment : BaseFragment<FragmentCodeLoginBinding>(), View.OnClickList
         binding.tvMimalogin.setOnClickListener(this)
         binding.tvAgree.setOnClickListener(this)
 
-        binding.codeText.initDatas(object : SendCodeView.MyOnClickListener{
-            override fun onGetPhoneNum(): String {
-                return ""
-            }
-
-            override fun onSuccess(t: String?) {
-            }
-
-            override fun onFailure(t: String?) {
-            }
-        })
-        binding.tvAgree.setButtonClickableBy(binding.edUserPhone,binding.edUserCode)
+        binding.codeText.initDatas(binding.edUserPhone,binding.edUserCode,lifecycle)
+        binding.tvAgree.setButtonClickableBy(binding.edUserPhone,binding.edUserCode,other = binding.codeText)
         UIUtils.setXieYiText(this,binding.tvXieyi)
 
     }
@@ -76,7 +66,7 @@ class LoginFragment : BaseFragment<FragmentCodeLoginBinding>(), View.OnClickList
                 if(null != activity){
                     KeyboardUtils.hideSoftInput(requireActivity())
                 }
-                viewModel.doLogin(LoginParams(binding.edUserPhone.text.toString(),binding.edUserCode.text.toString()))
+                viewModel.doSmsLogin(SmsCodeLoginParams(binding.edUserPhone.text.toString(),binding.edUserCode.text.toString()))
             }
             R.id.iv_back -> {
                 activity?.finish()

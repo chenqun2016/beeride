@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat
  * 功能描述：
  */
 object Constants {
-
+    const val base_url2 = "http://dev-bee-horseman-zuul-gateway.quxianfeng.vip:15889/"
     const val base_url = "http://dev-beeweb2.quxianfeng.vip:15889/bee-member-zuul-gateway/dis-center/"
 
     //    隐私权政策

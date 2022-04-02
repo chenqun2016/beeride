@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import com.chenchen.base.utils.d
 import com.bee.rider.R
+import com.bee.rider.view.SendCodeView
 import com.google.gson.Gson
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -37,7 +38,7 @@ fun ViewGroup.setRoundConner(radius:Int,radiusSide:Int){
     ViewHelper.setViewOutline(this,radius,radiusSide)
 }
 
-fun TextView.setButtonClickableBy(vararg args: EditText){
+fun TextView.setButtonClickableBy(vararg args: EditText,other: SendCodeView? = null){
     isEnabled = false
     setBackgroundResource(R.drawable.btn_gradient_grey_round)
     for (i in args.indices) {
@@ -46,7 +47,11 @@ fun TextView.setButtonClickableBy(vararg args: EditText){
             for (j in args.indices){
                 enable = enable && !args[j].text.isNullOrEmpty()
             }
-            UIUtils.setButtonStatus(this,enable)
+            if(null != other){
+                UIUtils.setButtonStatus(this,enable && other.hasSendCode)
+            }else{
+                UIUtils.setButtonStatus(this,enable)
+            }
         }
     }
 }

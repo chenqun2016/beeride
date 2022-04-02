@@ -5,4 +5,4 @@ package com.bee.rider.params
  * @Author： 陈陈陈
  * 功能描述：
  */
-data class LoginParams(var userName:String ,var password:String)
+data class LoginParams(var username:String ,var password:String)
