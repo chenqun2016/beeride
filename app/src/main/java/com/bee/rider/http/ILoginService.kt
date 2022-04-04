@@ -23,15 +23,15 @@ import retrofit2.http.Path
  */
 interface ILoginService {
 
-    @POST("api-uaa/member/login/password")
+    @POST("member/login/password")
     suspend fun login(@Body body: RequestBody?): BaseResponse<String>
 
-    @POST("api-uaa/member/login/smscode")
+    @POST("member/login/smscode")
     suspend fun loginSmscode(@Body body: RequestBody?): BaseResponse<String>
 
-    @POST("api-uaa/member/resetPassword")
+    @POST("member/resetPassword")
     suspend fun resetPassword(@Body body: RequestBody?): BaseResponse<String>
 
-    @GET("api-uaa/validata/smsCode/{mobile}")
+    @GET("validata/smsCode/{mobile}")
     suspend fun smsCode(@Path("mobile") mobile:String): BaseResponse<String>
 }

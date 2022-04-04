@@ -10,7 +10,7 @@ import com.bee.rider.utils.toApiBody
 /**
  * 网络请求具体实现
  */
-object NetworkApi : BaseNetworkApi<INetworkService>(Constants.base_url) {
+object NetworkApi : BaseNetworkApi<INetworkService>(Constants.base_url_dis) {
 
     suspend fun homeList(param: OrderListParams) = getResult {
         service.homeList(param.toApiBody())
