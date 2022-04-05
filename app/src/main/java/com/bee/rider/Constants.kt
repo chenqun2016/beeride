@@ -21,6 +21,8 @@ object Constants {
 
     //    用户注册协议
     const val agreement_regist = "http://www.quxianfeng.vip/yszcxy.html"
+
+    var sdfLong1 = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     var sdfLong2 = SimpleDateFormat("yyyy/MM/dd")
 
     var LOCATION = "location"

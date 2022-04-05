@@ -5,7 +5,6 @@ import android.animation.ValueAnimator
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import android.view.animation.LinearInterpolator
 import android.widget.PopupWindow
 import android.widget.RadioButton
 import android.widget.TextView
-import androidx.navigation.fragment.findNavController
 import com.bigkoo.pickerview.builder.TimePickerBuilder
 import com.bigkoo.pickerview.listener.OnTimeSelectListener
 import com.bigkoo.pickerview.view.TimePickerView
@@ -25,7 +23,6 @@ import com.bee.rider.databinding.FragmentOrderHistoryBinding
 import com.bee.rider.ui.home.OrderListFragment
 import com.bee.rider.utils.UIUtils
 import com.bee.rider.view.RadioGroupPlus
-import com.gyf.immersionbar.ImmersionBar
 import java.text.ParseException
 import java.util.*
 
@@ -36,8 +33,8 @@ import java.util.*
  */
 class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
     var popupWindow: PopupWindow? = null
-    var endDate: String? = null
-    var beginDate: String? = null
+    var endDate: Date? = null
+    var beginDate: Date? = null
     var transactionType: String? = null
 
     private var fragment: OrderListFragment? = null
@@ -56,6 +53,10 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
         if (savedInstanceState == null && fragment == null) {
             fragment = OrderListFragment.newInstance(OrderListFragment.TYPE_HISTORY)
             //TODO 默认选中时间段
+            val calendar = Calendar.getInstance()
+            endDate = calendar.time
+            calendar[Calendar.YEAR] = calendar[Calendar.YEAR] - 1
+            beginDate = calendar.time
             fragment?.reflushDatas(beginDate,endDate)
             childFragmentManager.beginTransaction().setReorderingAllowed(true)
                 .add(R.id.fcv, fragment!!, "OrderListFragment_history").commitNowAllowingStateLoss()
@@ -121,8 +122,8 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
             val btn_2 = mMenuView.findViewById<View>(R.id.btn_2)
             btn_2.setOnClickListener {
                 popupWindow!!.dismiss()
-                beginDate = tv_time_left.text.toString()
-                endDate = tv_time_right.text.toString()
+                beginDate = Constants.sdfLong2.parse(tv_time_left.text.toString())
+                endDate = Constants.sdfLong2.parse(tv_time_right.text.toString())
                 transactionType = when (rp_2.checkedRadioButtonId) {
                     R.id.rb_11 -> "A"
                     R.id.rb_22 -> "T"
@@ -133,7 +134,7 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
                 val checkedRadioButtonId: Int = rp_1.checkedRadioButtonId
                 val checkedBt = mMenuView.findViewById<RadioButton>(checkedRadioButtonId)
                 binding.titleView.setTitleText(checkedBt.text.toString() + "历史订单")
-                if(!TextUtils.isEmpty(beginDate) && !TextUtils.isEmpty(endDate)){
+                if(null != beginDate && null != endDate){
                     //TODO 时间格式
                     fragment?.reflushDatas(beginDate!!,endDate!!)
                 }

@@ -25,6 +25,7 @@ import com.bee.rider.vm.HomeViewModel
 import com.chenchen.base.constants.HttpConstants
 import com.chenchen.base.utils.MMKVUtils
 import kotlinx.coroutines.launch
+import java.util.*
 
 /**
  * 创建时间：2022/1/3
@@ -47,8 +48,8 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
     private val viewModel: HomeViewModel by viewModels()
     val adapter = HomeOrderAdapter()
     var loadmoreUtils: LoadmoreUtils<OrderListBean.RecordsBean>? = null
-    var beginDate:String? = null
-    var endDate:String? = null
+    var beginDate: Date? = null
+    var endDate:Date? = null
 
     override fun getBinding(
         inflater: LayoutInflater,
@@ -119,7 +120,9 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
         loadmoreUtils = object : LoadmoreUtils<OrderListBean.RecordsBean>(adapter, binding.srl) {
             override fun getDatas(page: Int) {
                 if(type == TYPE_HISTORY){
-                    val params = OrderListParams(QueryVO(10,beginDate,endDate), page, PAGE_SIZE)
+                    val beginDate1 = Constants.sdfLong1.format(beginDate)
+                    val endDate1 = Constants.sdfLong1.format(endDate)
+                    val params = OrderListParams(QueryVO(0,beginDate1,endDate1), page, PAGE_SIZE)
                     viewModel.doHistoryList(params)
                 }else{
                     var status: Int = 10
@@ -133,10 +136,9 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
                 }
             }
         }
-
         loadmoreUtils?.refresh()
     }
-    fun reflushDatas(beginDate :String?,endDate:String?) {
+    fun reflushDatas(beginDate :Date?,endDate:Date?) {
         this.beginDate = beginDate
         this.endDate = endDate
         loadmoreUtils?.refresh()
