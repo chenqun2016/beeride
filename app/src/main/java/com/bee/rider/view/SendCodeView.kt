@@ -8,13 +8,10 @@ import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import android.view.View
-import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.coroutineScope
 import com.bee.rider.R
 import com.bee.rider.http.LoginApi
@@ -22,13 +19,15 @@ import com.bee.rider.utils.countDownCoroutines
 
 /**
  * @author 陈陈陈
+ *
+ * 验证码 控件
  */
 class SendCodeView : FrameLayout, View.OnClickListener {
     private var mPhoneText: TextView? = null
-    private var mcodeText: TextView? = null
+    private var mCodeText: TextView? = null
     private lateinit var lifecycle: Lifecycle
 
-    private var tv_getcode: TextView? = null
+    private var tvGetCode: TextView? = null
     private var mIsWorking = false
     private var i = 0
     private val clickableColor = R.color.color_3e7dfb
@@ -55,14 +54,37 @@ class SendCodeView : FrameLayout, View.OnClickListener {
 
     private fun init(context: Context, attrs: AttributeSet?) {
         inflate(context, R.layout.view_code, this)
-        tv_getcode = findViewById<View>(R.id.tv_getcode) as TextView
-        tv_getcode!!.setOnClickListener(this)
+        tvGetCode = findViewById<View>(R.id.tv_getcode) as TextView
+        tvGetCode!!.setOnClickListener(this)
+    }
+
+    /**
+     * 初始化   必须调用
+     * @param phoneText：手机号 控件
+     * @param codeText：验证码 控件
+     * @param lifecycle：Activity或者Fragment的 lifecycle
+     */
+    fun initDatas(phoneText: TextView, codeText: TextView, lifecycle: Lifecycle) {
+        this.mPhoneText = phoneText
+        this.mCodeText = codeText
+        setCodeState(false)
+        mPhoneText?.addTextChangedListener(textWatcher)
+        this.lifecycle = lifecycle
+        lifecycle.addObserver(lifeObserver)
+    }
+
+    private val lifeObserver: LifecycleEventObserver = LifecycleEventObserver { source, event ->
+        if (event == Lifecycle.Event.ON_DESTROY) {
+            mPhoneText?.removeTextChangedListener(textWatcher)
+            mPhoneText = null
+            mCodeText = null
+        }
     }
 
     /**
      * 监听手机号空间格式是否正确
      */
-    val textWatcher: TextWatcher = object : TextWatcher {
+    private val textWatcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         }
 
@@ -78,28 +100,6 @@ class SendCodeView : FrameLayout, View.OnClickListener {
         }
     }
 
-    /**
-     * 初始化   必须调用
-     *
-     * @param listener
-     */
-    fun initDatas(phoneText: TextView, codeText: TextView, lifecycle: Lifecycle) {
-        this.mPhoneText = phoneText
-        this.mcodeText = codeText
-        setCodeState(false)
-        mPhoneText?.addTextChangedListener(textWatcher)
-        this.lifecycle = lifecycle
-        lifecycle.addObserver(lifeObserver)
-    }
-
-    private val lifeObserver: LifecycleEventObserver = LifecycleEventObserver { source, event ->
-        if (event == Lifecycle.Event.ON_DESTROY) {
-            mPhoneText?.removeTextChangedListener(textWatcher)
-            mPhoneText = null
-            mcodeText = null
-        }
-    }
-
     override fun onClick(view: View) {
         doGetCode()
     }
@@ -108,12 +108,11 @@ class SendCodeView : FrameLayout, View.OnClickListener {
         hasSendCode = true
         mIsWorking = true
         setCodeState(false)
-        mcodeText?.text = ""
+        mCodeText?.text = ""
         sendCode()
     }
 
     private fun sendCode() {
-        //TODO 请求网络
         if (null == mPhoneText) {
             return
         }
@@ -136,10 +135,10 @@ class SendCodeView : FrameLayout, View.OnClickListener {
                 ForegroundColorSpan(resources.getColor(clickableColor)), 2,
                 strs.length, Spanned.SPAN_EXCLUSIVE_INCLUSIVE
             )
-            tv_getcode!!.text = msp
+            tvGetCode!!.text = msp
         }, onFinish = {
             setCodeState(true)
-            tv_getcode!!.text = "重新发送"
+            tvGetCode!!.text = "重新发送"
             mIsWorking = false
         }, lifecycle.coroutineScope)
     }
@@ -149,10 +148,12 @@ class SendCodeView : FrameLayout, View.OnClickListener {
         setCodeState(true)
     }
 
-    //设置短信验证码的可点击状态，颜色
+    /**
+     * 设置Textview 是否可点击，颜色变换
+     */
     private fun setCodeState(enable: Boolean) {
-        tv_getcode!!.isEnabled = enable
-        tv_getcode!!.setTextColor(
+        tvGetCode!!.isEnabled = enable
+        tvGetCode!!.setTextColor(
             if (enable) resources.getColor(clickableColor) else resources.getColor(
                 unClickableColor
             )

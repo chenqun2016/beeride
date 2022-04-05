@@ -13,10 +13,10 @@ import com.bee.rider.utils.toApiBody
 object NetworkApi : BaseNetworkApi<INetworkService>(Constants.base_url_dis) {
 
     suspend fun homeList(param: OrderListParams) = getResult {
-        service.homeList(param.toApiBody())
+        service.homeList(param.pageNum,param.pageSize,param.queryVO.toApiBody())
     }
     suspend fun historyList(param: OrderListParams) = getResult {
-        service.historyList(param.toApiBody())
+        service.historyList(param.pageNum,param.pageSize,param.queryVO.toApiBody())
     }
     suspend fun orderDetail(id:String) = getResult {
         service.orderDetail(id)

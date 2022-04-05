@@ -7,4 +7,5 @@ package com.chenchen.base.constants
  */
 object HttpConstants {
     val TOKEN = "token"
+    val HORSEMANID = "horsemanId"
 }

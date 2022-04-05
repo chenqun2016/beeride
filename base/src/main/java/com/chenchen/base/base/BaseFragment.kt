@@ -27,7 +27,7 @@ abstract class BaseFragment <VB:ViewBinding> : ImmersionFragment(){
         initOnce(savedInstanceState)
     }
     /**
-     * 因Navigation框架限制，每次跳转新页面都会导致当前页面重走 onCreateView()--onDestroyView()方法
+     * 因Navigation框架限制，每次从当前页面跳转新页面都会导致当前页面重走 onCreateView()--onDestroyView()方法
      *
      * 此方法生命周期里只走一次
      * 用于初始化 viewmodel 等只需要初始化一次的代码

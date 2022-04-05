@@ -2,7 +2,6 @@ package com.bee.rider.ui.order
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -66,9 +65,10 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
     }
 
     private fun initTabViewpager() {
-        val id = arguments?.getString(Constants.ORDERID, "")
+        val id = arguments?.getString(Constants.TAKEOUTID, "")
+        val orderId = arguments?.getString(Constants.ORDERID, "")
         fragment1 = OrderDetailTab1Fragment.newInstance(id)
-        fragment2 = OrderDetailTab2Fragment.newInstance(id)
+        fragment2 = OrderDetailTab2Fragment.newInstance(orderId)
         val tab = binding.tabLayout.newTab()
         tab.text = "订单详细"
         val tab2 = binding.tabLayout.newTab()

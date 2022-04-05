@@ -43,7 +43,18 @@ class PasswordLoginFragment :BaseFragment<FragmentPasswordLoginBinding>(), View.
                 val token = it.getOrNull()
                 if(null != token){
                     MMKVUtils.putString(HttpConstants.TOKEN,token)
-//                    MMKVUtils.putInt(Constants.HORSEMANID,bean.id)
+//                    MMKVUtils.putString(HttpConstants.HORSEMANID,bean.id.toString())
+                    findNavController().navigate(R.id.next_action_home,null, UIUtils.getNavOptions(R.id.code_login_dest))
+                }
+            }
+        })
+        viewModel.passwordLogin2.observe(this,{
+            //登录成功
+            if(it.isSuccess){
+                val bean = it.getOrNull()
+                if(null != bean){
+                    MMKVUtils.putString(HttpConstants.TOKEN,bean.token)
+                    MMKVUtils.putString(HttpConstants.HORSEMANID,bean.id.toString())
                     findNavController().navigate(R.id.next_action_home,null, UIUtils.getNavOptions(R.id.code_login_dest))
                 }
             }
@@ -68,7 +79,7 @@ class PasswordLoginFragment :BaseFragment<FragmentPasswordLoginBinding>(), View.
                 if(null != activity){
                     KeyboardUtils.hideSoftInput(requireActivity())
                 }
-                viewModel.doPasswordLogin(LoginParams(binding.edUserPhone.text.toString(),binding.edUserPass.editTextView.text.toString()))
+                viewModel.doPasswordLogin2(LoginParams(binding.edUserPhone.text.toString(),binding.edUserPass.editTextView.text.toString()))
             }
             R.id.tv_forgetmima -> {
                 findNavController().navigate(R.id.next_action_reset_password,null, options)

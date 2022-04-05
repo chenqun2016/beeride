@@ -3,18 +3,15 @@ package com.bee.rider.http
 import com.bee.rider.bean.*
 import com.chenchen.base.network.base.BaseResponse
 import okhttp3.RequestBody
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface INetworkService {
 
     @POST("app-dis-horseman-takeout/list")
-    suspend fun homeList(@Body body: RequestBody?): BaseResponse<OrderListBean>
+    suspend fun homeList(@Query("pageNum") pageNum:Int, @Query("pageSize") pageSize:Int, @Body body: RequestBody?): BaseResponse<OrderListBean>
 
     @POST("app-dis-horseman-takeout/historyList")
-    suspend fun historyList(@Body body: RequestBody?): BaseResponse<OrderListBean>
+    suspend fun historyList(@Query("pageNum") pageNum:Int, @Query("pageSize") pageSize:Int, @Body body: RequestBody?): BaseResponse<OrderListBean>
 
     @GET("app-dis-horseman-takeout/get/{takeoutId}")
     suspend fun orderDetail(@Path("takeoutId") takeoutId:String): BaseResponse<OrderDetailBean>

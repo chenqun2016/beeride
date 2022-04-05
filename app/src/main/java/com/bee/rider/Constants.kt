@@ -9,7 +9,10 @@ import java.text.SimpleDateFormat
  * 功能描述：
  */
 object Constants {
+    //TODO 测试用
+    const val base_url2 = "http://dev-beeweb2.quxianfeng.vip:15889/bee-member-zuul-gateway/dis-center/"
     private const val base_url = "http://dev-bee-horseman-zuul-gateway.quxianfeng.vip:15889/"
+    //登录
     const val base_url_uaa = "${base_url}api-uaa/"
     const val base_url_dis = "${base_url}api-dis/"
 
@@ -47,8 +50,7 @@ object Constants {
     var ITEMRESULT = "itemResult"
 
     //订单id
+    var TAKEOUTID = "takeoutId"
+    //订单id
     var ORDERID = "orderId"
-
-    //骑手id
-    var HORSEMANID = "horsemanid"
 }

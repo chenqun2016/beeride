@@ -2,7 +2,6 @@ package com.bee.rider.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -14,7 +13,6 @@ import com.chad.library.adapter.base.listener.OnItemChildLongClickListener
 import com.chenchen.base.base.BaseFragment
 import com.chenchen.base.utils.LoadmoreUtils
 import com.bee.rider.R
-import com.bee.rider.bean.OrderBean
 import com.bee.rider.bean.OrderListBean
 import com.bee.rider.databinding.ModelRecyclerviewBinding
 import com.bee.rider.http.NetworkApi
@@ -24,8 +22,8 @@ import com.bee.rider.params.QueryVO
 import com.bee.rider.ui.adapter.HomeOrderAdapter
 import com.bee.rider.utils.options
 import com.bee.rider.vm.HomeViewModel
+import com.chenchen.base.constants.HttpConstants
 import com.chenchen.base.utils.MMKVUtils
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 /**
@@ -92,7 +90,8 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
         adapter.setType(type)
         adapter.setOnItemClickListener { a, _, position ->
             val args = Bundle()
-            args.putString(Constants.ORDERID, adapter.data[position].takeoutId.toString())
+            args.putString(Constants.TAKEOUTID, adapter.data[position].takeoutId.toString())
+            args.putString(Constants.ORDERID, adapter.data[position].orderId.toString())
             findNavController().navigate(R.id.order_detail_dest, args, options)
         }
         adapter.addChildLongClickViewIds(R.id.tv_accept)
@@ -100,7 +99,7 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
             if (view.id == R.id.tv_accept) {
                 val recordsBean = adapter.data[position]
 
-                val param = InitiativeCreateParams(MMKVUtils.getInt(Constants.HORSEMANID,0),recordsBean.takeoutId,recordsBean.takeoutId)
+                val param = InitiativeCreateParams(MMKVUtils.getString(HttpConstants.HORSEMANID,""),recordsBean.takeoutId,recordsBean.takeoutId)
                 viewModel.viewModelScope.launch {
                     val it = NetworkApi.initiativeCreate(param)
                     if (it.isSuccess) {

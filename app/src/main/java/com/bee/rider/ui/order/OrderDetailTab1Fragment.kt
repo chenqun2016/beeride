@@ -27,6 +27,7 @@ import com.bee.rider.utils.UIUtils
 import com.bee.rider.utils.startAlphaAnim
 import com.bee.rider.vm.OrderDetailViewModel
 import com.chenchen.base.base.BaseFragment
+import com.chenchen.base.constants.HttpConstants
 import com.chenchen.base.utils.DisplayUtil
 import com.chenchen.base.utils.LiveDataBus
 import com.chenchen.base.utils.MMKVUtils
@@ -46,7 +47,7 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
     companion object{
         fun newInstance(id: String?): OrderDetailTab1Fragment{
             val args = Bundle()
-            args.putString(Constants.ORDERID, id)
+            args.putString(Constants.TAKEOUTID, id)
             val fragment = OrderDetailTab1Fragment()
             fragment.arguments = args
             return fragment
@@ -87,7 +88,7 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.tv_accept -> {
-                val param = InitiativeCreateParams(MMKVUtils.getInt(Constants.HORSEMANID,0),mData?.disTakeout?.id,mData?.disTakeout?.id)
+                val param = InitiativeCreateParams(MMKVUtils.getString(HttpConstants.HORSEMANID,""),mData?.disTakeout?.id,mData?.disTakeout?.id)
                 viewModel.viewModelScope.launch {
                     val it = NetworkApi.initiativeCreate(param)
                     if (it.isSuccess) {
@@ -138,7 +139,7 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
         })
 
 
-        val id = arguments?.getString(Constants.ORDERID)
+        val id = arguments?.getString(Constants.TAKEOUTID)
         viewModel.doOrderDetail(id+"")
     }
 

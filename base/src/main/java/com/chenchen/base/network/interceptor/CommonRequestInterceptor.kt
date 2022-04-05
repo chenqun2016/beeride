@@ -13,8 +13,11 @@ class CommonRequestInterceptor : Interceptor {
         // 这里添加公共请求头
         builder.addHeader("brand", Build.BRAND)
         builder.addHeader("model", Build.MODEL)
+
+        builder.addHeader("x-user-header", "test1")
         //TODO token
-//        builder.addHeader("Authorization", MMKVUtils.getString(HttpConstants.TOKEN,""))
+        builder.addHeader("Authorization", MMKVUtils.getString(HttpConstants.TOKEN,""))
+        builder.addHeader("horsemanId", MMKVUtils.getString(HttpConstants.HORSEMANID,""))
 
         return chain.proceed(builder.build())
     }

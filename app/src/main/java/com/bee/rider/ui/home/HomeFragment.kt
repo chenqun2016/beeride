@@ -25,7 +25,7 @@ import com.gyf.immersionbar.ImmersionBar
 /**
  * 创建时间：2022/1/3
  * @Author： 陈陈陈
- * 功能描述：
+ * 功能描述：首页
  */
 class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener {
 
@@ -36,6 +36,9 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
     ): FragmentHome2Binding {
         return FragmentHome2Binding.inflate(inflater, container, false)
     }
+
+    private var selectedPosition = 0
+
     override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
@@ -84,7 +87,7 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
             }
         })
         binding.tabLayout.post {
-            binding.tabLayout.getTabAt(0)?.select()
+            binding.tabLayout.getTabAt(selectedPosition)?.select()
         }
 
         val toolbarHeight = DisplayUtil.dip2px(context,64f)
@@ -94,6 +97,11 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
             binding.ivBg.translationY = rate * diff
         })
         binding.collapsing.setContentScrimColor(resources.getColor(R.color.color_FF6600))
+    }
+
+    override fun onDestroyView() {
+        selectedPosition = binding.tabLayout.selectedTabPosition
+        super.onDestroyView()
     }
 
     override fun onClick(v: View?) {

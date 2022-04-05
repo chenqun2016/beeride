@@ -10,9 +10,10 @@ import com.chenchen.base.network.base.BaseNetworkApi
  * 创建时间：2022/4/2
  * 编写人： 陈陈陈
  * 功能描述：
+ *
+ *   base_url_uaa
  */
 object LoginApi : BaseNetworkApi<ILoginService>(Constants.base_url_uaa) {
-
     suspend fun login(param: LoginParams) = getResult {
         service.login(param.toApiBody())
     }

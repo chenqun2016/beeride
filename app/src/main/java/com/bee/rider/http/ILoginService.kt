@@ -22,7 +22,6 @@ import retrofit2.http.Path
 /api-uaa/validata/smsCode/{mobile}
  */
 interface ILoginService {
-
     @POST("member/login/password")
     suspend fun login(@Body body: RequestBody?): BaseResponse<String>
 
