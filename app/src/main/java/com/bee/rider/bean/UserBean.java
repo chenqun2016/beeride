@@ -9,43 +9,46 @@ import java.util.List;
  * 功能描述：
  */
 public class UserBean {
+
     public int id;
-    public String username;
-    public Object password;
-    public String nickname;
-    public String phone;
-    public int status;
+    public String accountNo;
+    public int levelId;
+    public String password;
+    public int type;
+    public int authType;
+    public int isWork;
+    public String name;
+    public int sex;
+    public String linkPhone;
+    public String idCard;
+    public String buildingArea;
+    public Object aid;
+    public int province;
+    public int city;
+    public int district;
+    public Object buildingId;
+    public int buildingAreaId;
+    public int areaId;
+    public String emergencyContactName;
+    public String emergencyContactPhone;
+    public String emergencyContactAddress;
+    public String emergencyContactRelationship;
+    public Object status;
     public String createTime;
-    public String icon;
-    public int gender;
-    public String birthday;
-    public String city;
-    public String job;
-    public String personalizedSignature;
-    public Object sourceType;
-    public String integration;
-    public Object historyIntegration;
-    public Object growth;
-    public Object invitecode;
-    public Object blance;
-    public Object buyCount;
-    public Object buyMoney;
-    public Object luckeyCount;
-    public int memberLevelId;
-    public String memberLevelName;
-    public Object avatar;
-    public Object weixinOpenid;
-    public Object confimpassword;
-    public Object phonecode;
-    public Object code;
-    public Boolean enabled;
-    public Object userId;
-    public List<?> authorities;
-    public Boolean accountNonExpired;
-    public Boolean accountNonLocked;
-    public Boolean credentialsNonExpired;
-    public String payPasswordFlag;
-    public String levelIcon;
     public String levelName;
+    public Object transactionAmount;
+    public int orderCount;
+    public int userData;
+    public int returnCount;
+    public int loginTimes;
+    public List<PictureList> pictureList;
+    public String token;
+
+    public static class PictureList {
+        public int id;
+        public int horsemanId;
+        public int fileId;
+        public String type;
+    }
 }
 

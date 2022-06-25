@@ -12,7 +12,9 @@ import com.bee.rider.R
 import com.bee.rider.databinding.FragmentSystemSettingBinding
 import com.bee.rider.utils.CacheDataManager
 import com.bee.rider.utils.DeviceUtils
+import com.bee.rider.utils.UIUtils
 import com.bee.rider.utils.options
+import com.chenchen.base.utils.MMKVUtils
 import com.gyf.immersionbar.ImmersionBar
 
 /**
@@ -42,6 +44,7 @@ class SystemSettingFragment : BaseFragment<FragmentSystemSettingBinding>(), View
         binding.tvServiceAgreement.setOnClickListener(this)
         binding.llVersion.setOnClickListener(this)
         binding.tvAbout.setOnClickListener(this)
+        binding.tvLoginOut.setOnClickListener(this)
     }
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -81,6 +84,10 @@ class SystemSettingFragment : BaseFragment<FragmentSystemSettingBinding>(), View
             }
 
             R.id.tv_about ->  findNavController().navigate(R.id.about_fresh_bee,null, options)
+            R.id.tv_login_out -> {
+                MMKVUtils.clearAll()
+                findNavController().navigate(R.id.code_login_dest,null, UIUtils.getNavOptions(R.id.home_dest))
+            }
         }
     }
 

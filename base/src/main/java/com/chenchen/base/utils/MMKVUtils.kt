@@ -2,7 +2,11 @@ package com.chenchen.base.utils
 
 import android.app.Application
 import android.os.Parcelable
+import android.text.TextUtils
+import com.chenchen.base.constants.HttpConstants
+import com.google.gson.Gson
 import com.tencent.mmkv.MMKV
+
 
 /**
  * 本类为MMKV的封装类，防止代码入侵
@@ -83,5 +87,21 @@ object MMKVUtils {
 
     inline fun <reified T : Parcelable> getParcelable( key: String): T? {
         return MMKV.defaultMMKV().decodeParcelable(key, T::class.java)
+    }
+
+    fun putObject(bean: Any): Boolean {
+        return MMKV.defaultMMKV().encode(bean.javaClass.name, Gson().toJson(bean))
+    }
+
+    fun <T> getObject(key: Class<T>): T? {
+        val v: String? = MMKV.defaultMMKV().decodeString(key.name, "")
+        if (!TextUtils.isEmpty(v)) {
+            return Gson().fromJson(v, key)
+        }
+        return null
+    }
+
+    fun clearAll(){
+        MMKV.defaultMMKV().clearAll()
     }
 }

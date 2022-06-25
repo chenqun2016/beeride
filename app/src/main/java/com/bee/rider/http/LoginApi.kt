@@ -13,16 +13,24 @@ import com.chenchen.base.network.base.BaseNetworkApi
  *
  *   base_url_uaa
  */
-object LoginApi : BaseNetworkApi<ILoginService>(Constants.base_url_uaa) {
+object LoginApi : BaseNetworkApi<ILoginService>(Constants.base_url_login) {
+    /**
+     * 密码登录
+     */
     suspend fun login(param: LoginParams) = getResult {
         service.login(param.toApiBody())
     }
-
+    /**
+     * 验证码登录
+     */
     suspend fun loginSmscode(param: SmsCodeLoginParams) = getResult {
         service.loginSmscode(param.toApiBody())
     }
-
+    /**
+     * 发送验证码
+     */
     suspend fun smsCode(mobile: String) = getResult {
         service.smsCode(mobile)
     }
+
 }

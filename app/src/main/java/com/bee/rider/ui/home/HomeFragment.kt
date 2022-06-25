@@ -1,7 +1,6 @@
 package com.bee.rider.ui.home
 
 import android.graphics.Typeface
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -12,15 +11,18 @@ import androidx.navigation.fragment.findNavController
 import com.chenchen.base.base.BaseFragment
 import com.chenchen.base.utils.DisplayUtil
 import com.bee.rider.R
+import com.bee.rider.bean.UserBean
 import com.bee.rider.databinding.FragmentHome2Binding
 import com.bee.rider.ui.adapter.HomeAdapter
+import com.bee.rider.utils.PicassoRoundTransform
 import com.bee.rider.utils.UIUtils
 import com.bee.rider.utils.options
+import com.chenchen.base.utils.MMKVUtils
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
-import com.gyf.immersionbar.ImmersionBar
+import com.squareup.picasso.Picasso
 
 /**
  * 创建时间：2022/1/3
@@ -97,6 +99,31 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
             binding.ivBg.translationY = rate * diff
         })
         binding.collapsing.setContentScrimColor(resources.getColor(R.color.color_FF6600))
+
+        setUserInfo()
+    }
+
+    /**
+     * 设置显示用户信息
+     */
+    private fun setUserInfo() {
+        val userBean = MMKVUtils.getObject(UserBean::class.java)
+        if(null != userBean){
+//            Picasso.with(context)
+//                .load(userBean.)
+//                .fit()
+//                .transform(
+//                    PicassoRoundTransform(
+//                        DisplayUtil.dip2px(context, 100f),
+//                        0,
+//                        PicassoRoundTransform.CornerType.ALL
+//                    )
+//                )
+//                .into(binding.ivIcon)
+            binding.tvName.text = userBean.name
+            binding.ivIconWork.setImageResource(if(userBean.isWork == 1) R.drawable.icon_working else R.drawable.icon_rest)
+            binding.tvWork.text = if(userBean.isWork == 1) "工作中" else "休息中"
+        }
     }
 
     override fun onDestroyView() {

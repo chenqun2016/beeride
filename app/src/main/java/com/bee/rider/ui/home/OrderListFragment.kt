@@ -66,7 +66,7 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
                 if (null != bean) {
                     loadmoreUtils?.onSuccess(bean.records)
                 }else{
-                    loadmoreUtils?.onFail("")
+                    loadmoreUtils?.onSuccess(listOf())
                 }
             } else {
                 loadmoreUtils?.onFail(it.exceptionOrNull()?.message)
@@ -79,7 +79,7 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
                 if (null != bean) {
                     loadmoreUtils?.onSuccess(bean.records)
                 }else{
-                    loadmoreUtils?.onFail("")
+                    loadmoreUtils?.onSuccess(listOf())
                 }
             } else {
                 loadmoreUtils?.onFail(it.exceptionOrNull()?.message)
@@ -100,7 +100,7 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
             if (view.id == R.id.tv_accept) {
                 val recordsBean = adapter.data[position]
 
-                val param = InitiativeCreateParams(MMKVUtils.getString(HttpConstants.HORSEMANID,""),recordsBean.takeoutId,recordsBean.takeoutId)
+                val param = InitiativeCreateParams(recordsBean.takeoutId,recordsBean.takeoutId)
                 viewModel.viewModelScope.launch {
                     val it = NetworkApi.initiativeCreate(param)
                     if (it.isSuccess) {

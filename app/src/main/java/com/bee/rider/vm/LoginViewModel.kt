@@ -3,11 +3,12 @@ package com.bee.rider.vm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bee.rider.bean.LoginBean
+import com.bee.rider.http.CenterApi
 import com.bee.rider.http.LoginApi
-import com.bee.rider.http.LoginApiTest
 import com.bee.rider.params.LoginParams
 import com.bee.rider.params.SmsCodeLoginParams
+import com.chenchen.base.constants.HttpConstants
+import com.chenchen.base.utils.MMKVUtils
 import kotlinx.coroutines.launch
 
 /**
@@ -21,23 +22,10 @@ class LoginViewModel : ViewModel(){
      */
     val passwordLogin : MutableLiveData<Result<String?>> = MutableLiveData()
     fun doPasswordLogin(param: LoginParams){
-        param.username = "test1"
-        param.password = "123456"
         viewModelScope.launch {
-            val result = LoginApi.login(param)
-            passwordLogin.value = result
-        }
-    }
-    /**
-     * 密码登录 测试
-     */
-    val passwordLogin2 : MutableLiveData<Result<LoginBean?>> = MutableLiveData()
-    fun doPasswordLogin2(param: LoginParams){
-        param.username = "test01"
-        param.password = "123456"
-        viewModelScope.launch {
-            val result = LoginApiTest.login2(param)
-            passwordLogin2.value = result
+            val tokenR = LoginApi.login(param)
+            putLoginDatas(tokenR)
+            passwordLogin.value = tokenR
         }
     }
 
@@ -48,7 +36,27 @@ class LoginViewModel : ViewModel(){
     fun doSmsLogin(param: SmsCodeLoginParams){
         viewModelScope.launch {
             val result = LoginApi.loginSmscode(param)
+            putLoginDatas(result)
             smsLogin.value = result
+        }
+    }
+
+    /**
+     * 保存登录信息
+     */
+    private suspend fun putLoginDatas(tokenR: Result<String?>) {
+        if(tokenR.isSuccess){
+            val token = tokenR.getOrNull()
+            if(null != token){
+                MMKVUtils.putString(HttpConstants.TOKEN,token)
+                val userDetail = CenterApi.getUserDetail()
+                if(userDetail.isSuccess){
+                    val userBean = userDetail.getOrNull()
+                    if(null != userBean){
+                        MMKVUtils.putObject(userBean)
+                    }
+                }
+            }
         }
     }
 }

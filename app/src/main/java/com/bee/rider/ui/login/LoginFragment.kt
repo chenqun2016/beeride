@@ -24,7 +24,7 @@ import com.chenchen.base.utils.MMKVUtils
 /**
  * 创建时间：2022/1/22
  * @Author： 陈陈陈
- * 功能描述：
+ * 功能描述：验证码登录
  */
 class LoginFragment : BaseFragment<FragmentCodeLoginBinding>(), View.OnClickListener {
     private val viewModel: LoginViewModel by viewModels()
@@ -58,6 +58,9 @@ class LoginFragment : BaseFragment<FragmentCodeLoginBinding>(), View.OnClickList
         binding.tvAgree.setButtonClickableBy(binding.edUserPhone,binding.edUserCode,other = binding.codeText)
         UIUtils.setXieYiText(this,binding.tvXieyi)
 
+        //TODO 测试账号
+        binding.edUserPhone.setText("18800000000")
+        binding.edUserCode.setText("123456")
     }
 
     override fun onClick(v: View?) {

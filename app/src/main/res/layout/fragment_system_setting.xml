@@ -3,166 +3,204 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-        <androidx.appcompat.widget.LinearLayoutCompat
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_F5F5F5"
+        android:orientation="vertical">
+
+        <com.bee.rider.view.TitleView
+            android:id="@+id/titleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:contentColor="black"
+            app:title="系统设置" />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/color_F5F5F5">
-            <com.bee.rider.view.TitleView
-                android:id="@+id/titleView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:contentColor="black"
-                app:title="系统设置" />
+            android:layout_height="wrap_content">
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp"
-                android:paddingStart="10dp"
-                android:paddingRight="10dp"
-                android:orientation="vertical"
-                android:background="@drawable/bg_round10dp_white"
-                >
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_password_set"
-                    android:layout_width="match_parent"
-                    android:layout_height="62dp"
-                    android:gravity="center_vertical"
-                    android:drawableRight="@drawable/icon_link"
-                    android:textColor="@color/color_282626"
-                    android:textSize="16sp"
-                    android:text="设置密码"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/color_F5F5F5"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_order_set"
-                    android:layout_width="match_parent"
-                    android:layout_height="62dp"
-                    android:gravity="center_vertical"
-                    android:drawableRight="@drawable/icon_link"
-                    android:textColor="@color/color_282626"
-                    android:textSize="16sp"
-                    android:text="订单设置"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/color_F5F5F5"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_notification_set"
-                    android:layout_width="match_parent"
-                    android:layout_height="62dp"
-                    android:gravity="center_vertical"
-                    android:drawableRight="@drawable/icon_link"
-                    android:textColor="@color/color_282626"
-                    android:textSize="16sp"
-                    android:text="通知与提示音设置"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/color_F5F5F5"/>
+                android:orientation="vertical">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/ll_clear_cache"
                     android:layout_width="match_parent"
-                    android:layout_height="62dp"
-                    android:gravity="center_vertical">
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/color_282626"
-                        android:textSize="16sp"
-                        android:text="清除缓存"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bg_round10dp_white"
+                    android:orientation="vertical"
+                    android:paddingStart="10dp"
+                    android:paddingRight="10dp">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_cache_text"
+                        android:id="@+id/tv_password_set"
                         android:layout_width="match_parent"
-                        android:gravity="right"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/color_9E9E9E"
+                        android:layout_height="62dp"
                         android:drawableRight="@drawable/icon_link"
-                        android:drawablePadding="10dp"
-                        android:textSize="16sp"
-                        android:text="233MB"/>
-                </androidx.appcompat.widget.LinearLayoutCompat>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/color_F5F5F5"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_privacy"
-                    android:layout_width="match_parent"
-                    android:layout_height="62dp"
-                    android:gravity="center_vertical"
-                    android:drawableRight="@drawable/icon_link"
-                    android:textColor="@color/color_282626"
-                    android:textSize="16sp"
-                    android:text="隐私政策"/>
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/color_F5F5F5"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_service_agreement"
-                    android:layout_width="match_parent"
-                    android:layout_height="62dp"
-                    android:gravity="center_vertical"
-                    android:drawableRight="@drawable/icon_link"
-                    android:textColor="@color/color_282626"
-                    android:textSize="16sp"
-                    android:text="服务协议"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/color_F5F5F5"/>
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/ll_version"
-                    android:layout_width="match_parent"
-                    android:layout_height="62dp"
-                    android:gravity="center_vertical">
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="设置密码"
                         android:textColor="@color/color_282626"
-                        android:textSize="16sp"
-                        android:text="版本更新"/>
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/color_F5F5F5" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_version_text"
+                        android:id="@+id/tv_order_set"
                         android:layout_width="match_parent"
-                        android:gravity="right"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/color_9E9E9E"
+                        android:layout_height="62dp"
                         android:drawableRight="@drawable/icon_link"
-                        android:drawablePadding="10dp"
-                        android:textSize="16sp"
-                        android:text=""/>
+                        android:gravity="center_vertical"
+                        android:text="订单设置"
+                        android:textColor="@color/color_282626"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/color_F5F5F5" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_notification_set"
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        android:drawableRight="@drawable/icon_link"
+                        android:gravity="center_vertical"
+                        android:text="通知与提示音设置"
+                        android:textColor="@color/color_282626"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/color_F5F5F5" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/ll_clear_cache"
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        android:gravity="center_vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="清除缓存"
+                            android:textColor="@color/color_282626"
+                            android:textSize="16sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_cache_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/icon_link"
+                            android:drawablePadding="10dp"
+                            android:gravity="right"
+                            android:text="233MB"
+                            android:textColor="@color/color_9E9E9E"
+                            android:textSize="16sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/color_F5F5F5" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_privacy"
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        android:drawableRight="@drawable/icon_link"
+                        android:gravity="center_vertical"
+                        android:text="隐私政策"
+                        android:textColor="@color/color_282626"
+                        android:textSize="16sp" />
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/color_F5F5F5" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_service_agreement"
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        android:drawableRight="@drawable/icon_link"
+                        android:gravity="center_vertical"
+                        android:text="服务协议"
+                        android:textColor="@color/color_282626"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/color_F5F5F5" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/ll_version"
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        android:gravity="center_vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="版本更新"
+                            android:textColor="@color/color_282626"
+                            android:textSize="16sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_version_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/icon_link"
+                            android:drawablePadding="10dp"
+                            android:gravity="right"
+                            android:text=""
+                            android:textColor="@color/color_9E9E9E"
+                            android:textSize="16sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/color_F5F5F5" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_about"
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        android:drawableRight="@drawable/icon_link"
+                        android:gravity="center_vertical"
+                        android:text="关于趣鲜蜂"
+                        android:textColor="@color/color_282626"
+                        android:textSize="16sp" />
+
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/color_F5F5F5"/>
-
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_about"
+                    android:id="@+id/tv_login_out"
                     android:layout_width="match_parent"
-                    android:layout_height="62dp"
-                    android:gravity="center_vertical"
-                    android:drawableRight="@drawable/icon_link"
-                    android:textColor="@color/color_282626"
-                    android:textSize="16sp"
-                    android:text="关于趣鲜蜂"/>
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/bg_round10dp_white"
+                    android:gravity="center"
+                    android:text="安全退出"
+                    android:textColor="@color/color_FF6100"
+                    android:textSize="16sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </ScrollView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </FrameLayout>

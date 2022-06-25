@@ -12,7 +12,7 @@ public class OrderDetailTraceBean {
 
     public String createName;
     public Date createTime;
-    public int orderId;
+    public long orderId;
     public String orderStatus;
     public String orderStatusName;
 }

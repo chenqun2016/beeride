@@ -6,6 +6,7 @@ import com.chenchen.base.BuildConfig
 import com.chenchen.base.network.NetworkException
 import com.chenchen.base.network.interceptor.CommonRequestInterceptor
 import com.chenchen.base.network.interceptor.CommonResponseInterceptor
+import com.chenchen.base.utils.d
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -63,6 +64,7 @@ abstract class BaseNetworkApi<I>(private val baseUrl: String) : IService<I> {
              }
         } catch (throwable: Throwable) {
              Toast.makeText(AppGlobals.getApplication(),throwable.message,Toast.LENGTH_SHORT).show()
+             d("throwable",throwable.message+"")
              return Result.failure(throwable)
         }
     }

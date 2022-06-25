@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 /**
  * 创建时间：2022/1/22
  * @Author： 陈陈陈
- * 功能描述：
+ * 功能描述：密码登录
  */
 class PasswordLoginFragment :BaseFragment<FragmentPasswordLoginBinding>(), View.OnClickListener {
     private val viewModel: LoginViewModel by viewModels()
@@ -42,19 +42,6 @@ class PasswordLoginFragment :BaseFragment<FragmentPasswordLoginBinding>(), View.
             if(it.isSuccess){
                 val token = it.getOrNull()
                 if(null != token){
-                    MMKVUtils.putString(HttpConstants.TOKEN,token)
-//                    MMKVUtils.putString(HttpConstants.HORSEMANID,bean.id.toString())
-                    findNavController().navigate(R.id.next_action_home,null, UIUtils.getNavOptions(R.id.code_login_dest))
-                }
-            }
-        })
-        viewModel.passwordLogin2.observe(this,{
-            //登录成功
-            if(it.isSuccess){
-                val bean = it.getOrNull()
-                if(null != bean){
-                    MMKVUtils.putString(HttpConstants.TOKEN,bean.token)
-                    MMKVUtils.putString(HttpConstants.HORSEMANID,bean.id.toString())
                     findNavController().navigate(R.id.next_action_home,null, UIUtils.getNavOptions(R.id.code_login_dest))
                 }
             }
@@ -68,6 +55,10 @@ class PasswordLoginFragment :BaseFragment<FragmentPasswordLoginBinding>(), View.
 
         binding.tvAgree.setButtonClickableBy(binding.edUserPhone,binding.edUserPass.editTextView)
         UIUtils.setXieYiText(this,binding.tvXieyi)
+
+        //TODO 测试账号
+        binding.edUserPhone.setText("test01")
+        binding.edUserPass.editTextView.setText("123456")
     }
 
     override fun onClick(v: View?) {
@@ -79,7 +70,7 @@ class PasswordLoginFragment :BaseFragment<FragmentPasswordLoginBinding>(), View.
                 if(null != activity){
                     KeyboardUtils.hideSoftInput(requireActivity())
                 }
-                viewModel.doPasswordLogin2(LoginParams(binding.edUserPhone.text.toString(),binding.edUserPass.editTextView.text.toString()))
+                viewModel.doPasswordLogin(LoginParams(binding.edUserPhone.text.toString(),binding.edUserPass.editTextView.text.toString()))
             }
             R.id.tv_forgetmima -> {
                 findNavController().navigate(R.id.next_action_reset_password,null, options)

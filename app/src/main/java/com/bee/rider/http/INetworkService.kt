@@ -7,22 +7,22 @@ import retrofit2.http.*
 
 interface INetworkService {
 
-    @POST("app-dis-horseman-takeout/list")
+    @POST("orderTakeout/getTakeoutOrder")
     suspend fun homeList(@Query("pageNum") pageNum:Int, @Query("pageSize") pageSize:Int, @Body body: RequestBody?): BaseResponse<OrderListBean>
 
-    @POST("app-dis-horseman-takeout/historyList")
+    @POST("orderTakeout/historyList")
     suspend fun historyList(@Query("pageNum") pageNum:Int, @Query("pageSize") pageSize:Int, @Body body: RequestBody?): BaseResponse<OrderListBean>
 
-    @GET("app-dis-horseman-takeout/get/{takeoutId}")
+    @GET("orderTakeout/get/{takeoutId}")
     suspend fun orderDetail(@Path("takeoutId") takeoutId:String): BaseResponse<OrderDetailBean>
 
-
-    @POST("dis-horseman-takeout/initiativeCreate")
+    //骑手接单/取货/送达
+    @POST("disOrder/horsrmanAcceptOrder")
     suspend fun initiativeCreate(@Body body: RequestBody?): BaseResponse<Any>
     @POST("app-sys/appUpdateInfo")
     suspend fun appUpdateInfo(@Body body: RequestBody?): BaseResponse<AppUpdateInfoBean>
 
-    @GET("app-dis-horseman-takeout/getOperateHistory/{orderId}")
+    @GET("orderTakeout/getOperateHistory/{orderId}")
     suspend fun getOperateHistory(@Path("orderId") orderId:String?): BaseResponse<List<OrderDetailTraceBean>>
 
 }

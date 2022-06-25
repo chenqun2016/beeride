@@ -1,6 +1,7 @@
 package com.bee.rider.ui.adapter
 
 import android.view.View
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.Group
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
@@ -26,15 +27,24 @@ class HomeOrderAdapter() : BaseQuickAdapter<OrderListBean.RecordsBean, BaseViewH
                 holder.getView<Group>(R.id.id_order_detail_gone).visibility = View.VISIBLE
             }
         }
-        holder.getView<View>(R.id.tv_accept).visibility = if(mType == 0) View.VISIBLE else View.GONE
+        val accept = holder.getView<AppCompatTextView>(R.id.tv_accept)
+        //历史订单列表中隐藏
+        accept.visibility = if(mType == 0) View.VISIBLE else View.GONE
+        //TODO  缺少订单状态字段
+        when(mType){
+            0 -> accept.text = "长按接单"
+            1 -> accept.text = "长按确认已取货"
+            2 -> accept.text = "长按确认已送达"
+        }
+
         holder.setText(R.id.tv_right,"#${item.floor}")
-        holder.setText(R.id.tv_time,"${item.expectedTime}前送达")
         holder.setText(R.id.tv_store_name, item.storeName)
         holder.setText(R.id.tv_store_address, item.storeAddressDetail)
         holder.setText(R.id.tv_customer_address, item.detailAddress)
         holder.setText(R.id.tv_customer_name_phone,"${item.linkman}/${item.phone}")
         holder.setText(R.id.tv_store_name, item.storeName)
         //TODO
+        holder.setText(R.id.tv_time,"${item.expectedTime}前送达")
         holder.setText(R.id.tv_time_2,"(系统派送)")
         holder.setText(R.id.tv_store_distance,"距离1.5km")
         holder.setText(R.id.tv_customer_distance, "距离1.5km")

@@ -22,7 +22,7 @@ public class OrderListBean {
         public int id;
         public int horsemanId;
         public int takeoutId;
-        public int orderId;
+        public long orderId;
         public String deliverySn;
         public Object expectedTime;
         public Object accomplishTime;

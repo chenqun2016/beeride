@@ -123,7 +123,7 @@ public class OrderDetailBean {
         public int id;
         public String allocationRuleId;
         public String sorterSn;
-        public int orderId;
+        public long orderId;
         public Object storeId;
         public Object storeName;
         public int deliveryAddressId;
@@ -143,7 +143,7 @@ public class OrderDetailBean {
 
     public static class OrderItemListBean {
         public int id;
-        public int orderId;
+        public long orderId;
         public String orderSn;
         public int productId;
         public int flashSaleGoodsId;
@@ -181,7 +181,7 @@ public class OrderDetailBean {
 
     public static class HistoryListBean {
         public int id;
-        public int orderId;
+        public long orderId;
         public int orderItemId;
         public String operateMan;
         public String orderStatus;

@@ -4,9 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bee.rider.bean.AppUpdateInfoBean
-import com.bee.rider.bean.LoginBean
 import com.bee.rider.http.NetworkApi
-import com.bee.rider.params.LoginParams
 import com.bee.rider.params.UpdateInfoParams
 import kotlinx.coroutines.launch
 

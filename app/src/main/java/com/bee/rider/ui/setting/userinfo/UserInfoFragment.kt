@@ -42,19 +42,19 @@ class UserInfoFragment : BaseFragment<FragmentUserinfoBinding>(), View.OnClickLi
         val gString = MMKVUtils.getString(Constants.USER_INFO, "")
         val userInfo = Gson().fromJson(gString, UserBean::class.java)
         if (null != userInfo) {
-            if (!TextUtils.isEmpty(userInfo.icon)) {
-                Picasso.with(context)
-                    .load(userInfo.icon)
-                    .fit()
-                    .transform(
-                        PicassoRoundTransform(
-                            DisplayUtil.dip2px(context, 100f),
-                            0,
-                            PicassoRoundTransform.CornerType.ALL
-                        )
-                    )
-                    .into(binding.tvIcon)
-            }
+//            if (!TextUtils.isEmpty(userInfo.icon)) {
+//                Picasso.with(context)
+//                    .load(userInfo.icon)
+//                    .fit()
+//                    .transform(
+//                        PicassoRoundTransform(
+//                            DisplayUtil.dip2px(context, 100f),
+//                            0,
+//                            PicassoRoundTransform.CornerType.ALL
+//                        )
+//                    )
+//                    .into(binding.tvIcon)
+//            }
             binding.tvMingchengText.text = ""
             binding.tvGonghaoText.text = ""
             binding.tvXingbieText.text = ""

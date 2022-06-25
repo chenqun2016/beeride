@@ -10,11 +10,15 @@ import java.text.SimpleDateFormat
  */
 object Constants {
     //TODO 测试用
-    const val base_url2 = "http://dev-beeweb2.quxianfeng.vip:15889/bee-member-zuul-gateway/dis-center/"
-    private const val base_url = "http://dev-bee-horseman-zuul-gateway.quxianfeng.vip:15889/"
+    const val base_url2 = "http://dev-beeweb2.quxianfeng.vip:15889/bee-member-zuul-gateway/"
+//    private const val base_url = "http://dev-bee-horseman-zuul-gateway.quxianfeng.vip:15889/"
+
     //登录
-    const val base_url_uaa = "${base_url}api-uaa/"
-    const val base_url_dis = "${base_url}api-dis/"
+//    const val base_url_uaa = "${base_url}api-uaa/"
+//    const val base_url_center = "${base_url2}dis-center/"
+
+    const val base_url_login = "${base_url2}api-uaa/"
+    const val base_url_dis = "${base_url2}api-dis/"
 
     //    隐私权政策
     const val agreement_privacy = "http://www.quxianfeng.vip/yhyszc.html"
@@ -55,4 +59,7 @@ object Constants {
     var TAKEOUTID = "takeoutId"
     //订单id
     var ORDERID = "orderId"
+
+    //用户
+    var USER = "user"
 }

@@ -1,6 +1,5 @@
 package com.bee.rider.http
 
-import com.bee.rider.bean.LoginBean
 import com.chenchen.base.network.base.BaseResponse
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -22,13 +21,13 @@ import retrofit2.http.Path
 /api-uaa/validata/smsCode/{mobile}
  */
 interface ILoginService {
-    @POST("member/login/password")
+    @POST("horseman/login/password")
     suspend fun login(@Body body: RequestBody?): BaseResponse<String>
 
-    @POST("member/login/smscode")
+    @POST("horseman/login/smscode")
     suspend fun loginSmscode(@Body body: RequestBody?): BaseResponse<String>
 
-    @POST("member/resetPassword")
+    @POST("horseman/resetPassword")
     suspend fun resetPassword(@Body body: RequestBody?): BaseResponse<String>
 
     @GET("validata/smsCode/{mobile}")

@@ -88,7 +88,7 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.tv_accept -> {
-                val param = InitiativeCreateParams(MMKVUtils.getString(HttpConstants.HORSEMANID,""),mData?.disTakeout?.id,mData?.disTakeout?.id)
+                val param = InitiativeCreateParams(mData?.disTakeout?.id,mData?.disTakeout?.id)
                 viewModel.viewModelScope.launch {
                     val it = NetworkApi.initiativeCreate(param)
                     if (it.isSuccess) {

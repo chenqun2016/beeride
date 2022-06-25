@@ -5,4 +5,4 @@ package com.bee.rider.params
  * @Author： 陈陈陈
  * 功能描述：
  */
-data class InitiativeCreateParams(val horsemanId:String,val takeoutId:Int?,val id:Int?)
+data class InitiativeCreateParams(val takeoutId:Int?,val id:Int?)

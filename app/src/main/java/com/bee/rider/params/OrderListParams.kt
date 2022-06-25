@@ -11,4 +11,4 @@ import java.util.*
  */
 data class OrderListParams(val queryVO:QueryVO,var pageNum:Int,var pageSize:Int)
 //TODO  horsemanId 测试用
-data class QueryVO(val queryStatus:Int, val beginDate: String? = null, val endDate:String? = null, val horsemanId :String= MMKVUtils.getString(HttpConstants.HORSEMANID,"1"))
+data class QueryVO(val queryStatus:Int, val beginDate: String? = null, val endDate:String? = null)
