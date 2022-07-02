@@ -48,7 +48,6 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
     }
 
     private fun initView() {
-        UIUtils.setGradientDrawable(this,binding.statusBar,binding.ivBg,R.color.color_FF6200)
 
         binding.ivIcon.setOnClickListener(this)
         binding.tvName.setOnClickListener(this)
@@ -125,6 +124,8 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
             binding.tvName.text = userBean.name
             binding.ivIconWork.setImageResource(if(userBean.isWork == 1) R.drawable.icon_working else R.drawable.icon_rest)
             binding.tvWork.text = if(userBean.isWork == 1) "工作中" else "休息中"
+
+            UIUtils.setGradientDrawable(this,binding.statusBar,binding.ivBg,if(userBean.isWork == 1) R.color.color_FF6200 else R.color.color_2c2c2c)
         }
     }
 

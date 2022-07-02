@@ -50,7 +50,7 @@ public class OrderDetailBean {
     public Object deliverySn;
     public String deliveryTime;
     public int confirmStatus;
-    public Object receiveTime;
+    public Date receiveTime;
     public Object commentTime;
     public Object modifyTime;
     public int buildingId;
@@ -130,7 +130,7 @@ public class OrderDetailBean {
         public int status;
         public Boolean type;
         public String deliverySn;
-        public Object expectedTime;
+        public Date expectedTime;
         public Object accomplishTime;
         public int delFlag;
         public Object createBy;

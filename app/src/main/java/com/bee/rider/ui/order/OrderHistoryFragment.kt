@@ -35,7 +35,7 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
     var popupWindow: PopupWindow? = null
     var endDate: Date? = null
     var beginDate: Date? = null
-    var transactionType: String? = null
+    var transactionType: Int = 0
 
     private var fragment: OrderListFragment? = null
 
@@ -55,9 +55,9 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
             //TODO 默认选中时间段
             val calendar = Calendar.getInstance()
             endDate = calendar.time
-            calendar[Calendar.YEAR] = calendar[Calendar.YEAR] - 1
+            calendar[Calendar.MONTH] = calendar[Calendar.MONTH] - 3
             beginDate = calendar.time
-            fragment?.reflushDatas(beginDate,endDate)
+            fragment?.reflushHistoryDatas(beginDate,endDate,99)
             childFragmentManager.beginTransaction().setReorderingAllowed(true)
                 .add(R.id.fcv, fragment!!, "OrderListFragment_history").commitNowAllowingStateLoss()
         }
@@ -87,7 +87,7 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
                     val passString: String
                     when (checkedId) {
                         R.id.rb_1 -> {
-                            calendar[Calendar.YEAR] = calendar[Calendar.YEAR] - 1
+                            calendar[Calendar.MONTH] = calendar[Calendar.MONTH] - 3
                             passString = Constants.sdfLong2.format(calendar.time)
                             tv_time_left.text = passString
                         }
@@ -97,7 +97,7 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
                             tv_time_left.text = passString
                         }
                         R.id.rb_3 -> {
-                            calendar[Calendar.MONTH] = calendar[Calendar.MONTH] - 3
+                            calendar[Calendar.YEAR] = calendar[Calendar.YEAR] - 1
                             passString = Constants.sdfLong2.format(calendar.time)
                             tv_time_left.text = passString
                         }
@@ -125,18 +125,18 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
                 beginDate = Constants.sdfLong2.parse(tv_time_left.text.toString())
                 endDate = Constants.sdfLong2.parse(tv_time_right.text.toString())
                 transactionType = when (rp_2.checkedRadioButtonId) {
-                    R.id.rb_11 -> "A"
-                    R.id.rb_22 -> "T"
-                    R.id.rb_111 -> "I"
-                    R.id.rb_222 -> "S"
-                    else -> "A"
+                    R.id.rb_11 -> 99
+                    R.id.rb_22 -> 10
+                    R.id.rb_111 -> 20
+                    R.id.rb_222 -> 30
+                    else -> 99
                 }
                 val checkedRadioButtonId: Int = rp_1.checkedRadioButtonId
                 val checkedBt = mMenuView.findViewById<RadioButton>(checkedRadioButtonId)
                 binding.titleView.setTitleText(checkedBt.text.toString() + "历史订单")
                 if(null != beginDate && null != endDate){
                     //TODO 时间格式
-                    fragment?.reflushDatas(beginDate!!,endDate!!)
+                    fragment?.reflushHistoryDatas(beginDate!!,endDate!!,transactionType)
                 }
             }
             tv_time_left.setOnClickListener { showBirthdayDialog(tv_time_left) }

@@ -15,7 +15,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="15dp"
         android:textStyle="bold"
-        android:text="交易日期"/>
+        android:text="按时间"/>
 
     <com.bee.rider.view.RadioGroupPlus
         android:id="@+id/rp_1"
@@ -39,7 +39,7 @@
                 android:textColor="@drawable/color_trade_shaixuan"
                 android:button="@null"
                 android:gravity="center"
-                android:text="近一年"
+                android:text="近三月"
                 android:textSize="13sp" />
 
             <RadioButton
@@ -65,7 +65,7 @@
                 android:layout_marginStart="15dp"
                 android:button="@null"
                 android:gravity="center"
-                android:text="近三月"
+                android:text="近一年"
                 android:textSize="13sp" />
 
         </LinearLayout>
@@ -116,7 +116,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="15dp"
         android:textStyle="bold"
-        android:text="交易日期"/>
+        android:text="按类型"/>
 
 
     <com.bee.rider.view.RadioGroupPlus
@@ -155,7 +155,7 @@
                 android:layout_marginStart="15dp"
                 android:button="@null"
                 android:gravity="center"
-                android:text="充值"
+                android:text="正常"
                 android:textSize="13sp" />
 
         </LinearLayout>
@@ -175,7 +175,7 @@
                 android:textColor="@drawable/color_trade_shaixuan"
                 android:button="@null"
                 android:gravity="center"
-                android:text="收入"
+                android:text="超时"
                 android:textSize="13sp" />
 
             <RadioButton
@@ -188,7 +188,7 @@
                 android:layout_marginStart="15dp"
                 android:button="@null"
                 android:gravity="center"
-                android:text="支出"
+                android:text="取消"
                 android:textSize="13sp" />
         </LinearLayout>
     </com.bee.rider.view.RadioGroupPlus>

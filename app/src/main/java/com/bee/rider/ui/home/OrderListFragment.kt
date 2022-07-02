@@ -20,6 +20,7 @@ import com.bee.rider.params.InitiativeCreateParams
 import com.bee.rider.params.OrderListParams
 import com.bee.rider.params.QueryVO
 import com.bee.rider.ui.adapter.HomeOrderAdapter
+import com.bee.rider.utils.UIUtils
 import com.bee.rider.utils.options
 import com.bee.rider.vm.HomeViewModel
 import com.chenchen.base.constants.HttpConstants
@@ -50,6 +51,7 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
     var loadmoreUtils: LoadmoreUtils<OrderListBean.RecordsBean>? = null
     var beginDate: Date? = null
     var endDate:Date? = null
+    var queryStatus:Int = 99
 
     override fun getBinding(
         inflater: LayoutInflater,
@@ -87,25 +89,31 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
         })
     }
     override fun initViews(savedInstanceState: Bundle?) {
-        val type = arguments?.getInt("type")
+        val type = arguments?.getInt("type") ?: 0
         adapter.setType(type)
         adapter.setOnItemClickListener { a, _, position ->
             val args = Bundle()
             args.putString(Constants.TAKEOUTID, adapter.data[position].takeoutId.toString())
             args.putString(Constants.ORDERID, adapter.data[position].orderId.toString())
+            type?.let { args.putInt(Constants.TYPE, it) }
             findNavController().navigate(R.id.order_detail_dest, args, options)
         }
         adapter.addChildLongClickViewIds(R.id.tv_accept)
         adapter.setOnItemChildLongClickListener(OnItemChildLongClickListener { _, view, position ->
             if (view.id == R.id.tv_accept) {
                 val recordsBean = adapter.data[position]
-
-                val param = InitiativeCreateParams(recordsBean.takeoutId,recordsBean.takeoutId)
+                val status: Int = when (type) {
+                    0 -> 20
+                    1 -> 30
+                    2 -> 40
+                    else -> 20
+                }
+                val param = InitiativeCreateParams(recordsBean.takeoutId,recordsBean.takeoutId,status)
                 viewModel.viewModelScope.launch {
                     val it = NetworkApi.initiativeCreate(param)
                     if (it.isSuccess) {
                         val bean = it.getOrNull()
-                        Toast.makeText(context, "接单成功", Toast.LENGTH_SHORT).show()
+                        context?.let { it1 -> UIUtils.showAcceptButtomToast(type, it1) }
                         adapter.removeAt(position)
                     } else {
                         loadmoreUtils?.onFail(it.exceptionOrNull()?.message)
@@ -122,7 +130,7 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
                 if(type == TYPE_HISTORY){
                     val beginDate1 = Constants.sdfLong1.format(beginDate)
                     val endDate1 = Constants.sdfLong1.format(endDate)
-                    val params = OrderListParams(QueryVO(0,beginDate1,endDate1), page, PAGE_SIZE)
+                    val params = OrderListParams(QueryVO(queryStatus,beginDate1,endDate1), page, PAGE_SIZE)
                     viewModel.doHistoryList(params)
                 }else{
                     var status: Int = 10
@@ -138,9 +146,14 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
         }
         loadmoreUtils?.refresh()
     }
-    fun reflushDatas(beginDate :Date?,endDate:Date?) {
+
+    /**
+     * queryStatus 订单类型。全部：99，正常：10，超时：20，取消：30
+     */
+    fun reflushHistoryDatas(beginDate :Date?,endDate:Date?,queryStatus:Int) {
         this.beginDate = beginDate
         this.endDate = endDate
+        this.queryStatus = queryStatus
         loadmoreUtils?.refresh()
     }
 }
