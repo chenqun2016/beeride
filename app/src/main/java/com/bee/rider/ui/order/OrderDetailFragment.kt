@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bee.rider.Constants
@@ -13,6 +14,7 @@ import com.chenchen.base.utils.LiveDataBus
 import com.bee.rider.R
 import com.bee.rider.databinding.FragmentOrderDetailBinding
 import com.bee.rider.utils.startAlphaAnim
+import com.bee.rider.vm.OrderDetailViewModel
 import com.google.android.material.tabs.TabLayout
 import com.gyf.immersionbar.ImmersionBar
 
@@ -24,6 +26,8 @@ import com.gyf.immersionbar.ImmersionBar
 class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
     var fragment1:OrderDetailTab1Fragment? = null
     var fragment2:OrderDetailTab2Fragment? = null
+    private val viewModel: OrderDetailViewModel by viewModels()
+    var takeoutId :String = ""
 
     override fun getBinding(
         inflater: LayoutInflater,
@@ -32,6 +36,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
     ): FragmentOrderDetailBinding {
         return FragmentOrderDetailBinding.inflate(inflater, container, false)
     }
+
     override fun initOnce(savedInstanceState: Bundle?) {
         LiveDataBus.get().with("reflushToolbar").observe(this,object :Observer<Boolean>{
             override fun onChanged(t: Boolean?) {
@@ -46,6 +51,16 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
                 }
             }
         })
+
+        viewModel.orderDetail.observe(this,{
+            if (it.isSuccess){
+                val data = it.getOrNull()
+                if(null != data){
+                    fragment1?.setDatas(data)
+                    fragment2?.setDatas(data)
+                }
+            }
+        })
     }
 
     override fun initViews(savedInstanceState: Bundle?) {
@@ -55,6 +70,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
         initStatusBar()
         initTabViewpager()
         binding.tabLayout.alpha = 0f
+        viewModel.doOrderDetail(takeoutId+"")
     }
 
     private fun initStatusBar() {
@@ -63,9 +79,8 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
         layoutParams.height += statusBarHeight
 
     }
-
     private fun initTabViewpager() {
-        val takeoutId = arguments?.getString(Constants.TAKEOUTID, "")
+        takeoutId = arguments?.getString(Constants.TAKEOUTID, "") ?: ""
         val orderId = arguments?.getString(Constants.ORDERID, "")
         val type = arguments?.getInt(Constants.TYPE, 0) ?: 0
 

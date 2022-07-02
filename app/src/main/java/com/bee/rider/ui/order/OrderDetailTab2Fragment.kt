@@ -8,10 +8,12 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bee.rider.Constants
+import com.bee.rider.bean.OrderDetailBean
 import com.chenchen.base.base.BaseFragment
 import com.chenchen.base.utils.DisplayUtil
 import com.bee.rider.databinding.FragmentOrderDetailTab2Binding
 import com.bee.rider.ui.adapter.OrderDetailTraceAdapter
+import com.bee.rider.utils.UIUtils
 import com.bee.rider.vm.OrderDetailViewModel
 import com.gyf.immersionbar.ImmersionBar
 
@@ -62,6 +64,7 @@ class OrderDetailTab2Fragment :BaseFragment<FragmentOrderDetailTab2Binding>() {
 //        orderDetailTraceAdapter.setNewInstance(datas)
 
         getDatas()
+        bindDatas()
     }
 
     private fun getDatas() {
@@ -70,4 +73,17 @@ class OrderDetailTab2Fragment :BaseFragment<FragmentOrderDetailTab2Binding>() {
         viewModel.doGetOperateHistory(id)
     }
 
+    var mDatas :OrderDetailBean? = null
+    fun setDatas(item: OrderDetailBean) {
+        mDatas = item
+       bindDatas()
+    }
+
+    private fun bindDatas() {
+        if(null != mDatas && isBindingViewCreated()){
+            binding.tvTime.text = "${UIUtils.getNomalTime2(mDatas?.disTakeout?.expectedTime)}前送达"
+            binding.tvTime2.text = "(系统派送)"
+            binding.tvRight.text = "#${mDatas?.deliverySn}"
+        }
+    }
 }

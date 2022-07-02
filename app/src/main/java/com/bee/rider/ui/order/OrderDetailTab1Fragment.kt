@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amap.api.location.AMapLocation
@@ -56,7 +57,6 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
     }
     //0:新订单， 1：待取货   ，2：待送货
     private var mType:Int = 0
-    private val viewModel: OrderDetailViewModel by viewModels()
     private var mData :OrderDetailBean? = null
     private var productsAdapter :ProductsAdapter? = null
 
@@ -64,14 +64,6 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
 
     override fun initOnce(savedInstanceState: Bundle?) {
 
-        viewModel.orderDetail.observe(this,{
-            if (it.isSuccess){
-                mData = it.getOrNull()
-                if(null != mData){
-                    setDatas(mData!!)
-                }
-            }
-        })
     }
 
     override fun onDestroyView() {
@@ -98,7 +90,7 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
                     else -> 20
                 }
                 val param = InitiativeCreateParams(mData?.disTakeout?.id,mData?.disTakeout?.id,status)
-                viewModel.viewModelScope.launch {
+                lifecycleScope.launch {
                     val it = NetworkApi.initiativeCreate(param)
                     if (it.isSuccess) {
                         val bean = it.getOrNull()
@@ -156,12 +148,12 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
 
 
         val takeoutId = arguments?.getString(Constants.TAKEOUTID)
-        viewModel.doOrderDetail(takeoutId+"")
+
     }
 
-    private fun setDatas(item: OrderDetailBean) {
+    fun setDatas(item: OrderDetailBean) {
         binding.includeDetail.includeOrderItem.tvAccept.visibility = if(item.queryStatus == 10) View.VISIBLE else View.GONE
-        binding.includeDetail.includeOrderItem.tvRight.text = "#"
+        binding.includeDetail.includeOrderItem.tvRight.text = "#${item.deliverySn}"
         binding.includeDetail.includeOrderItem.tvTime.text = "${UIUtils.getNomalTime2(item.disTakeout.expectedTime)}前送达"
         binding.includeDetail.includeOrderItem.tvStoreName.text = item.storeName
         binding.includeDetail.includeOrderItem.tvStoreAddress.text = item.shopStoreDetailVO.addressDetail

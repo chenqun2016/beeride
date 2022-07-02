@@ -21,6 +21,10 @@ abstract class BaseFragment <VB:ViewBinding> : ImmersionFragment(){
     private var _binding: VB? = null
     protected val binding get() = _binding!!
 
+    fun isBindingViewCreated():Boolean{
+        return null != _binding
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         d(TAG,"onCreate")
