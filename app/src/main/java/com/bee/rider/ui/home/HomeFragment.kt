@@ -108,17 +108,19 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
     private fun setUserInfo() {
         val userBean = MMKVUtils.getObject(UserBean::class.java)
         if(null != userBean){
-//            Picasso.with(context)
-//                .load(userBean.)
-//                .fit()
-//                .transform(
-//                    PicassoRoundTransform(
-//                        DisplayUtil.dip2px(context, 100f),
-//                        0,
-//                        PicassoRoundTransform.CornerType.ALL
-//                    )
-//                )
-//                .into(binding.ivIcon)
+            Picasso.with(context)
+                .load(userBean.icon)
+                .error(R.drawable.icon_touxiang)
+                .placeholder(R.drawable.icon_touxiang)
+                .fit()
+                .transform(
+                    PicassoRoundTransform(
+                        DisplayUtil.dip2px(context, 100f),
+                        0,
+                        PicassoRoundTransform.CornerType.ALL
+                    )
+                )
+                .into(binding.ivIcon)
             binding.tvName.text = userBean.name
             binding.ivIconWork.setImageResource(if(userBean.isWork == 1) R.drawable.icon_working else R.drawable.icon_rest)
             binding.tvWork.text = if(userBean.isWork == 1) "工作中" else "休息中"

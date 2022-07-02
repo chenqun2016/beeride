@@ -39,29 +39,28 @@ class UserInfoFragment : BaseFragment<FragmentUserinfoBinding>(), View.OnClickLi
     override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
-        val gString = MMKVUtils.getString(Constants.USER_INFO, "")
-        val userInfo = Gson().fromJson(gString, UserBean::class.java)
+        val userInfo = MMKVUtils.getObject(UserBean::class.java)
         if (null != userInfo) {
-//            if (!TextUtils.isEmpty(userInfo.icon)) {
-//                Picasso.with(context)
-//                    .load(userInfo.icon)
-//                    .fit()
-//                    .transform(
-//                        PicassoRoundTransform(
-//                            DisplayUtil.dip2px(context, 100f),
-//                            0,
-//                            PicassoRoundTransform.CornerType.ALL
-//                        )
-//                    )
-//                    .into(binding.tvIcon)
-//            }
-            binding.tvMingchengText.text = ""
-            binding.tvGonghaoText.text = ""
-            binding.tvXingbieText.text = ""
-            binding.tvPhoneText.text = ""
-            binding.tvIdcardText.text = ""
-            binding.tvWorkTypeText.text = ""
-            binding.tvDizhiText.text = ""
+            if (!TextUtils.isEmpty(userInfo.icon)) {
+                Picasso.with(context)
+                    .load(userInfo.icon)
+                    .fit()
+                    .transform(
+                        PicassoRoundTransform(
+                            DisplayUtil.dip2px(context, 100f),
+                            0,
+                            PicassoRoundTransform.CornerType.ALL
+                        )
+                    )
+                    .into(binding.tvIcon)
+            }
+            binding.tvMingchengText.text = userInfo.name
+            binding.tvGonghaoText.text = userInfo.id.toString()
+            binding.tvXingbieText.text = if(userInfo.sex == 0) "男" else "女"
+            binding.tvPhoneText.text = if(userInfo.linkPhone.length>10) userInfo.linkPhone.substring(0, 3) + " ****** " + userInfo.linkPhone.substring(9, 11) else userInfo.linkPhone
+            binding.tvIdcardText.text = userInfo.idCard
+            binding.tvWorkTypeText.text = if(userInfo.type == 1) "全职" else "兼职"
+            binding.tvDizhiText.text = userInfo.address
         }
 
         binding.tvIcon.setOnClickListener(this)
