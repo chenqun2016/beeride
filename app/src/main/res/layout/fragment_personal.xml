@@ -199,7 +199,8 @@
                     app:sb_checked_color="@color/color_FF6200"
                     app:sb_checkline_text="工作中"
                     app:sb_shadow_effect="false"
-                    app:sb_uncheckcircle_color="@color/transparent" />
+                    app:sb_uncheckcircle_color="@color/transparent"
+                    app:sb_background="@color/color_EBEBEB"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.LinearLayoutCompat

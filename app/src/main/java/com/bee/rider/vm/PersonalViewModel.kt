@@ -8,6 +8,7 @@ import com.bee.rider.http.CenterApi
 import com.bee.rider.http.LoginApi
 import com.bee.rider.params.LoginParams
 import com.bee.rider.params.SmsCodeLoginParams
+import com.bee.rider.params.UpdateWorkStatusParams
 import com.chenchen.base.constants.HttpConstants
 import com.chenchen.base.utils.MMKVUtils
 import kotlinx.coroutines.launch
@@ -19,13 +20,24 @@ import kotlinx.coroutines.launch
  */
 class PersonalViewModel : ViewModel(){
     /**
-     * 密码登录
+     * 获取骑手信息
      */
     val lvUserDetail : MutableLiveData<Result<UserBean?>> = MutableLiveData()
     fun getUserDetail(){
         viewModelScope.launch {
             val userDetail = CenterApi.getUserDetail()
             lvUserDetail.value = userDetail
+        }
+    }
+
+    /**
+     * 修改【骑手信息】工作状态
+     */
+    val lvUpdateWorkStatus : MutableLiveData<Result<Any?>> = MutableLiveData()
+    fun updateWorkStatus(param: UpdateWorkStatusParams){
+        viewModelScope.launch {
+            val result = CenterApi.updateWorkStatus(param)
+            lvUpdateWorkStatus.value = result
         }
     }
 }

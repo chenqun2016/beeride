@@ -41,6 +41,7 @@ public class SwitchButton extends View implements Checkable {
     private final int ANIMATE_STATE_PENDING_RESET = 3;
     private final int ANIMATE_STATE_PENDING_SETTLE = 4;
     private final int ANIMATE_STATE_SWITCH = 5;
+    private boolean isCheckPost;//是否触发监听事件
 
     public SwitchButton(Context context) {
         super(context);
@@ -84,7 +85,7 @@ public class SwitchButton extends View implements Checkable {
 
         uncheckCircleColor = optColor(typedArray,
                 R.styleable.SwitchButton_sb_uncheckcircle_color,
-                0XffAAAAAA);//0XffAAAAAA;
+                0Xff999999);//0XffAAAAAA;
 
         uncheckCircleWidth = optPixelSize(typedArray,
                 R.styleable.SwitchButton_sb_uncheckcircle_width,
@@ -555,15 +556,19 @@ public class SwitchButton extends View implements Checkable {
     private void broadcastEvent() {
         if(onCheckedChangeListener != null){
             isEventBroadcast = true;
-            onCheckedChangeListener.onCheckedChanged(this, isChecked());
+            if(isCheckPost) {
+                onCheckedChangeListener.onCheckedChanged(this, isChecked());
+            }
         }
         isEventBroadcast = false;
+        isCheckPost = false;
     }
 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(!isEnabled()){return false;}
+        isCheckPost = true;
         int actionMasked = event.getActionMasked();
 
         switch (actionMasked){
