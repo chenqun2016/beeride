@@ -3,8 +3,10 @@ package com.bee.rider.ui.setting.userinfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.bee.rider.bean.UserBean
 import com.chenchen.base.base.BaseFragment
 import com.bee.rider.databinding.FragmentAreasBinding
+import com.chenchen.base.utils.MMKVUtils
 
 /**
  * 创建时间：2022/2/26
@@ -22,9 +24,12 @@ class AreasFragment : BaseFragment<FragmentAreasBinding>() {
     override fun initOnce(savedInstanceState: Bundle?) {}
 
     override fun initViews(savedInstanceState: Bundle?) {
-
-        binding.tvIdcardResult.text = "上海市 / 上海市 / 青浦区"
-        binding.tvIdcardHandResult.text = "陆家嘴"
-        binding.tvCardHealthResult.text = "陆家嘴"
+        val userInfo = MMKVUtils.getObject(UserBean::class.java)
+        if(null != userInfo) {
+            binding.tvIdcardResult.text = userInfo.city
+            binding.tvIdcardHandResult.text = userInfo.buildingArea
+            // TODO: 配送楼宇暂无该字段 
+            binding.tvCardHealthResult.text = ""
+        }
     }
 }

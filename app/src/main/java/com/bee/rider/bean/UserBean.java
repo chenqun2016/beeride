@@ -24,7 +24,7 @@ public class UserBean {
     public String buildingArea;
     public Object aid;
     public int province;
-    public int city;
+    public String city;
     public int district;
     public Object buildingId;
     public int buildingAreaId;
@@ -43,6 +43,10 @@ public class UserBean {
     public int loginTimes;
     public List<PictureList> pictureList;
     public String token;
+    public String icon;
+    public String address;
+    public int todayOrderCount;
+    public String praiseRate;
 
     public static class PictureList {
         public int id;
