@@ -65,9 +65,11 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
     }
 
     private fun initTabViewpager() {
-        val id = arguments?.getString(Constants.TAKEOUTID, "")
+        val takeoutId = arguments?.getString(Constants.TAKEOUTID, "")
         val orderId = arguments?.getString(Constants.ORDERID, "")
-        fragment1 = OrderDetailTab1Fragment.newInstance(id)
+        val type = arguments?.getInt(Constants.TYPE, 0) ?: 0
+
+        fragment1 = OrderDetailTab1Fragment.newInstance(takeoutId,type)
         fragment2 = OrderDetailTab2Fragment.newInstance(orderId)
         val tab = binding.tabLayout.newTab()
         tab.text = "订单详细"

@@ -15,6 +15,7 @@ import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
@@ -26,6 +27,7 @@ import com.bee.rider.R
 import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.gyf.immersionbar.ImmersionBar
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -154,6 +156,15 @@ object  UIUtils {
             ""
         } else TimeUtils.date2String(createTime)
     }
+    //mm:ss
+    fun getNomalTime2(createTime: Date?): String? {
+        return if (null == createTime) {
+            ""
+        } else {
+            val format = SimpleDateFormat("HH:mm")
+            return format.format(createTime)
+        }
+    }
 
     fun copyContentToClipboard(content: String?, context: Context) {
         try {
@@ -168,5 +179,29 @@ object  UIUtils {
             e.printStackTrace()
             ToastUtils.showShort( "复制失败")
         }
+    }
+
+    /**
+     * 设置长安接单按钮的文案
+     */
+    fun setAccepeButtomTextByType(type:Int,view:TextView){
+        when(type){
+            0 -> view.text = "长按接单"
+            1 -> view.text = "长按确认已取货"
+            2 -> view.text = "长按确认已送达"
+        }
+    }
+
+    /**
+     * 接单后弹窗
+     */
+    fun showAcceptButtomToast(type:Int,context:Context){
+        val toastText = when (type) {
+            0 -> "接单成功"
+            1 -> "取货成功"
+            2 -> "订单已完成"
+            else -> ""
+        }
+        Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show()
     }
 }

@@ -62,4 +62,7 @@ object Constants {
 
     //用户
     var USER = "user"
+
+    // 首页订单列表类型，0：新订单，1：带取货，2：待送达
+    val TYPE = "type"
 }

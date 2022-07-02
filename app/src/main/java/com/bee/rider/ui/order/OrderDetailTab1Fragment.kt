@@ -42,25 +42,28 @@ import kotlin.math.abs
  * 功能描述：
  */
 class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() , AMap.OnMapLoadedListener,
-    AMap.OnInfoWindowClickListener, View.OnClickListener {
+    AMap.OnInfoWindowClickListener, View.OnClickListener, View.OnLongClickListener {
 
     companion object{
-        fun newInstance(id: String?): OrderDetailTab1Fragment{
+        fun newInstance(takeoutId: String?,type:Int): OrderDetailTab1Fragment{
             val args = Bundle()
-            args.putString(Constants.TAKEOUTID, id)
+            args.putString(Constants.TAKEOUTID, takeoutId)
+            args.putInt(Constants.TYPE, type)
             val fragment = OrderDetailTab1Fragment()
             fragment.arguments = args
             return fragment
         }
     }
-
+    //0:新订单， 1：待取货   ，2：待送货
+    private var mType:Int = 0
     private val viewModel: OrderDetailViewModel by viewModels()
-    var mData :OrderDetailBean? = null
-    var productsAdapter :ProductsAdapter? = null
+    private var mData :OrderDetailBean? = null
+    private var productsAdapter :ProductsAdapter? = null
 
     private var aMap: AMap? = null
 
     override fun initOnce(savedInstanceState: Bundle?) {
+
         viewModel.orderDetail.observe(this,{
             if (it.isSuccess){
                 mData = it.getOrNull()
@@ -85,19 +88,30 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
     }
 
 
-    override fun onClick(v: View?) {
+    override fun onLongClick(v: View?): Boolean {
         when(v?.id){
             R.id.tv_accept -> {
-                val param = InitiativeCreateParams(mData?.disTakeout?.id,mData?.disTakeout?.id)
+                val status: Int = when (mType) {
+                    0 -> 20
+                    1 -> 30
+                    2 -> 40
+                    else -> 20
+                }
+                val param = InitiativeCreateParams(mData?.disTakeout?.id,mData?.disTakeout?.id,status)
                 viewModel.viewModelScope.launch {
                     val it = NetworkApi.initiativeCreate(param)
                     if (it.isSuccess) {
                         val bean = it.getOrNull()
-                        Toast.makeText(context, "接单成功", Toast.LENGTH_SHORT).show()
+                        context?.let { it1 -> UIUtils.showAcceptButtomToast(mType, it1) }
                         binding.includeDetail.includeOrderItem.tvAccept.visibility = View.GONE
                     }
                 }
             }
+        }
+        return false
+    }
+    override fun onClick(v: View?) {
+        when(v?.id){
             R.id.tv_contact -> {
                 startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mData?.shopStoreDetailVO?.contactMobile)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             }
@@ -112,6 +126,8 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
     }
 
     override fun initViews(savedInstanceState: Bundle?) {
+        mType = arguments?.getInt(Constants.TYPE) ?: 0
+
         val layoutParams = binding.toolbar.layoutParams
         layoutParams.height = DisplayUtil.dip2px(context,40f)+ImmersionBar.getStatusBarHeight(this)
         binding.toolbar.layoutParams = layoutParams
@@ -123,8 +139,8 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
         binding.includeDetail.includeOrderItem.tvContact.visibility = View.VISIBLE
         binding.includeMessages.tvCopy.setOnClickListener(this)
         binding.includeDetail.includeOrderItem.tvAccept.setOnClickListener(this)
-        binding.includeDetail.includeOrderItem.tvContact.setOnClickListener(this)
-
+        binding.includeDetail.includeOrderItem.tvContact.setOnLongClickListener(this)
+        UIUtils.setAccepeButtomTextByType(mType,binding.includeDetail.includeOrderItem.tvContact)
         initMap(savedInstanceState)
 
         binding.appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
@@ -139,14 +155,14 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
         })
 
 
-        val id = arguments?.getString(Constants.TAKEOUTID)
-        viewModel.doOrderDetail(id+"")
+        val takeoutId = arguments?.getString(Constants.TAKEOUTID)
+        viewModel.doOrderDetail(takeoutId+"")
     }
 
     private fun setDatas(item: OrderDetailBean) {
         binding.includeDetail.includeOrderItem.tvAccept.visibility = if(item.queryStatus == 10) View.VISIBLE else View.GONE
         binding.includeDetail.includeOrderItem.tvRight.text = "#"
-        binding.includeDetail.includeOrderItem.tvTime.text = "${item.receiveTime}前送达"
+        binding.includeDetail.includeOrderItem.tvTime.text = "${UIUtils.getNomalTime2(item.disTakeout.expectedTime)}前送达"
         binding.includeDetail.includeOrderItem.tvStoreName.text = item.storeName
         binding.includeDetail.includeOrderItem.tvStoreAddress.text = item.shopStoreDetailVO.addressDetail
         binding.includeDetail.includeOrderItem.tvCustomerAddress.text = item.receiverDetailAddress
@@ -159,8 +175,9 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
         binding.includeProducts.tvStore.text = item.storeName
         productsAdapter?.setNewInstance(item.orderItemList)
 
-        binding.includeProducts.itemDes.tvBaozhuangfeiValue.text =  "¥${item.packingFeeAmount}"
-        binding.includeProducts.itemDes.tvPeisongfeiValue.text = "¥${item.freightAmount}"
+        binding.includeProducts.itemDes.tvBaozhuangfeiValue.text =  "¥${item.packingFeeAmount?:0}"
+        val freight = if(item.freightAmount == null || item.freightAmount==0) "免运费" else "¥${item.freightAmount}"
+        binding.includeProducts.itemDes.tvPeisongfeiValue.text = freight
         binding.includeProducts.itemDes.tvYouhuiquanValue.text = "¥${item.couponAmount}"
         binding.includeProducts.itemDes.tvTotalYouhuiValue.text = "¥${item.couponAmount}"
         binding.includeProducts.itemDes.tvTotalValue.text = "¥${item.totalAmount}"
@@ -172,12 +189,28 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
         if(item.disTakeout.type){
             binding.includeMessages.tvTypeDes.text = "趣鲜蜂专送"
         }else{
-            binding.includeMessages.tvTypeDes.text = ""
+            binding.includeMessages.tvTypeDes.text = "趣鲜蜂专送"
         }
         binding.includeMessages.tvOrdernumDes.text = item.orderSn
-        binding.includeMessages.tvPayTypeDes.text = if(item.payType == 1) "米粒支付" else ""
+        binding.includeMessages.tvPayTypeDes.text = if(item.payType == 1) "米粒支付" else "米粒支付"
         binding.includeMessages.tvPayTimeDes.text = UIUtils.getNomalTime(item.createTime)
         binding.includeMessages.tvBeizhuDes.text = item.note
+
+        if(mType <= 10){
+            binding.includeMessages.line4.visibility = View.GONE
+            binding.includeMessages.tvPeople.visibility = View.GONE
+            binding.includeMessages.tvPeopleDes.visibility = View.GONE
+            binding.includeMessages.line1.visibility = View.GONE
+            binding.includeMessages.tvTime.visibility = View.GONE
+            binding.includeMessages.tvTimeDes.visibility = View.GONE
+        }else{
+            binding.includeMessages.line4.visibility = View.VISIBLE
+            binding.includeMessages.tvPeople.visibility = View.VISIBLE
+            binding.includeMessages.tvPeopleDes.visibility = View.VISIBLE
+            binding.includeMessages.line1.visibility = View.VISIBLE
+            binding.includeMessages.tvTime.visibility = View.VISIBLE
+            binding.includeMessages.tvTimeDes.visibility = View.VISIBLE
+        }
     }
 
     var closed :Boolean = false
@@ -270,5 +303,6 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
         super.onSaveInstanceState(outState)
         binding.map.onSaveInstanceState(outState)
     }
+
 
 }

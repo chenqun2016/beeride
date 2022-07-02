@@ -17,7 +17,7 @@ interface INetworkService {
     suspend fun orderDetail(@Path("takeoutId") takeoutId:String): BaseResponse<OrderDetailBean>
 
     //骑手接单/取货/送达
-    @POST("disOrder/horsrmanAcceptOrder")
+    @POST("disOrder/horsemanAcceptOrder")
     suspend fun initiativeCreate(@Body body: RequestBody?): BaseResponse<Any>
     @POST("app-sys/appUpdateInfo")
     suspend fun appUpdateInfo(@Body body: RequestBody?): BaseResponse<AppUpdateInfoBean>

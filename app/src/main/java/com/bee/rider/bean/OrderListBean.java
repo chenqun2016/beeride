@@ -1,5 +1,6 @@
 package com.bee.rider.bean;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public class OrderListBean {
         public int takeoutId;
         public long orderId;
         public String deliverySn;
-        public Object expectedTime;
+        public Date expectedTime;
         public Object accomplishTime;
         public int storeId;
         public String storeName;
