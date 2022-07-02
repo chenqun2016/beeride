@@ -17,6 +17,7 @@ import com.chenchen.base.utils.DisplayUtil
 import com.bee.rider.R
 import com.bee.rider.bean.UserBean
 import com.bee.rider.databinding.FragmentPersonalBinding
+import com.bee.rider.params.UpdateWorkStatusParams
 import com.bee.rider.utils.*
 import com.bee.rider.vm.LoginViewModel
 import com.bee.rider.vm.PersonalViewModel
@@ -32,6 +33,7 @@ import kotlin.math.roundToInt
  */
 class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickListener {
     private val viewModel: PersonalViewModel by viewModels()
+    private var isWork = 0
     override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,6 +44,24 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
     override fun initOnce(savedInstanceState: Bundle?) {
         viewModel.lvUserDetail.observe(this) {
             setUserDetail(it)
+        }
+
+        viewModel.lvUpdateWorkStatus.observe(this, Observer {
+            setUpdateWorkStatus(it)
+        })
+    }
+
+    /**
+     * 设置骑手工作状态
+     */
+    private fun setUpdateWorkStatus(it: Result<Any?>) {
+        if(it.isSuccess){
+            binding.tvWork.text = if(isWork == 0) "工作中" else "休息中"
+            binding.switchButton.isChecked = isWork == 0
+            isWork = if(isWork==0) 1 else 0
+
+        }else{
+            binding.switchButton.isChecked = isWork == 1
         }
     }
 
@@ -66,6 +86,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
                         )
                         .into(binding.ivIcon)
                 }
+                isWork = userBean.isWork
                 binding.tvWork.text = if(userBean.isWork == 1) "工作中" else "休息中"
                 binding.switchButton.isChecked = userBean.isWork == 1
                 binding.tv1.text = userBean.orderCount.toString()
@@ -106,7 +127,13 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
         binding.tvSystemSetting.setOnClickListener(this)
 
         binding.switchButton.setOnCheckedChangeListener { view, isChecked ->
-            Toast.makeText(context, "$isChecked", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(context, "$isChecked", Toast.LENGTH_SHORT).show()
+            if(isWork == 0) {
+                viewModel.updateWorkStatus(UpdateWorkStatusParams(1))
+            }else{
+                viewModel.updateWorkStatus(UpdateWorkStatusParams(0))
+            }
+
         }
         viewModel.getUserDetail()
     }
@@ -130,6 +157,15 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
             R.id.tv_system_setting -> {
                 findNavController().navigate(R.id.system_set,null, options)
             }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val userInfo = MMKVUtils.getObject(UserBean::class.java)
+        if(null != userInfo) {
+            userInfo.isWork = isWork
+            MMKVUtils.putObject(userInfo)
         }
     }
 }
