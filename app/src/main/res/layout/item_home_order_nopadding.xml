@@ -168,7 +168,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_contact"
-        android:layout_width="0dp"
+        android:layout_width="130dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
@@ -178,8 +178,11 @@
         android:textColor="@color/color_FF6200"
         android:visibility="gone"
         android:textSize="16sp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:textStyle="bold"
+        android:drawablePadding="4dp"
+        android:paddingStart="10dp"
+        android:drawableStart="@drawable/ic_baseline_call_24"
         android:background="@drawable/btn_stroke_yellow"
         app:layout_constraintRight_toLeftOf="@+id/tv_accept"
         app:layout_constraintLeft_toLeftOf="parent"

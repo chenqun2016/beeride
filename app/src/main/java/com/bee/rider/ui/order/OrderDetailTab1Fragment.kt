@@ -27,6 +27,7 @@ import com.bee.rider.ui.adapter.ProductsAdapter
 import com.bee.rider.utils.UIUtils
 import com.bee.rider.utils.startAlphaAnim
 import com.bee.rider.vm.OrderDetailViewModel
+import com.blankj.utilcode.util.ObjectUtils
 import com.chenchen.base.base.BaseFragment
 import com.chenchen.base.constants.HttpConstants
 import com.chenchen.base.utils.DisplayUtil
@@ -87,15 +88,21 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
                     0 -> 20
                     1 -> 30
                     2 -> 40
-                    else -> 20
+                    else -> 50
                 }
                 val param = InitiativeCreateParams(mData?.disTakeout?.id,mData?.disTakeout?.id,status)
                 lifecycleScope.launch {
                     val it = NetworkApi.initiativeCreate(param)
                     if (it.isSuccess) {
+                        mType++
                         val bean = it.getOrNull()
                         context?.let { it1 -> UIUtils.showAcceptButtomToast(mType, it1) }
-                        binding.includeDetail.includeOrderItem.tvAccept.visibility = View.GONE
+                        UIUtils.setAccepeButtomTextByType(mType,binding.includeDetail.includeOrderItem.tvAccept)
+                        if(mType in arrayOf(0,1,2)){
+                            binding.includeDetail.includeOrderItem.tvAccept.visibility = View.VISIBLE
+                        }else{
+                            binding.includeDetail.includeOrderItem.tvAccept.visibility = View.GONE
+                        }
                     }
                 }
             }
@@ -105,7 +112,9 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.tv_contact -> {
-                startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mData?.shopStoreDetailVO?.contactMobile)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                if(ObjectUtils.isNotEmpty(mData?.shopStoreDetailVO?.contactMobile)){
+                    startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mData?.shopStoreDetailVO?.contactMobile)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                }
             }
             R.id.tv_copy -> {
                 context?.let { it1 ->
@@ -130,9 +139,9 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
 
         binding.includeDetail.includeOrderItem.tvContact.visibility = View.VISIBLE
         binding.includeMessages.tvCopy.setOnClickListener(this)
-        binding.includeDetail.includeOrderItem.tvAccept.setOnClickListener(this)
-        binding.includeDetail.includeOrderItem.tvContact.setOnLongClickListener(this)
-        UIUtils.setAccepeButtomTextByType(mType,binding.includeDetail.includeOrderItem.tvContact)
+        binding.includeDetail.includeOrderItem.tvAccept.setOnLongClickListener(this)
+        binding.includeDetail.includeOrderItem.tvContact.setOnClickListener(this)
+        UIUtils.setAccepeButtomTextByType(mType,binding.includeDetail.includeOrderItem.tvAccept)
         initMap(savedInstanceState)
 
         binding.appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
@@ -152,7 +161,9 @@ class OrderDetailTab1Fragment : BaseFragment<FragmentOrderDetailTab1Binding>() ,
     }
 
     fun setDatas(item: OrderDetailBean) {
-        binding.includeDetail.includeOrderItem.tvAccept.visibility = if(item.queryStatus == 10) View.VISIBLE else View.GONE
+        mData = item
+        binding.includeDetail.includeOrderItem.tvAccept.visibility = if(mType in arrayOf(0,1,2)) View.VISIBLE else View.GONE
+//        binding.includeDetail.includeOrderItem.tvAccept.visibility = if(item.queryStatus in arrayOf(10,20,30)) View.VISIBLE else View.GONE
         binding.includeDetail.includeOrderItem.tvRight.text = "#${item.deliverySn}"
         binding.includeDetail.includeOrderItem.tvTime.text = "${UIUtils.getNomalTime2(item.disTakeout.expectedTime)}前送达"
         binding.includeDetail.includeOrderItem.tvStoreName.text = item.storeName

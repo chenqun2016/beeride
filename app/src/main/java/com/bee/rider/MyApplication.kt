@@ -3,6 +3,7 @@ package com.bee.rider
 import android.app.Application
 import cn.jpush.android.api.JPushInterface
 import com.chenchen.base.utils.MMKVUtils
+import com.tencent.bugly.crashreport.CrashReport
 
 /**
  * 创建时间：2021/12/21
@@ -19,5 +20,7 @@ class MyApplication : Application() {
         MMKVUtils.init(this)
         JPushInterface.setDebugMode(true)
         JPushInterface.init(this)
+
+        CrashReport.initCrashReport(applicationContext, "5ae469d9b8", true)
     }
 }

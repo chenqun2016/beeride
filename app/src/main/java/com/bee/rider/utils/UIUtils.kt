@@ -24,8 +24,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.bee.rider.Constants
 import com.bee.rider.R
+import com.bee.rider.bean.UserBean
 import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.chenchen.base.utils.MMKVUtils
 import com.gyf.immersionbar.ImmersionBar
 import java.text.SimpleDateFormat
 import java.util.*
@@ -185,6 +187,14 @@ object  UIUtils {
      * 设置长安接单按钮的文案
      */
     fun setAccepeButtomTextByType(type:Int,view:TextView){
+        val userInfo = MMKVUtils.getObject(UserBean::class.java)
+        if(userInfo?.isWork == 1){
+            view.background = ContextCompat.getDrawable(view.context,R.drawable.btn_gradient_yellow_round)
+            view.isEnabled = true
+        }else{
+            view.background = ContextCompat.getDrawable(view.context,R.drawable.btn_gradient_grey_round)
+            view.isEnabled = false
+        }
         when(type){
             0 -> view.text = "长按接单"
             1 -> view.text = "长按确认已取货"

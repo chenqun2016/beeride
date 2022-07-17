@@ -22,6 +22,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
+import com.gyf.immersionbar.ImmersionBar
 import com.squareup.picasso.Picasso
 
 /**
@@ -48,7 +49,7 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
     }
 
     private fun initView() {
-
+        binding.appbar.setPadding(0,ImmersionBar.getStatusBarHeight(this),0,0)
         binding.ivIcon.setOnClickListener(this)
         binding.tvName.setOnClickListener(this)
         binding.ivIconWork.setOnClickListener(this)
@@ -92,12 +93,11 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
         }
 
         val toolbarHeight = DisplayUtil.dip2px(context,64f)
-        val diff = DisplayUtil.dip2px(context,246f) - toolbarHeight
-        binding.appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            val rate = verticalOffset.toFloat() / appBarLayout.totalScrollRange
-            binding.ivBg.translationY = rate * diff
-        })
-        binding.collapsing.setContentScrimColor(resources.getColor(R.color.color_FF6600))
+//        val diff = DisplayUtil.dip2px(context,246f) - toolbarHeight
+//        binding.appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+//            val rate = verticalOffset.toFloat() / appBarLayout.totalScrollRange
+//            binding.ivBg.translationY = rate * diff
+//        })
 
         setUserInfo()
     }
@@ -125,7 +125,9 @@ class HomeFragment : BaseFragment<FragmentHome2Binding>(), View.OnClickListener 
             binding.ivIconWork.setImageResource(if(userBean.isWork == 1) R.drawable.icon_working else R.drawable.icon_rest)
             binding.tvWork.text = if(userBean.isWork == 1) "工作中" else "休息中"
 
-            UIUtils.setGradientDrawable(this,binding.statusBar,binding.ivBg,if(userBean.isWork == 1) R.color.color_FF6200 else R.color.color_2c2c2c)
+            binding.collapsing.setContentScrimColor(resources.getColor(if(userBean.isWork == 1) R.color.color_FF6600 else R.color.color_2c2c2c))
+
+            UIUtils.setGradientDrawable(this,null,binding.ivBg,if(userBean.isWork == 1) R.color.color_FF6200 else R.color.color_2c2c2c)
         }
     }
 

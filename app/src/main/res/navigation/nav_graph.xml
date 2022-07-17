@@ -160,4 +160,9 @@
         android:id="@+id/userinfo_contacts_dest"
         android:name="com.bee.rider.ui.setting.userinfo.ContactsFragment"
         android:label="userinfo_contacts" />
+
+    <fragment
+        android:id="@+id/message_dest"
+        android:name="com.bee.rider.ui.setting.MessageFragment"
+        android:label="message" />
 </navigation>

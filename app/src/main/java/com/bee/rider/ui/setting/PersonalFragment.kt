@@ -60,6 +60,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
             binding.switchButton.isChecked = isWork == 0
             isWork = if(isWork==0) 1 else 0
 
+            UIUtils.setGradientDrawable(this,null,binding.ivBg,if(isWork == 1) R.color.color_FF6200 else R.color.color_2c2c2c)
         }else{
             binding.switchButton.isChecked = isWork == 1
         }
@@ -100,9 +101,9 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
         val userBean = MMKVUtils.getObject(UserBean::class.java)
         if(userBean != null) {
             binding.tvName.text = userBean.name
+            UIUtils.setGradientDrawable(this,null,binding.ivBg,if(userBean.isWork == 1) R.color.color_FF6200 else R.color.color_2c2c2c)
         }
 
-        UIUtils.setGradientDrawable(this,null,binding.ivBg,R.color.color_FF6200)
         binding.scrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, totalScrollY, oldScrollX, oldScrollY ->
             if(totalScrollY >= 100){
                 binding.titleView.setBackgroundAlpha(255)
@@ -152,16 +153,15 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
                 findNavController().navigate(R.id.userinfo_dest,null, options)
             }
             R.id.tv_message -> {
-
+                findNavController().navigate(R.id.message_dest,null, options)
             }
             R.id.tv_system_setting -> {
                 findNavController().navigate(R.id.system_set,null, options)
             }
         }
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
         val userInfo = MMKVUtils.getObject(UserBean::class.java)
         if(null != userInfo) {
             userInfo.isWork = isWork
