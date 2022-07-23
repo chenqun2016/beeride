@@ -46,8 +46,8 @@ class OrderDetailTab2Fragment :BaseFragment<FragmentOrderDetailTab2Binding>() {
         viewModel.getOperateHistory.observe(this,{
             if (it.isSuccess){
                 val mData = it.getOrNull()
-                if(null != mData && mData.isNotEmpty()){
-                    orderDetailTraceAdapter.setNewInstance(mData.toMutableList())
+                if(null != mData && mData.trackList.isNotEmpty()){
+                    orderDetailTraceAdapter.setNewInstance(mData.trackList.toMutableList())
                 }
             }
         })
@@ -57,7 +57,7 @@ class OrderDetailTab2Fragment :BaseFragment<FragmentOrderDetailTab2Binding>() {
         val layoutParams = binding.clContent.layoutParams as FrameLayout.LayoutParams
         layoutParams.topMargin = DisplayUtil.dip2px(context,50f)+ImmersionBar.getStatusBarHeight(this)
 
-        binding.recyclerview.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,true)
+        binding.recyclerview.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
         binding.recyclerview.adapter = orderDetailTraceAdapter
 
 //        val datas = mutableListOf("1提交订单","21提交订单","31提交订单","41提交订单","51提交订单")

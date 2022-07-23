@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.chenchen.base.base.BaseFragment
 import com.chenchen.base.utils.LoadmoreUtils
 import com.bee.rider.R
+import com.bee.rider.params.MessageParams
 import com.bee.rider.vm.MessageViewModel
 import com.chad.library.adapter.base.module.LoadMoreModule
 
@@ -23,7 +24,16 @@ import com.chad.library.adapter.base.module.LoadMoreModule
 class MessageFragment : BaseFragment<FragmentMessageBinding>() {
     override fun initOnce(savedInstanceState: Bundle?) {
         viewModel.list.observe(this,{
-
+            if (it.isSuccess) {
+                val bean = it.getOrNull()
+                if (null != bean) {
+                    loadmoreUtils?.onSuccess(bean)
+                }else{
+                    loadmoreUtils?.onSuccess(listOf())
+                }
+            } else {
+                loadmoreUtils?.onFail(it.exceptionOrNull()?.message)
+            }
         })
     }
 
@@ -47,10 +57,11 @@ class MessageFragment : BaseFragment<FragmentMessageBinding>() {
         }
         loadmoreUtils = object : LoadmoreUtils<MessageBean>(adapter, binding.srl) {
             override fun getDatas(page: Int) {
-                viewModel.doGetList()
+                val params = MessageParams(page, PAGE_SIZE)
+                viewModel.doGetList(params)
             }
         }
-//        loadmoreUtils?.refresh()
+        loadmoreUtils?.refresh()
 
         val datas = mutableListOf<MessageBean>()
         datas.add(MessageBean())

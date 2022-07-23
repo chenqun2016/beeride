@@ -31,4 +31,8 @@ object NetworkApi : BaseNetworkApi<INetworkService>(Constants.base_url_dis) {
     suspend fun getOperateHistory(orderId:String?) = getResult {
         service.getOperateHistory(orderId)
     }
+
+    suspend fun disDataStatistics() = getResult {
+        service.disDataStatistics()
+    }
 }

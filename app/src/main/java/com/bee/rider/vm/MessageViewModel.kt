@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bee.rider.bean.MessageBean
 import com.bee.rider.http.NetworkApi
+import com.bee.rider.params.MessageParams
 import kotlinx.coroutines.launch
 
 /**
@@ -13,9 +14,8 @@ import kotlinx.coroutines.launch
  * 功能描述：
  */
 class MessageViewModel :ViewModel() {
-
-    val list : MutableLiveData<Result<MessageBean?>> = MutableLiveData()
-    fun doGetList(){
+    val list : MutableLiveData<Result<List<MessageBean>?>> = MutableLiveData()
+    fun doGetList(params: MessageParams){
         viewModelScope.launch {
 //            val result = NetworkApi.homeList()
 //            list.value = result

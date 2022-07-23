@@ -23,6 +23,10 @@ interface INetworkService {
     suspend fun appUpdateInfo(@Body body: RequestBody?): BaseResponse<AppUpdateInfoBean>
 
     @GET("orderTakeout/getOperateHistory/{orderId}")
-    suspend fun getOperateHistory(@Path("orderId") orderId:String?): BaseResponse<List<OrderDetailTraceBean>>
+    suspend fun getOperateHistory(@Path("orderId") orderId:String?): BaseResponse<OrderDetailTraceBaseBean>
+
+
+    @GET("disDataStatistics/getDetails/1")
+    suspend fun disDataStatistics(): BaseResponse<StatisticBean>
 
 }

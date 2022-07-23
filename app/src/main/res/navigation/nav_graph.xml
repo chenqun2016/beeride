@@ -165,4 +165,9 @@
         android:id="@+id/message_dest"
         android:name="com.bee.rider.ui.setting.MessageFragment"
         android:label="message" />
+
+    <fragment
+        android:id="@+id/statistics_dest"
+        android:name="com.bee.rider.ui.setting.StatisticsFragment"
+        android:label="statistics" />
 </navigation>

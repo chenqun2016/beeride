@@ -144,7 +144,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
                 findNavController().navigate(R.id.next_action_history,null, options)
             }
             R.id.tv_datas -> {
-
+                findNavController().navigate(R.id.statistics_dest,null, options)
             }
             R.id.tv_comments -> {
                 findNavController().navigate(R.id.next_action_comment,null, options)
