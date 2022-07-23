@@ -32,7 +32,7 @@ object NetworkApi : BaseNetworkApi<INetworkService>(Constants.base_url_dis) {
         service.getOperateHistory(orderId)
     }
 
-    suspend fun disDataStatistics() = getResult {
-        service.disDataStatistics()
+    suspend fun disDataStatistics(id:Int) = getResult {
+        service.disDataStatistics(id)
     }
 }

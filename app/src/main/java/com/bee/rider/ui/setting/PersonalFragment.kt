@@ -49,6 +49,16 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
         viewModel.lvUpdateWorkStatus.observe(this, Observer {
             setUpdateWorkStatus(it)
         })
+        viewModel.lvStatisticsDatas.observe(this,{
+            if(it.isSuccess){
+                val data = it.getOrNull()
+                if(null != data){
+                    binding.tv1.text = data.disOrderTotal
+                    binding.tv2.text = data.disOrderTotal
+                    binding.tv3.text = data.totalRate
+                }
+            }
+        })
     }
 
     /**
@@ -90,9 +100,9 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
                 isWork = userBean.isWork
                 binding.tvWork.text = if(userBean.isWork == 1) "工作中" else "休息中"
                 binding.switchButton.isChecked = userBean.isWork == 1
-                binding.tv1.text = userBean.orderCount.toString()
-                binding.tv2.text = userBean.todayOrderCount.toString()
-                binding.tv3.text = userBean.praiseRate
+//                binding.tv1.text = userBean.orderCount.toString()
+//                binding.tv2.text = userBean.todayOrderCount.toString()
+//                binding.tv3.text = userBean.praiseRate
             }
         }
     }
@@ -137,6 +147,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>(), View.OnClickLi
 
         }
         viewModel.getUserDetail()
+        viewModel.getStatisticsDatas()
     }
     override fun onClick(v: View?) {
         when(v?.id){

@@ -3,9 +3,11 @@ package com.bee.rider.vm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bee.rider.bean.StatisticBean
 import com.bee.rider.bean.UserBean
 import com.bee.rider.http.CenterApi
 import com.bee.rider.http.LoginApi
+import com.bee.rider.http.NetworkApi
 import com.bee.rider.params.LoginParams
 import com.bee.rider.params.SmsCodeLoginParams
 import com.bee.rider.params.UpdateWorkStatusParams
@@ -38,6 +40,17 @@ class PersonalViewModel : ViewModel(){
         viewModelScope.launch {
             val result = CenterApi.updateWorkStatus(param)
             lvUpdateWorkStatus.value = result
+        }
+    }
+
+    /**
+     * 获取统计数据
+     */
+    val lvStatisticsDatas : MutableLiveData<Result<StatisticBean?>> = MutableLiveData()
+    fun getStatisticsDatas(){
+        viewModelScope.launch {
+            val datas = NetworkApi.disDataStatistics(2)
+            lvStatisticsDatas.value = datas
         }
     }
 }

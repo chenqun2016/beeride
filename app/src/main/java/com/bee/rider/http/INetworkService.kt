@@ -26,7 +26,7 @@ interface INetworkService {
     suspend fun getOperateHistory(@Path("orderId") orderId:String?): BaseResponse<OrderDetailTraceBaseBean>
 
 
-    @GET("disDataStatistics/getDetails/1")
-    suspend fun disDataStatistics(): BaseResponse<StatisticBean>
+    @GET("disDataStatistics/getDetails/{id}")
+    suspend fun disDataStatistics(@Path("id") id:Int): BaseResponse<StatisticBean>
 
 }

@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bee.rider.bean.StatisticBean
-import com.bee.rider.http.CenterApi
 import com.bee.rider.http.NetworkApi
 import kotlinx.coroutines.launch
 
@@ -20,7 +19,7 @@ class StatisticsViewModel: ViewModel() {
     val lvStatisticsDatas : MutableLiveData<Result<StatisticBean?>> = MutableLiveData()
     fun getStatisticsDatas(){
         viewModelScope.launch {
-            val datas = NetworkApi.disDataStatistics()
+            val datas = NetworkApi.disDataStatistics(1)
             lvStatisticsDatas.value = datas
         }
     }
