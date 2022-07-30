@@ -27,10 +27,10 @@ class SendCodeView : FrameLayout, View.OnClickListener {
     private var mCodeText: TextView? = null
     private lateinit var lifecycle: Lifecycle
 
-    private var tvGetCode: TextView? = null
+    var tvGetCode: TextView? = null
     private var mIsWorking = false
     private var i = 0
-    private val clickableColor = R.color.color_3e7dfb
+    private val clickableColor = R.color.color_FF6100
     private val unClickableColor = R.color.color_ccc
 
     /**
@@ -116,7 +116,7 @@ class SendCodeView : FrameLayout, View.OnClickListener {
         if (null == mPhoneText) {
             return
         }
-        val phone = mPhoneText?.text.toString()
+        val phone = (mPhoneText?.tag ?: mPhoneText?.text).toString()
         lifecycle.coroutineScope.launchWhenResumed {
             val result = LoginApi.smsCode(phone)
             if (result.isSuccess) {

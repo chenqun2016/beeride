@@ -25,6 +25,7 @@ import androidx.navigation.navOptions
 import com.bee.rider.Constants
 import com.bee.rider.R
 import com.bee.rider.bean.UserBean
+import com.blankj.utilcode.util.ObjectUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.chenchen.base.utils.MMKVUtils
@@ -233,5 +234,12 @@ object  UIUtils {
             else -> ""
         }
         Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show()
+    }
+
+    fun getPhoneText(linkPhone: String?): String? {
+        if(ObjectUtils.isNotEmpty(linkPhone) && linkPhone!!.length>6){
+            return linkPhone.replaceRange(3,7,"****")
+        }
+        return linkPhone
     }
 }

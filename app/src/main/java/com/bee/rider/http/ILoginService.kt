@@ -32,4 +32,7 @@ interface ILoginService {
 
     @GET("validata/smsCode/{mobile}")
     suspend fun smsCode(@Path("mobile") mobile:String): BaseResponse<String>
+
+    @GET("validata/checkSmsCode/{mobile}/{code}")
+    suspend fun checkSmsCode(@Path("mobile") mobile:String,@Path("code") code:String): BaseResponse<String?>
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.bee.rider.http.CenterApi
 import com.bee.rider.http.LoginApi
 import com.bee.rider.params.LoginParams
+import com.bee.rider.params.ResetPasswordParams
 import com.bee.rider.params.SmsCodeLoginParams
 import com.chenchen.base.constants.HttpConstants
 import com.chenchen.base.utils.MMKVUtils
@@ -57,6 +58,28 @@ class LoginViewModel : ViewModel(){
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * 密码登录
+     */
+    val resetPassword : MutableLiveData<Result<String?>> = MutableLiveData()
+    fun doResetPassword(param: ResetPasswordParams){
+        viewModelScope.launch {
+            val tokenR = LoginApi.resetPassword(param)
+            resetPassword.value = tokenR
+        }
+    }
+
+    /**
+     * 验证码校验
+     */
+    val checkSmsCode : MutableLiveData<Result<String?>> = MutableLiveData()
+    fun doCheckSmsCode(phone:String,code:String){
+        viewModelScope.launch {
+            val tokenR = LoginApi.checkSmsCode(phone,code)
+            checkSmsCode.value = tokenR
         }
     }
 }
