@@ -144,6 +144,10 @@ class OrderListFragment() : BaseFragment<ModelRecyclerviewBinding>() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
         loadmoreUtils?.refresh()
     }
 

@@ -57,7 +57,6 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
                 val data = it.getOrNull()
                 if(null != data){
                     fragment1?.setDatas(data)
-                    fragment2?.setDatas(data)
                 }
             }
         })

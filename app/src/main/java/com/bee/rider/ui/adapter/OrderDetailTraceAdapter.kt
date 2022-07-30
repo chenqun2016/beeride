@@ -40,7 +40,7 @@ class OrderDetailTraceAdapter :
             dian.setImageResource(R.drawable.point_grey)
         }
         try {
-            if((item.status == 1 && holder.layoutPosition == data.size-1) ||
+            if((item.status == 1 && data.size == 1) ||
                 (item.status == 1 && holder.layoutPosition-1>=0 && data[holder.layoutPosition-1].status==0)){
 
                 val scaleAnimation = ScaleAnimation(1.0f, 0.3f, 1.0f, 0.3f,DisplayUtil.dip2px(dian.context,8f).toFloat(),DisplayUtil.dip2px(dian.context,8f).toFloat())

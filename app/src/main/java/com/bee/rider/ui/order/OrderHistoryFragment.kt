@@ -67,6 +67,7 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
         }
     }
 
+    var rp_1: RadioGroupPlus? = null
     private fun showShaixuan() {
         if (null == popupWindow) {
             val mMenuView =
@@ -76,10 +77,10 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT
             )
-            val rp_1: RadioGroupPlus = mMenuView.findViewById(R.id.rp_1)
+            rp_1 = mMenuView.findViewById(R.id.rp_1)
             val tv_time_left = mMenuView.findViewById<TextView>(R.id.tv_time_left)
             val tv_time_right = mMenuView.findViewById<TextView>(R.id.tv_time_right)
-            rp_1.setOnCheckedChangeListener(object : RadioGroupPlus.OnCheckedChangeListener {
+            rp_1?.setOnCheckedChangeListener(object : RadioGroupPlus.OnCheckedChangeListener {
                 override fun onCheckedChanged(group: RadioGroupPlus?, checkedId: Int) {
                     val calendar = Calendar.getInstance()
                     val nowString: String = Constants.sdfLong2.format(calendar.time)
@@ -112,11 +113,11 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
 
                 }
             })
-            rp_1.check(R.id.rb_1)
+            rp_1?.check(R.id.rb_1)
             rp_2.check(R.id.rb_11)
             val btn_1 = mMenuView.findViewById<View>(R.id.btn_1)
             btn_1.setOnClickListener {
-                rp_1.check(R.id.rb_1)
+                rp_1?.check(R.id.rb_1)
                 rp_2.check(R.id.rb_11)
             }
             val btn_2 = mMenuView.findViewById<View>(R.id.btn_2)
@@ -131,9 +132,15 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
                     R.id.rb_222 -> 30
                     else -> 99
                 }
-                val checkedRadioButtonId: Int = rp_1.checkedRadioButtonId
-                val checkedBt = mMenuView.findViewById<RadioButton>(checkedRadioButtonId)
-                binding.titleView.setTitleText(checkedBt.text.toString() + "历史订单")
+                val checkedRadioButtonId: Int = rp_1?.checkedRadioButtonId ?: 0
+                if(0 != checkedRadioButtonId){
+                    val checkedBt = mMenuView.findViewById<RadioButton>(checkedRadioButtonId)
+                    if(null != checkedBt){
+                        binding.titleView.setTitleText(checkedBt.text.toString() + "历史订单")
+                    }else{
+                        binding.titleView.setTitleText("历史订单")
+                    }
+                }
                 if(null != beginDate && null != endDate){
                     //TODO 时间格式
                     fragment?.reflushHistoryDatas(beginDate!!,endDate!!,transactionType)
@@ -168,7 +175,11 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
             if (date.time > System.currentTimeMillis()) {
                 date = Date()
             }
-            view.text = getDateLong(date.time)
+            val sDate = getDateLong(date.time)
+            if(sDate != view.text.toString()){
+                rp_1?.clearCheck()
+                view.text = sDate
+            }
         })
             .setType(booleanArrayOf(true, true, true, false, false, false)) //分别对应 年月日时分秒，默认全部显示
             .setLabel("年", "月", "日", "时", "分", "秒")

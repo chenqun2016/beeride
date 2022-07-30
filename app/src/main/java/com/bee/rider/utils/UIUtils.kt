@@ -160,12 +160,32 @@ object  UIUtils {
     }
     //mm:ss
     fun getNomalTime2(createTime: Date?): String? {
-        return if (null == createTime) {
-            ""
-        } else {
-            val format = SimpleDateFormat("HH:mm")
-            return format.format(createTime)
+        var time :String? = null
+        try {
+            time = if (null == createTime) {
+                ""
+            } else {
+                val format = SimpleDateFormat("HH:mm")
+                return format.format(createTime)
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
         }
+        return time
+    }
+    fun getNomalTime3(createTime: String?): String? {
+        var time :String? = null
+        try {
+            time = if (null == createTime) {
+                ""
+            } else {
+                val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                return getNomalTime2(format.parse(createTime))
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        return time
     }
 
     fun copyContentToClipboard(content: String?, context: Context) {
