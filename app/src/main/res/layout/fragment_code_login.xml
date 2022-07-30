@@ -112,17 +112,31 @@
             android:textColor="@color/white"
             android:textSize="17sp"/>
 
-
-        <TextView
-            android:id="@+id/tv_xieyi"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="20dp"
-            android:text=""
-            android:textColor="@color/color_7C7877"
-            android:textSize="12sp" />
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:checked="false"
+                android:layout_marginEnd="10dp"
+                android:button="@drawable/checkbox"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+
+            <TextView
+                android:id="@+id/tv_xieyi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_7C7877"
+                android:textSize="12sp"
+                android:text=""/>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

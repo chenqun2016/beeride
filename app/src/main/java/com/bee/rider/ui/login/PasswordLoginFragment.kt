@@ -1,9 +1,12 @@
 package com.bee.rider.ui.login
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -70,11 +73,35 @@ class PasswordLoginFragment :BaseFragment<FragmentPasswordLoginBinding>(), View.
                 if(null != activity){
                     KeyboardUtils.hideSoftInput(requireActivity())
                 }
+                if(!binding.checkbox.isChecked){
+                    showCommonDialog()
+                    return
+                }
                 viewModel.doPasswordLogin(LoginParams(binding.edUserPhone.text.toString(),binding.edUserPass.editTextView.text.toString()))
             }
             R.id.tv_forgetmima -> {
                 findNavController().navigate(R.id.next_action_reset_password,null, options)
             }
         }
+    }
+
+    private fun showCommonDialog() {
+        val dialog = context?.let { Dialog(it, R.style.loadingDialogTheme) }
+        val inflate = View.inflate(context, R.layout.dialog_hint, null)
+        val tv_des = inflate.findViewById<TextView>(R.id.tv_des)
+        UIUtils.setXieYiText(this,tv_des,"提示：请先阅读并同意趣鲜蜂")
+        val tv_quxiao = inflate.findViewById<TextView>(R.id.btn_cancel)
+        val tv_queding = inflate.findViewById<TextView>(R.id.btn_sure)
+        tv_quxiao.setOnClickListener {
+            dialog?.dismiss()
+        }
+        tv_queding.setOnClickListener {
+            if(isBindingViewCreated()){
+                binding.checkbox.isChecked = true
+            }
+            dialog?.dismiss()
+        }
+        dialog?.setContentView(inflate)
+        dialog?.show()
     }
 }

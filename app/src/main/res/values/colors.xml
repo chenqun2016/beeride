@@ -6,9 +6,9 @@
     <!--全局主题颜色值-->
     <color name="theme_color">#FFF5F5F5</color>
 
-    <color name="colorPrimary">#3D7DFB</color>
-    <color name="colorPrimaryDark">#3D7DFB</color>
-    <color name="colorAccent">#3D7DFB</color>
+    <color name="colorPrimary">#FF6100</color>
+    <color name="colorPrimaryDark">#FF6100</color>
+    <color name="colorAccent">#FF6100</color>
 
     <color name="transparent">#00ffffff</color>
 

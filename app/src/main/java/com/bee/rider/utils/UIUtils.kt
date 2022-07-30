@@ -25,6 +25,7 @@ import androidx.navigation.navOptions
 import com.bee.rider.Constants
 import com.bee.rider.R
 import com.bee.rider.bean.UserBean
+import com.bee.rider.ui.WebActivity
 import com.blankj.utilcode.util.ObjectUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
@@ -100,21 +101,21 @@ object  UIUtils {
     /**
      * 设置协议
      */
-    fun setXieYiText(fragment: Fragment,view:TextView){
+    fun setXieYiText(fragment: Fragment,view:TextView,str:String = "已阅读并同意"){
         try {
             if(null == fragment.context){
                 return
             }
-            val str = "已阅读并同意"
             val str1 = "《用户服务协议》"
             val str2 = "和"
             val str3 = "《隐私政策》"
             val msp = SpannableString(str + str1 + str2 + str3)
             msp.setSpan(object : ClickableSpan() {
                 override fun onClick(view: View) {
-                    val bundle = Bundle()
-                    bundle.putString("url", Constants.agreement_privacy)
-                    fragment.findNavController().navigate(R.id.common_web_dest,bundle, options)
+                    WebActivity.startWebActivity(Constants.agreement_privacy,fragment.context)
+//                    val bundle = Bundle()
+//                    bundle.putString("url", Constants.agreement_privacy)
+//                    fragment.findNavController().navigate(R.id.common_web_dest,bundle, options)
                 }
                 override fun updateDrawState(ds: TextPaint) {
                     super.updateDrawState(ds)
@@ -123,9 +124,10 @@ object  UIUtils {
             }, str.length, str.length + str1.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             msp.setSpan(object : ClickableSpan() {
                 override fun onClick(view: View) {
-                    val bundle = Bundle()
-                    bundle.putString("url", Constants.agreement_privacy)
-                    fragment.findNavController().navigate(R.id.common_web_dest,bundle, options)
+                    WebActivity.startWebActivity(Constants.agreement_privacy,fragment.context)
+//                    val bundle = Bundle()
+//                    bundle.putString("url", Constants.agreement_privacy)
+//                    fragment.findNavController().navigate(R.id.common_web_dest,bundle, options)
                 }
                 override fun updateDrawState(ds: TextPaint) {
                     super.updateDrawState(ds)

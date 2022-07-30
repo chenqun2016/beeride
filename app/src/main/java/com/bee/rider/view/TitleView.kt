@@ -57,17 +57,28 @@ class TitleView : FrameLayout {
 
         back = view.findViewById(R.id.iv_back)
         back?.setOnClickListener {
-            if(context is Activity){
-                val findNavController = context.findNavController(R.id.nav_host_fragment)
-                findNavController.navigateUp()
-            }
-            if(context is Fragment){
-                val findNavController = context.findNavController()
-                findNavController.navigateUp()
-            }
-            if(context is ContextThemeWrapper && context.baseContext is Activity){
-                val findNavController = (context.baseContext as Activity).findNavController(R.id.nav_host_fragment)
-                findNavController.navigateUp()
+            try{
+                if(context is Activity){
+                    val findNavController = context.findNavController(R.id.nav_host_fragment)
+                    findNavController.navigateUp()
+                }
+                if(context is Fragment){
+                    val findNavController = context.findNavController()
+                    findNavController.navigateUp()
+                }
+                if(context is ContextThemeWrapper && context.baseContext is Activity){
+                    val findNavController = (context.baseContext as Activity).findNavController(R.id.nav_host_fragment)
+                    findNavController.navigateUp()
+                }
+            }catch (e:Exception){
+                e.printStackTrace()
+                try {
+                    if(e is IllegalArgumentException && context is Activity){
+                        context.finish()
+                    }
+                }catch (e2:Exception){
+                    e2.printStackTrace()
+                }
             }
         }
         title = view.findViewById(R.id.tv_title)

@@ -214,6 +214,7 @@
                 <category android:name="${JPUSH_PKGNAME}" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.WebActivity" />
 
         <!-- Required SDK核心功能 -->
         <receiver
