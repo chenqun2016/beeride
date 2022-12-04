@@ -18,9 +18,9 @@ import java.util.concurrent.TimeUnit
 /**
  * 网络请求封装
  */
-abstract class BaseNetworkApi<I>(private val baseUrl: String) : IService<I> {
+open class BaseNetworkApi<I>(private val baseUrl: String) : IService<I> {
 
-    protected val service: I by lazy {
+    val service: I by lazy {
         getRetrofit().create(getServiceClass())
     }
 
@@ -53,19 +53,19 @@ abstract class BaseNetworkApi<I>(private val baseUrl: String) : IService<I> {
         return null
     }
 
-    protected suspend fun <T> getResult(block: suspend () -> BaseResponse<T>): Result<T?> {
-         try {
+    suspend fun <T> getResult(block: suspend () -> BaseResponse<T>): Result<T?> {
+        return try {
             val response = block()
-             return if (response.code == 200) {
-                 Result.success(response.data)
-             }else{
-                 Toast.makeText(AppGlobals.getApplication(),response.msg,Toast.LENGTH_SHORT).show()
-                 Result.failure(NetworkException.of(response.code, response.msg+""))
-             }
+            if (response.code == 200) {
+                Result.success(response.data)
+            }else{
+                Toast.makeText(AppGlobals.getApplication(),response.msg,Toast.LENGTH_SHORT).show()
+                Result.failure(NetworkException.of(response.code, response.msg+""))
+            }
         } catch (throwable: Throwable) {
-             Toast.makeText(AppGlobals.getApplication(),throwable.message,Toast.LENGTH_SHORT).show()
-             d("throwable",throwable.message+"")
-             return Result.failure(throwable)
+            Toast.makeText(AppGlobals.getApplication(),throwable.message,Toast.LENGTH_SHORT).show()
+            d("throwable",throwable.message+"")
+            Result.failure(throwable)
         }
     }
 
@@ -74,10 +74,10 @@ abstract class BaseNetworkApi<I>(private val baseUrl: String) : IService<I> {
         private const val RETRY_COUNT = 2
         private val defaultOkHttpClient by lazy {
             val builder = OkHttpClient.Builder()
-                .callTimeout(10L, TimeUnit.SECONDS)
-                .connectTimeout(10L, TimeUnit.SECONDS)
-                .readTimeout(10L, TimeUnit.SECONDS)
-                .writeTimeout(10L, TimeUnit.SECONDS)
+                .callTimeout(30L, TimeUnit.SECONDS)
+                .connectTimeout(30L, TimeUnit.SECONDS)
+                .readTimeout(30L, TimeUnit.SECONDS)
+                .writeTimeout(30L, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
 
             builder.addInterceptor(CommonRequestInterceptor())

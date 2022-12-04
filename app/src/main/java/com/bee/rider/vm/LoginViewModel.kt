@@ -3,12 +3,16 @@ package com.bee.rider.vm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bee.rider.Constants
 import com.bee.rider.http.CenterApi
+import com.bee.rider.http.ILoginService
 import com.bee.rider.http.LoginApi
 import com.bee.rider.params.LoginParams
 import com.bee.rider.params.ResetPasswordParams
 import com.bee.rider.params.SmsCodeLoginParams
+import com.bee.rider.utils.toApiBody
 import com.chenchen.base.constants.HttpConstants
+import com.chenchen.base.network.base.BaseNetworkApi
 import com.chenchen.base.utils.MMKVUtils
 import kotlinx.coroutines.launch
 
@@ -39,6 +43,14 @@ class LoginViewModel : ViewModel(){
             val result = LoginApi.loginSmscode(param)
             putLoginDatas(result)
             smsLogin.value = result
+
+
+            //另一种写法
+//            BaseNetworkApi<ILoginService>(Constants.base_url_login).apply {
+//                val result2 = getResult { service.loginSmscode(param.toApiBody()) }
+//                putLoginDatas(result)
+//                smsLogin.value = result2
+//            }
         }
     }
 
