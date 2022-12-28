@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat
  */
 object Constants {
     //TODO 测试用
-    const val base_url2 = "http://dev-beeweb2.quxianfeng.vip:15889/bee-member-zuul-gateway/"
+    const val base_url2 = "http://dev-beeweb2.quxianfeng.vip/bee-member-zuul-gateway/"
 //    private const val base_url = "http://dev-bee-horseman-zuul-gateway.quxianfeng.vip:15889/"
 
     //登录
